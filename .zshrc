@@ -30,7 +30,7 @@ ZSH_THEME="sorin"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git zsh-syntax-highlighting archlinux ruby rvm virtualenvwrapper autojump)
+plugins=(git zsh-syntax-highlighting archlinux ruby rvm virtualenvwrapper autojump lein systemd)
 
 source ~/.zlogin
 source $ZSH/oh-my-zsh.sh
