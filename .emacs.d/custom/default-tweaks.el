@@ -1,5 +1,8 @@
+;;set-appearance-tweaks
+(set-cursor-color (background-color-at-point))
+(set-default-font "DejaVu Sans Mono-14")
 (global-linum-mode 1)
-(fringe-mode 0)
+(fringe-mode (quote (nil . 0)))
 (global-rainbow-delimiters-mode 1)
 
  ;;powerline enable
@@ -17,3 +20,4 @@
 (require 'auto-complete-config)
 (ac-config-default)
 (provide 'default-tweaks)
+

@@ -1,4 +1,5 @@
 ;;;;;;;;;;;;;;;;;
+
 ;; jk binding
 ;;;;;;;;;;;;;;;;;
 
@@ -161,5 +162,6 @@
 (define-key evil-normal-state-map "  " 'ace-jump-mode)
 (define-key evil-normal-state-map " k" 'ace-jump-char-mode)
 (define-key evil-normal-state-map " l" 'ace-jump-line-mode)
+(setq evil-default-cursor t)
 (evil-set-initial-state 'slime-repl-mode 'emacs)
 (provide 'evil-tweaks)
