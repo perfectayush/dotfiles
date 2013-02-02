@@ -19,7 +19,7 @@
 (setq linum-relativenumber-last-pos 0)
 
 (defadvice linum-update (before linum-relativenumber-linum-update activate)
-  (setq linum-last-pos (line-number-at-pos)))
+  (setq-default linum-last-pos (line-number-at-pos)))
 
 (defface linum-relativenumber-zero
   '((t :inherit linum :foreground "grey10" :background "#31A39C" :weight bold))
@@ -27,7 +27,7 @@
   :group 'linum)
 
 (defface linum-relativenumber-top
-  '((t :inherit linum :foreground "grey35" :weight bold))
+  '((t :inherit linum :foreground "grey80" :weight normal))
   "Face for displaying top line number"
   :group 'linum)
 
