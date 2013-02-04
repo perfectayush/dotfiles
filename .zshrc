@@ -48,6 +48,7 @@ alias en="emacs -nw"
 alias v="vim"
 alias ssa="ssh -l ayush.go"
 alias dsdb="udisksctl unmount --block-device /dev/sdb1;udisksctl unmount --block-device /dev/sdb2;udisks --detach /dev/sdb;"
+alias cnet="ping 8.8.8.8"
 alias zshconfig="emacsclient -t -a 'nano' ~/.zshrc"
 
 export TERM=xterm-256color
