@@ -1,13 +1,37 @@
+;;Functions
+(defun x11-maximize-frame ()
+  "Maximize the current frame (to full screen)"
+  (interactive)
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
+  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))
+
+(defun apply-to-frame (frame)
+  (select-frame frame)
+  (if (window-system frame)
+      (progn  
+        (x11-maximize-frame))))
+
+
 ;;set-appearance-tweaks
 (set-cursor-color (background-color-at-point))
 (set-default-font "DejaVu Sans Mono-14")
+(setq default-frame-alist '((font . "DejaVu Sans Mono-14")))
 (global-linum-mode 1)
 (fringe-mode (quote (nil . 0)))
 (global-rainbow-delimiters-mode 1)
+(when window-system
+  (x11-maximize-frame))
+(add-hook 'after-make-frame-functions 'apply-to-frame)
 
- ;;powerline enable
+;;powerline enable
 (require 'powerline)
 (powerline-default)
+;;powerline-color tweaks
+(custom-set-faces
+ '(powerline-active1 ((t (:inherit mode-line :background "#31A39C"))))
+ '(powerline-active2 ((t (:inherit mode-line :background "#197374"))))
+ '(powerline-inactive1 ((t (:inherit mode-line :background "#222222"))))
+ '(powerline-inactive2 ((t (:inherit mode-line :background "#999999")))))
 
 ;; Nrepl config
 (add-hook 'nrepl-mode-hook 'evil-emacs-state)
