@@ -45,6 +45,14 @@
                               :type git
                               :url "https://github.com/roman/evil-paredit.git")
 
+                       (:name evil-nerd-commenter
+                              :type git
+                              :url "https://github.com/redguardtoo/evil-nerd-commenter.git")
+
+                       (:name linum+
+                              :type git
+                              :url "https://github.com/emacsmirror/linum-plus.git")
+
                        (:name rainbow-mode
                               :type git
                               :url "https://github.com/emacsmirror/rainbow-mode.git")
@@ -92,6 +100,7 @@
         evil
         evil-paredit
         evil-leader
+        evil-nerd-commenter
 
         ;;utility
         magit
@@ -108,8 +117,6 @@
         ;;auto-complete
         auto-complete
         ac-nrepl
-        ac-anything
-        ac-anything2
         ac-python
 
         ;;Lispy languages
@@ -126,8 +133,6 @@
         puppet-mode
         haml-mode
         lua-mode
-        
-
         ))
 
 (el-get 'sync my-el-get-packages)

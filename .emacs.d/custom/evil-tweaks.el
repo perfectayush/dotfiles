@@ -34,15 +34,33 @@
 ;; the k is handled on the function
 (define-key evil-insert-state-map "j" #'zoo/jk-to-normal-mode)
 
+;;evil surround
+(global-surround-mode 1)
+(evil-define-key 'operator surround-mode-map "s" 'undefined)
+(evil-define-key 'visual surround-mode-map "s" 'undefined)
+(evil-define-key 'visual surround-mode-map "S" 'undefined)
+
 ;;;;;;;;;;;;;;
-;; Normal Mode
+;; evil leader shortcuts
 ;;;;;;;;;;;;;;
 ;;
 ;; Undo visualize tree on ",u" when on normal mode
-(define-key evil-normal-state-map (kbd ",u") #'undo-tree-visualize)
-;; Find defined symbols using ,. in normal mode instead of M-. in
-;; insert mode
-(define-key evil-normal-state-map (kbd ",.") 'find-tag)
+(require 'evil-leader)
+(evil-leader/set-leader ",")
+(evil-leader/set-key
+  "u"  'undo-tree-visualize
+  "."  'find-tag
+  "e"  'file-file
+  "b"  'switch-to-buffer
+  "cs" 'surround-change
+  "ca" 'surround-edit
+  "S"  'Surround-region
+  "s"  'surround-region
+  "cd" 'surround-delete
+  "cc" 'evilnc-comment-or-uncomment-lines
+  "cc" 'evilnc-comment-or-uncomment-lines
+  "ci" 'evilnc-comment-or-uncomment-to-the-line
+  "k"  'kill-buffer)
 
 ;;;;;;;;;;;;;;;;;
 ;; Custom highlights for insert and normal mode
@@ -155,6 +173,8 @@
 ;; but [escape] should switch back to normal state
 (define-key evil-insert-state-map [escape] 'evil-normal-state) 
 (define-key evil-visual-state-map [escape] 'evil-normal-state)
+;;evil-leader-in-visual-mode
+(define-key evil-visual-state-map "," evil-leader/map) 
 (define-key evil-normal-state-map "L" 'evil-next-buffer)
 (define-key evil-normal-state-map "H" 'evil-prev-buffer)
 (define-key evil-motion-state-map "H" 'evil-prev-buffer)
@@ -164,4 +184,5 @@
 (define-key evil-normal-state-map " l" 'ace-jump-line-mode)
 (setq evil-default-cursor t)
 (evil-set-initial-state 'slime-repl-mode 'emacs)
+
 (provide 'evil-tweaks)
