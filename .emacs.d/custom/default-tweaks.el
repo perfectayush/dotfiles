@@ -19,6 +19,7 @@
 (global-linum-mode 1)
 (fringe-mode (quote (nil . 0)))
 (global-rainbow-delimiters-mode 1)
+(global-hl-line-mode 1)
 (when window-system
   (x11-maximize-frame))
 (add-hook 'after-make-frame-functions 'apply-to-frame)
@@ -26,6 +27,7 @@
 ;;powerline enable
 (require 'powerline)
 (powerline-default)
+
 ;;powerline-color tweaks
 (custom-set-faces
  '(powerline-active1 ((t (:inherit mode-line :background "#31A39C"))))
@@ -43,5 +45,6 @@
 ;;auto-complete
 (require 'auto-complete-config)
 (ac-config-default)
+(defun ac-common-setup ()
+  (setq ac-sources (append ac-sources '(ac-source-filename))))
 (provide 'default-tweaks)
-
