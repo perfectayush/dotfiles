@@ -50,6 +50,7 @@ alias ssa="ssh -l ayush.go"
 alias dsdb="udisksctl unmount --block-device /dev/sdb1;udisksctl unmount --block-device /dev/sdb2;udisks --detach /dev/sdb;"
 alias cnet="ping 8.8.8.8"
 alias zshconfig="emacsclient -t -a 'nano' ~/.zshrc"
+alias wn="dict -d wn"
 
 export TERM=xterm-256color
 export GREP_COLOR='1;35'
