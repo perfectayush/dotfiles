@@ -179,8 +179,8 @@
 
 ;; emacs like movement
 (define-key evil-normal-state-map "\C-e" 'evil-end-of-line)
-(define-key evil-insert-state-map "\C-e" 'evil-end-of-line)
 (define-key evil-motion-state-map "\C-e" 'evil-end-of-line)
+(define-key evil-insert-state-map "\C-e" 'end-of-line)
 
 ;; enable evil >:->
 (evil-mode 1)
