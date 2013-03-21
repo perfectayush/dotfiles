@@ -10,7 +10,7 @@
   "Powerline face 1."
   :group 'powerline)
 
-(defface powerline-active2 '((t (:background "#585858" :foreground "#FFFFFF" :inherit mode-line)))
+(defface powerline-active2 '((t (:background "#D0D0D0" :foreground "#585858" :inherit mode-line)))
   "Powerline face 2."
   :group 'powerline)
 
@@ -41,7 +41,7 @@
   "Powerline face 1."
   :group 'powerline)
 
-(defface powerline-evil-inactive '((t (:background "black" :inherit mode-line)))
+(defface powerline-evil-inactive '((t (:background "black" :foreground "#FFFFFF" :inherit mode-line)))
   "Powerline evil inactive state face."
   :group 'powerline)
 
@@ -57,11 +57,11 @@
   "Powerline evil visual state face."
   :group 'powerline)
 
-(defface powerline-evil-operator '((t (:background "red" :inherit mode-line)))
+(defface powerline-evil-operator '((t (:background "red" :foreground "#FFFFFF" :inherit mode-line)))
   "Powerline evil operator state face."
   :group 'powerline)
 
-(defface powerline-evil-motion '((t (:background "#0087AF" :inherit mode-line)))
+(defface powerline-evil-motion '((t (:background "#0087AF" :foreground "#FFFFFF" :inherit mode-line)))
   "Powerline evil motion state face."
   :group 'powerline)
 
@@ -73,7 +73,7 @@
   "Powerline evil emacs state face."
   :group 'powerline)
 
-(defface powerline-evil-unknown '((t (:background "red" :inherit mode-line)))
+(defface powerline-evil-unknown '((t (:background "red" :foreground "#FFFFFF" :inherit mode-line)))
   "Powerline evil unknown state face."
   :group 'powerline)
 
@@ -105,40 +105,6 @@
        ((evil-replace-state-p)  'powerline-evil-replace)
        ((evil-emacs-state-p)    'powerline-evil-emacs)
        (t                       'powerline-evil-normal)))
-
-
-(defun powerline-mode-list (face)
-  (let ((major (propertize
-                (downcase (format-mode-line mode-name))
-
-                'help-echo "Major mode\n\ mouse-1: Display major mode menu\n\ mouse-2: Show help for major mode\n\ mouse-3: Toggle minor modes"
-
-                'local-map (let ((map (make-sparse-keymap)))
-                             (define-key map [mode-line down-mouse-1]
-                               `(menu-item ,(purecopy "Menu Bar") ignore
-                                           :filter (lambda (_) (mouse-menu-major-mode-map))))
-                             (define-key map [mode-line mouse-2]      'describe-mode)
-                             (define-key map [mode-line down-mouse-3] mode-line-mode-menu)
-                             map)))
-
-        (minor (mapconcat (lambda (mm)
-                            (when mm (propertize (downcase mm)
-
-                                                 'help-echo "Minor mode\n mouse-1: Display minor mode menu\n mouse-2: Show help for minor mode\n mouse-3: Toggle minor modes"
-
-                                                 'local-map (let ((map (make-sparse-keymap)))
-                                                              (define-key map [mode-line down-mouse-1]   (powerline-mouse 'minor 'menu mm))
-                                                              (define-key map [mode-line mouse-2]        (powerline-mouse 'minor 'help mm))
-                                                              (define-key map [mode-line down-mouse-3]   (powerline-mouse 'minor 'menu mm))
-                                                              (define-key map [header-line down-mouse-3] (powerline-mouse 'minor 'menu mm))
-                                                              map))))
-                          (split-string (format-mode-line minor-mode-alist)) " ")))
-
-    (if (not (string= minor ""))
-        (propertize (concat " " major " | " minor " ") 'face face)
-      (propertize (concat " " major " ") 'face face))))
-
-
 
 
 ;; Modeline tweaking
@@ -187,12 +153,18 @@
                                 (powerline-arrow-right face0 face1)
 
                                     ; modes
-                                (powerline-mode-list face1)
-                                (powerline-arrow-right face1 face2)
+
+                                   (powerline-raw " " face1)
+                                   (powerline-major-mode face1 'l)
+                                   (powerline-process face1)
+                                   (powerline-raw " :" face1)
+                                   (powerline-minor-modes face1 'l)
+                                   (powerline-raw " " face1)
+                                   (powerline-arrow-right face1 face2)
 
                                     ; process
-                                (when mode-line-process
-                                  (powerline-raw (format "%s " mode-line-process) face2 'l))
+                                ;; (when mode-line-process
+                                ;;   (powerline-raw (format "%s " mode-line-process) face2 'l))
 
 
                                     ; vcs
@@ -236,6 +208,8 @@
     (hi-lock-mode . "")
     (python-mode . "Py")
     (emacs-lisp-mode . "EL")
+    (lisp-interaction-mode . "ELi")
+    (puppet-mode . "PP")
     (markdown-mode . "md"))
   "Alist for `clean-mode-line'.
 
