@@ -35,6 +35,7 @@
 ;;evil-leader-in-visual-mode
 (define-key evil-visual-state-map "," evil-leader/map) 
 (evil-leader/set-key
+  "i"  'indent-region
   "k"  'kill-buffer 
   "b"  'switch-to-buffer
   "e"  'file-file
@@ -44,7 +45,6 @@
   "."  'find-tag
   "="  'evil-numbers/inc-at-pt
   "-"  'evil-numbers/dec-at-pt
-  "cc" 'evilnc-comment-or-uncomment-lines
   "cc" 'evilnc-comment-or-uncomment-lines
   "ci" 'evilnc-comment-or-uncomment-to-the-line
 )
