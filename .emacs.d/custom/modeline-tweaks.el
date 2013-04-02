@@ -181,11 +181,12 @@
                                 (powerline-arrow-left face1 face0)
 
                                     ; position 
-                                (powerline-raw " LN %l:%2c " face0 'r)
-                                (powerline-narrow face0 'r)
-                                (powerline-arrow-left face0 face2)
+                                (powerline-raw " LN %l:%2c" face0 'r)
+                                ;;(powerline-narrow face0 'r)
+                                ;;no arrow here
+                                ;;(powerline-arrow-left face0 face2)
 
-                                (powerline-hud face2 face1))))
+                                (powerline-hud face1 face2))))
 
                      (concat
                       (powerline-render lhs)
