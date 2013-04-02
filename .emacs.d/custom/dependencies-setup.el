@@ -96,6 +96,12 @@
 (setq my-el-get-packages
       '(
 
+        ;;appearance
+        color-theme
+        color-theme-railscasts
+        color-theme-almost-monokai
+        color-theme-tomorrow
+        
         ;;evil-mode
         evil
         evil-paredit
@@ -111,7 +117,6 @@
         powerline
         popup
         fuzzy
-        zenburn-theme
         linum+
 
         ;;auto-complete

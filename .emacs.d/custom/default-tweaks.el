@@ -13,8 +13,11 @@
 
 
 ;;set-appearance-tweaks
-(custom-set-faces
-  '(default ((t (:background "#101010")))))
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-tomorrow-night)
+
+
 (set-cursor-color (background-color-at-point))
 (set-default-font "DejaVu Sans Mono-14")
 (setq default-frame-alist '((font . "DejaVu Sans Mono-14")))
