@@ -1,0 +1,36 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+alias .='cd ../'
+alias ..='cd ../../'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+
+alias fget='aria2c -c --max-connection-per-server=8 --min-split-size=1M'
+alias e='emacsclient -t'
+alias en='emacs -nw'
+alias v='vim'
+alias ssa='ssh -l ayush.go'
+alias dsdb='udisksctl unmount --block-device /dev/sdb1;udisksctl unmount --block-device /dev/sdb2;udisks --detach /dev/sdb;'
+alias cnet='ping 8.8.8.8'
+alias zshconfig='emacsclient -t -a 'nano' ~/.zshrc'
+alias wn='dict -d wn'
+
+export TERM=xterm-256color
+export GREP_COLOR='1;35'
+export PATH="$HOME/.rbenv/bin:$PATH"
+export EDITOR=vim
+
+eval "$(rbenv init - zsh)"
+archbey -c green
