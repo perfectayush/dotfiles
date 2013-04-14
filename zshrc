@@ -30,7 +30,7 @@ ZSH_THEME="sorin"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(git zsh-syntax-highlighting archlinux ruby rvm virtualenvwrapper autojump lein systemd)
+plugins=(git zsh-syntax-highlighting archlinux ruby virtualenvwrapper autojump fasd lein systemd)
 
 source ~/.zlogin
 source $ZSH/oh-my-zsh.sh
@@ -42,17 +42,18 @@ alias ...='cd ../../../'
 alias ....='cd ../../../../'
 
 archbey -c green
-alias fget="aria2c -c --max-connection-per-server=8 --min-split-size=1M"
-alias e="emacsclient -t"
-alias en="emacs -nw"
-alias v="vim"
-alias ssa="ssh -l ayush.go"
-alias dsdb="udisksctl unmount --block-device /dev/sdb1;udisksctl unmount --block-device /dev/sdb2;udisks --detach /dev/sdb;"
-alias cnet="ping 8.8.8.8"
-alias zshconfig="emacsclient -t -a 'nano' ~/.zshrc"
-alias wn="dict -d wn"
+alias fget='aria2c -c --max-connection-per-server=8 --min-split-size=1M'
+alias e='emacsclient -t'
+alias en='emacs -nw'
+alias v='vim'
+alias ssa='ssh -l ayush.go'
+alias dsdb='udisksctl unmount --block-device /dev/sdb1;udisksctl unmount --block-device /dev/sdb2;udisks --detach /dev/sdb;'
+alias cnet='ping 8.8.8.8'
+alias zshconfig='emacsclient -t -a 'nano' ~/.zshrc'
+alias wn='dict -d wn'
 
 export TERM=xterm-256color
 export GREP_COLOR='1;35'
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
