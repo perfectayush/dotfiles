@@ -15,17 +15,19 @@ namespace :dot do
   desc "install emacs config"
   task :emacs do
     puts "Installing emacs config ..."
-    FileUtils.makedir_p(home + "/.emacs.d/custom/")
+    FileUtils.mkdir_p(home + "/.emacs.d/custom/")
     FileUtils.ln_s(pwd + "/emacs.d/init.el", home + "/.emacs.d/")
-    Dir.glob(pwd + "/emacs.d/*.el").each do |elisp|
-      FileUtils.ln_s(pwd + "/emacs.d/"+elisp, home + "/.emacs.d/" + elisp)
+    Dir[ pwd + "/emacs.d/custom/*.el"].each do |elisp|
+      FileUtils.ln_s(elisp, home + "/.emacs.d/custom/" + File.basename(elisp),:force => true)
     end
   end
   
   desc "install zsh config"
   task :zsh do
     puts "Installing zsh config ..."
-    Rake::Task["prezto"].invoke
+
+    Rake::Task["prezto"].invoke unless File.exists?(home + "/.zprezto")
+
     FileUtils.ln_s(pwd + "/zsh/zshrc", home + "/.zshrc",:force => true)
     FileUtils.ln_s(pwd + "/zsh/zpreztorc", home + "/.zpreztorc",:force => true)
     FileUtils.ln_s(pwd + "/zsh/prompt_archaic_setup",
@@ -37,11 +39,14 @@ namespace :dot do
   task :prezto do
     begin
       puts "Installing prezto"
-      run %{ git clone --recursive https://github.com/sorin-ionescu/prezto.git #{home}/.zprezto }
-      Dir.glob(home + "/.zprezto/runcom/*").reject{|f| f[/rc$|md$/]}.each do |file|
-        FileUtils.ln_s(home + "/.zprezto/runcom/*",home + "/." + file,:force => true)
+      unless File.exists?(home + "/.zprezto")
+        `git clone --recursive https://github.com/sorin-ionescu/prezto.git #{home}/.zprezto`
       end
-    rescue
+      Dir[home + "/.zprezto/runcoms/*"].reject{|f| f[/rc$|md$/]}.each do |file|
+        FileUtils.ln_s(file,home + "/." + File.basename(file),:force => true)
+      end
+    rescue => e
+      puts e
       puts "Failed while installing prezto from internet"
     end
   end
