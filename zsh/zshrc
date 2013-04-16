@@ -32,4 +32,4 @@ export GREP_COLOR='1;35'
 export PATH="$HOME/.rbenv/bin:$PATH"
 export EDITOR=vim
 
-archbey -c green
+alsi -a -u

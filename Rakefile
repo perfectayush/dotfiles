@@ -35,7 +35,7 @@ namespace :dot do
                   :force => true)
   end
     
-  desc "Install prezto ..."
+  desc "install prezto"
   task :prezto do
     begin
       puts "Installing prezto"
