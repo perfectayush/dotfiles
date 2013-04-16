@@ -32,5 +32,4 @@ export GREP_COLOR='1;35'
 export PATH="$HOME/.rbenv/bin:$PATH"
 export EDITOR=vim
 
-eval "$(rbenv init - zsh)"
 archbey -c green
