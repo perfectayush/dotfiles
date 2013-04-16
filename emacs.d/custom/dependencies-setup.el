@@ -105,6 +105,7 @@
         evil
         evil-paredit
         evil-leader
+        evil-surround
         evil-nerd-commenter
 
         ;;utility
