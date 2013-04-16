@@ -98,7 +98,6 @@
 
         ;;appearance
         color-theme
-        color-theme-railscasts
         color-theme-almost-monokai
         color-theme-tomorrow
         
