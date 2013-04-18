@@ -9,15 +9,15 @@ Installation is managed via a Rakefile.
          
 ### To install only one of the component you can do
 
-          rake dot:emacs
+    rake dot:emacs
 
-### Or to install all components do
+### To install all components do
 
-          rake dot:all
+    rake dot:all
 
 ### Check available configs for installation using
 
-          rake -D
+    rake -D
  
 License
 -------
