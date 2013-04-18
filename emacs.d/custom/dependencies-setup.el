@@ -107,6 +107,7 @@
         evil-leader
         evil-surround
         evil-nerd-commenter
+        key-chord
 
         ;;utility
         magit

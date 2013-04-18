@@ -1,27 +1,3 @@
-;; Function to switch mode using jk by roman
-;; In this section we implement code that will allow us
-;; to get into evil-normal mode using "jk" in insert mode.
-
-(evil-define-command custom/jk-to-normal-mode ()
-  "Allows to get into 'normal' mode using 'jk'."
-  :repeat change
-  (let ((modified (buffer-modified-p)))
-    (insert "j")
-    (let ((evt (read-event (format "Insert %c to exit insert state" ?k)
-                           nil 0.5)))
-      (cond
-       ((null evt)
-          (message ""))
-       ((and (integerp evt)
-             (char-equal evt ?k))
-          ;; remove the j character
-          (delete-char -1)
-          (set-buffer-modified-p modified)
-          (push 'escape unread-command-events))
-       (t ; otherwise
-          (setq unread-command-events (append unread-command-events
-                                              (list evt))))))))
-
 ;;evil surround
 (global-surround-mode 1)
 
@@ -62,7 +38,10 @@
 
 ;; Adding the binding for the j character, then
 ;; the k is handled on the function
-(define-key evil-insert-state-map "j" #'custom/jk-to-normal-mode)
+(setq key-chord-two-keys-delay 0.2)
+(key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+(key-chord-mode 1)
+
 
 ;; evil quick buffer switching
 (define-key evil-normal-state-map "L" 'evil-next-buffer)
