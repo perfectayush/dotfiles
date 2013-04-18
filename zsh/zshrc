@@ -32,4 +32,7 @@ export GREP_COLOR='1;35'
 export PATH="$HOME/.rbenv/bin:$PATH"
 export EDITOR=vim
 
+#custom fasd settings. prezto settings primitive
+eval "$(fasd --init auto)"
+
 alsi -a -u
