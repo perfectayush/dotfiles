@@ -36,9 +36,13 @@
 (setq nrepl-popup-stacktraces nil)
 (add-to-list 'same-window-buffer-names "*nrepl*") 
 
-;;auto-complete
+;;auto-complete with yasnippets and jedi
 (require 'auto-complete-config)
 (ac-config-default)
 (defun ac-common-setup ()
-  (setq ac-sources (append ac-sources '(ac-source-filename))))
+  (setq ac-sources (append ac-sources '(ac-source-filename
+                                        ac-source-yasnippet))))
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq yas-snippet-dirs "~/.emacs.d/el-get/yasnippet/snippets/")
+(yas-global-mode t)
 (provide 'default-tweaks)
