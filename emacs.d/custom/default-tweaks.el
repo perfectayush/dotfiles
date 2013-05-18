@@ -1,16 +1,4 @@
 ;;Functions
-(defun x11-maximize-frame ()
-  "Maximize the current frame (to full screen)"
-  (interactive)
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0)))
-
-(defun apply-to-frame (frame)
-  (select-frame frame)
-  (if (window-system frame)
-      (progn  
-        (x11-maximize-frame))))
-
 
 ;;set-appearance-tweaks
 (require 'color-theme)
@@ -25,9 +13,6 @@
 (fringe-mode (quote (nil . 0)))
 (global-rainbow-delimiters-mode 1)
 (global-hl-line-mode 1)
-(when window-system
-  (x11-maximize-frame))
-(add-hook 'after-make-frame-functions 'apply-to-frame)
 
 ;; Nrepl config
 (add-hook 'nrepl-mode-hook 'evil-emacs-state)
