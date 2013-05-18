@@ -141,7 +141,7 @@
                           (lhs (list
                                     ; evil state
                                 (propertize (format " %s " evilstate) 'face evilface)
-                                (powerline-arrow-right evilface face0)
+                                (powerline-arrow-left evilface face0)
 
                                     ; buffer name
                                 (eval
@@ -150,7 +150,7 @@
                                        ((buffer-modified-p)
                                         (propertize " %b + " 'face face0))
                                        (t (powerline-raw "%b " face0 'l))))
-                                (powerline-arrow-right face0 face1)
+                                (powerline-arrow-left face0 face1)
 
                                     ; modes
 
@@ -160,7 +160,7 @@
                                    (powerline-raw " :" face1)
                                    (powerline-minor-modes face1 'l)
                                    (powerline-raw " " face1)
-                                   (powerline-arrow-right face1 face2)
+                                   (powerline-arrow-left face1 face2)
 
                                     ; process
                                 ;; (when mode-line-process
@@ -173,18 +173,18 @@
                           (rhs (list
                                     ; mode string
                                 (powerline-raw global-mode-string face2 'r)
-                                (powerline-arrow-left face2 face1)
+                                (powerline-arrow-right face2 face1)
 
                                     ; position percent
                                 (powerline-raw " %p" face1 'r)
                                 ;; (powerline-narrow face0 'r)
-                                (powerline-arrow-left face1 face0)
+                                (powerline-arrow-right face1 face0)
 
                                     ; position 
                                 (powerline-raw " LN %l:%2c" face0 'r)
                                 ;;(powerline-narrow face0 'r)
                                 ;;no arrow here
-                                ;;(powerline-arrow-left face0 face2)
+                                ;;(powerline-arrow-right face0 face2)
 
                                 (powerline-hud face1 face2))))
 
