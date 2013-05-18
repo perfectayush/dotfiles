@@ -40,7 +40,6 @@
 ;; the k is handled on the function
 (setq key-chord-two-keys-delay 0.2)
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
-(key-chord-mode 1)
 
 
 ;; evil quick buffer switching
@@ -50,9 +49,12 @@
 (define-key evil-motion-state-map "L" 'evil-next-buffer)
 
 ;; ace jump mode key bindings
-(define-key evil-normal-state-map "  " 'ace-jump-mode)
-(define-key evil-normal-state-map " k" 'ace-jump-char-mode)
-(define-key evil-normal-state-map " l" 'ace-jump-line-mode)
+(key-chord-define evil-normal-state-map "  " #'ace-jump-char-mode)
+(key-chord-define evil-visual-state-map "  " #'ace-jump-char-mode)
+(key-chord-define evil-normal-state-map " l" #'ace-jump-line-mode)
+(key-chord-define evil-visual-state-map " l" #'ace-jump-line-mode)
+(key-chord-define evil-normal-state-map " w" #'ace-jump-word-mode)
+(key-chord-define evil-visual-state-map " w" #'ace-jump-word-mode)
 
 ;;evil cursor tweak for themes
 (setq evil-default-cursor t)
@@ -61,11 +63,46 @@
 (evil-set-initial-state 'slime-repl-mode 'emacs)
 
 ;; emacs like movement
-(define-key evil-normal-state-map "\C-e" 'evil-end-of-line)
 (define-key evil-motion-state-map "\C-e" 'evil-end-of-line)
+(define-key evil-normal-state-map "\C-e" 'evil-end-of-line)
 (define-key evil-insert-state-map "\C-e" 'end-of-line)
+(define-key evil-visual-state-map "\C-e" 'evil-end-of-line)
+(define-key evil-normal-state-map "\C-f" 'evil-forward-char)
+(define-key evil-insert-state-map "\C-f" 'evil-forward-char)
+(define-key evil-insert-state-map "\C-f" 'evil-forward-char)
+(define-key evil-normal-state-map "\C-b" 'evil-backward-char)
+(define-key evil-insert-state-map "\C-b" 'evil-backward-char)
+(define-key evil-visual-state-map "\C-b" 'evil-backward-char)
+(define-key evil-normal-state-map "\C-d" 'evil-delete-char)
+(define-key evil-insert-state-map "\C-d" 'evil-delete-char)
+(define-key evil-visual-state-map "\C-d" 'evil-delete-char)
+(define-key evil-normal-state-map "\C-n" 'evil-next-line)
+(define-key evil-insert-state-map "\C-n" 'evil-next-line)
+(define-key evil-visual-state-map "\C-n" 'evil-next-line)
+(define-key evil-normal-state-map "\C-p" 'evil-previous-line)
+(define-key evil-insert-state-map "\C-p" 'evil-previous-line)
+(define-key evil-visual-state-map "\C-p" 'evil-previous-line)
+(define-key evil-normal-state-map "\C-w" 'evil-delete)
+(define-key evil-insert-state-map "\C-w" 'evil-delete)
+(define-key evil-visual-state-map "\C-w" 'evil-delete)
+(define-key evil-normal-state-map "\C-y" 'yank)
+(define-key evil-insert-state-map "\C-y" 'yank)
+(define-key evil-visual-state-map "\C-y" 'yank)
+(define-key evil-normal-state-map "\C-k" 'kill-line)
+(define-key evil-insert-state-map "\C-k" 'kill-line)
+(define-key evil-visual-state-map "\C-k" 'kill-line)
+(define-key evil-normal-state-map "Q" 'call-last-kbd-macro)
+(define-key evil-visual-state-map "Q" 'call-last-kbd-macro)
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
-;; enable evil >:->
+;; enable evil and key-chord-mode >:->
+(key-chord-mode 1)
 (evil-mode 1)
 
 (provide 'evil-tweaks)
