@@ -105,7 +105,7 @@ zstyle ':prezto:module:prompt' theme 'archaic'
 # Set syntax highlighters.
 # By default main, brackets, and cursor are enabled.
 zstyle -t ':prezto:module:syntax-highlighting' color 'yes'
-zstyle ':prezto:module:syntax-highlighting' highlighters 'main' 'brackets' 'pattern' 'cursor' 'root'
+zstyle ':prezto:module:syntax-highlighting' highlighters 'main' 'brackets' 'pattern' 'cursor' #'root'
 
 
 ############
