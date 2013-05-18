@@ -21,7 +21,9 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings starter-kit-ruby starter-kit-eshell starter-kit-js)
+(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings
+                      starter-kit-ruby starter-kit-eshell starter-kit-js
+                      jedi)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
@@ -124,6 +126,8 @@
         auto-complete
         ac-nrepl
         ac-python
+        yasnippet
+        auto-complete-yasnippet
 
         ;;Lispy languages
         paredit
@@ -137,6 +141,7 @@
 
         ;;Extra-Language-modes
         puppet-mode
+        haskell-mode
         haml-mode
         lua-mode
         ))
