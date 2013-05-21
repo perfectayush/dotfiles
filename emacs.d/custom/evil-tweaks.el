@@ -14,7 +14,6 @@
   "i"  'indent-region
   "k"  'kill-buffer 
   "b"  'switch-to-buffer
-  "e"  'file-file
   "u"  'undo-tree-visualize
   "l"  'evil-next-buffer
   "h"  'evil-prev-buffer
@@ -90,15 +89,7 @@
 (define-key evil-visual-state-map "Q" 'call-last-kbd-macro)
 
 ;; evil-org-mode settings
-(require 'evil)
 (require 'org)
-(define-minor-mode evil-org-mode
-  "Buffer local minor mode for evil-org"
-  :init-value nil
-  :lighter " EvilOrg"
-  :keymap (make-sparse-keymap) ; defines evil-org-mode-map
-  :group 'evil-org)
-
 
 (defun always-insert-item ()
   (if (not (org-in-item-p))
@@ -111,7 +102,7 @@
   (evil-append nil))
 
 ;; normal state shortcuts
-(evil-define-key 'normal evil-org-mode-map
+(evil-define-key 'normal org-mode-map
   "gh" 'outline-up-heading
   "gj" 'org-forward-heading-same-level
   "gk" 'org-backward-heading-same-level
@@ -130,8 +121,8 @@
   (kbd "TAB") 'org-cycle)
 
 ;; normal & insert state shortcuts.
-(mapc (lambda (state)
-        (evil-define-key state evil-org-mode-map
+(mapcar (lambda (state)
+        (evil-define-key state org-mode-map
           (kbd "M-l") 'org-metaright
           (kbd "M-h") 'org-metaleft
           (kbd "M-k") 'org-metaup
@@ -152,10 +143,8 @@
                              (org-metaright))))))
       '(normal insert))
 
-;;; evil-org.el ends here
 
 ;; enable evil and key-chord-mode >:->
-(add-hook 'org-mode-hook 'evil-org-mode) ;; only load with org-mode
 (key-chord-mode 1)
 (evil-mode 1)
 
