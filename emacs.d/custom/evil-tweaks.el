@@ -80,9 +80,6 @@
 (define-key evil-visual-state-map "\C-n" 'evil-next-line)
 (define-key evil-normal-state-map "\C-p" 'evil-previous-line)
 (define-key evil-visual-state-map "\C-p" 'evil-previous-line)
-(define-key evil-normal-state-map "\C-w" 'evil-delete)
-(define-key evil-insert-state-map "\C-w" 'evil-delete)
-(define-key evil-visual-state-map "\C-w" 'evil-delete)
 (define-key evil-normal-state-map "\C-y" 'yank)
 (define-key evil-insert-state-map "\C-y" 'yank)
 (define-key evil-visual-state-map "\C-y" 'yank)
@@ -91,13 +88,6 @@
 (define-key evil-visual-state-map "\C-k" 'kill-line)
 (define-key evil-normal-state-map "Q" 'call-last-kbd-macro)
 (define-key evil-visual-state-map "Q" 'call-last-kbd-macro)
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
-(define-key evil-visual-state-map [escape] 'keyboard-quit)
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 
 ;; evil-org-mode settings
 (require 'evil)
@@ -109,7 +99,6 @@
   :keymap (make-sparse-keymap) ; defines evil-org-mode-map
   :group 'evil-org)
 
-(add-hook 'org-mode-hook 'evil-org-mode) ;; only load with org-mode
 
 (defun always-insert-item ()
   (if (not (org-in-item-p))
@@ -166,6 +155,7 @@
 ;;; evil-org.el ends here
 
 ;; enable evil and key-chord-mode >:->
+(add-hook 'org-mode-hook 'evil-org-mode) ;; only load with org-mode
 (key-chord-mode 1)
 (evil-mode 1)
 
