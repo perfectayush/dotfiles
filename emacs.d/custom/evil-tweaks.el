@@ -108,7 +108,7 @@
   "gk" 'org-backward-heading-same-level
   "gl" 'outline-next-visible-heading
   "t" 'org-todo
-  "T" '(lambda () (interactive) (evil-org-eol-call '(org-insert-todo-heading nil)))
+  "T" '(lambda () (interactive) (evil-org-eol-call '(lambda () (org-insert-todo-heading nil))))
   ";t" 'org-show-todo-tree
   "o" '(lambda () (interactive) (evil-org-eol-call 'always-insert-item))
   "O" '(lambda () (interactive) (evil-org-eol-call 'org-insert-heading))
