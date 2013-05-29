@@ -107,6 +107,7 @@
         evil
         evil-paredit
         evil-leader
+        evil-numbers
         evil-surround
         evil-nerd-commenter
         key-chord
