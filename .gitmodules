@@ -1,0 +1,3 @@
+[submodule "emacs.d/custom/snippets/clojure-mode"]
+	path = emacs.d/custom/snippets/clojure-mode
+	url = git://github.com/swannodette/clojure-snippets.git
