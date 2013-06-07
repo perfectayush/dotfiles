@@ -23,7 +23,7 @@
 
 (defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings
                       starter-kit-ruby starter-kit-eshell starter-kit-js
-                      jedi)
+                      jedi haskell-mode)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
@@ -142,7 +142,6 @@
 
         ;;Extra-Language-modes
         puppet-mode
-        haskell-mode
         haml-mode
         lua-mode
         ))
