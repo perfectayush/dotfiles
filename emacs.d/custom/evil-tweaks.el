@@ -8,8 +8,6 @@
 ;; evil leader shortcuts
 (require 'evil-leader)
 (evil-leader/set-leader ",")
-;;evil-leader-in-visual-mode
-(define-key evil-visual-state-map "," evil-leader/map) 
 (evil-leader/set-key
   "i"  'indent-region
   "k"  'kill-buffer 
