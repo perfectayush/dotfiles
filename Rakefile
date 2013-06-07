@@ -16,8 +16,8 @@ namespace :dot do
   task :emacs do
     puts "Installing emacs config ..."
     FileUtils.mkdir_p(home + "/.emacs.d/custom/")
-    FileUtils.ln_s(pwd + "/emacs.d/init.el", home + "/.emacs.d/")
-    Dir[ pwd + "/emacs.d/custom/*.el"].each do |elisp|
+    FileUtils.ln_s(pwd + "/emacs.d/init.el", home + "/.emacs.d/",:force => true)
+    Dir[ pwd + "/emacs.d/custom/*"].each do |elisp|
       FileUtils.ln_s(elisp, home + "/.emacs.d/custom/" + File.basename(elisp),:force => true)
     end
   end

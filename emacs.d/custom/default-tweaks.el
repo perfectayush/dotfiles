@@ -28,6 +28,6 @@
   (setq ac-sources (append ac-sources '(ac-source-filename
                                         ac-source-yasnippet))))
 (add-hook 'python-mode-hook 'jedi:setup)
-(setq yas-snippet-dirs "~/.emacs.d/el-get/yasnippet/snippets/")
+(setq yas-snippet-dirs '("~/.emacs.d/custom/snippets/" "~/.emacs.d/el-get/yasnippet/snippets/"))
 (yas-global-mode t)
 (provide 'default-tweaks)
