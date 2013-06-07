@@ -22,8 +22,7 @@
   (package-refresh-contents))
 
 (defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings
-                      starter-kit-ruby starter-kit-eshell starter-kit-js
-                      jedi haskell-mode)
+                      starter-kit-eshell starter-kit-js jedi haskell-mode)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
