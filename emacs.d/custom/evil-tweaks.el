@@ -21,6 +21,7 @@
   "cc" 'evilnc-comment-or-uncomment-lines
   "ci" 'evilnc-comment-or-uncomment-to-the-line
 )
+(global-evil-leader-mode)
 
 ;; Global Evil mode toggles
 (define-key global-map [f5] 'evil-mode)
