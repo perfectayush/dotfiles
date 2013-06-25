@@ -21,6 +21,17 @@
 (setq nrepl-popup-stacktraces nil)
 (add-to-list 'same-window-buffer-names "*nrepl*") 
 
+;;kpm-list tweaks for evil
+(defadvice kpm-list (after no-evil-kpm-list activate)
+  "Make kpm-list play along with evil-mode."
+  (with-current-buffer (get-buffer kpm-list-buffer-name)
+    (define-key evil-normal-state-local-map (kbd "<RET>") 'kpm-list-select-buffer)
+    (define-key evil-normal-state-local-map "q" 'quit-window)
+    (define-key evil-normal-state-local-map "o" 'kpm-list-select-other-window)
+    (define-key evil-normal-state-local-map "j" 'kpm-list-next-buffer)
+    (define-key evil-normal-state-local-map "k" 'kpm-list-prev-buffer)
+    (define-key evil-normal-state-local-map "d" 'kpm-list-kill-buffer)))
+
 ;;auto-complete with yasnippets and jedi
 (require 'auto-complete-config)
 (ac-config-default)

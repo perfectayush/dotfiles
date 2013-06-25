@@ -121,6 +121,7 @@
         popup
         fuzzy
         linum+
+        kpm-list
 
         ;;auto-complete
         auto-complete
