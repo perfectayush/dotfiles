@@ -1,6 +1,12 @@
 ;;evil surround
 (global-surround-mode 1)
 
+;;functions
+(defun evil-eval-replace ()
+  (interactive)
+  (end-of-line)
+  (esk-eval-and-replace))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; key bindings overrides for evil mode ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -11,6 +17,7 @@
 (evil-leader/set-key
   "i"  'indent-region
   "k"  'kill-buffer 
+  "e"  'evil-eval-replace
   "b"  'switch-to-buffer
   "u"  'undo-tree-visualize
   "l"  'evil-next-buffer
