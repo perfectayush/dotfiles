@@ -41,6 +41,10 @@
 
 (add-hook 'temp-buffer-setup-hook 'split-horizontally-for-temp-buffers)
 
+;;golden-ratio
+(require 'golden-ratio)
+(golden-ratio-mode 1)
+
 ;;auto-complete with yasnippets and jedi
 (require 'auto-complete-config)
 (ac-config-default)

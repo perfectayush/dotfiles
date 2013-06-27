@@ -196,6 +196,7 @@
 (defvar mode-line-cleaner-alist
   `((auto-complete-mode . " α")
     (yas-minor-mode . " γ")
+    (golden-ratio-mode . " φ")
     (paredit-mode . " Φ")
     (eldoc-mode . "")
     (abbrev-mode . "")

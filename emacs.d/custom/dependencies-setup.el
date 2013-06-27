@@ -46,6 +46,10 @@
                               :type git
                               :url "https://github.com/roman/evil-paredit.git")
 
+                       (:name golden-ratio
+                              :type git
+                              :url "https://github.com/roman/golden-ratio.el.git")
+
                        (:name evil-nerd-commenter
                               :type git
                               :url "https://github.com/redguardtoo/evil-nerd-commenter.git")
@@ -122,6 +126,7 @@
         fuzzy
         linum+
         kpm-list
+        golden-ratio
 
         ;;auto-complete
         auto-complete
