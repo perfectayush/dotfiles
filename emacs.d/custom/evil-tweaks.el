@@ -135,8 +135,7 @@
           (kbd "M-t") '(lambda () (interactive)
                          (evil-org-eol-call
                           '(lambda ()
-                             (org-insert-todo-heading nil)
-                             (org-metaright))))))
+                             (org-insert-todo-heading nil))))))
       '(normal insert))
 
 
