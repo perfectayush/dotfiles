@@ -32,6 +32,15 @@
     (define-key evil-normal-state-local-map "k" 'kpm-list-prev-buffer)
     (define-key evil-normal-state-local-map "d" 'kpm-list-kill-buffer)))
 
+;;horizontal splitting for temp buff
+(defun split-horizontally-for-temp-buffers ()
+  "Split the window horizontally for temp buffers."
+  (when (and (one-window-p t)
+             (not (active-minibuffer-window)))
+    (split-window-horizontally)))
+
+(add-hook 'temp-buffer-setup-hook 'split-horizontally-for-temp-buffers)
+
 ;;auto-complete with yasnippets and jedi
 (require 'auto-complete-config)
 (ac-config-default)
