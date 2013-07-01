@@ -129,10 +129,9 @@
         golden-ratio
 
         ;;auto-complete
+        yasnippet
         auto-complete
         ac-nrepl
-        ac-python
-        yasnippet
         auto-complete-yasnippet
 
         ;;Lispy languages

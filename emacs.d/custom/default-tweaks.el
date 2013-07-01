@@ -46,12 +46,26 @@
 (golden-ratio-mode 1)
 
 ;;auto-complete with yasnippets and jedi
-(require 'auto-complete-config)
-(ac-config-default)
-(defun ac-common-setup ()
-  (setq ac-sources (append ac-sources '(ac-source-filename
-                                        ac-source-yasnippet))))
-(add-hook 'python-mode-hook 'jedi:setup)
 (setq yas-snippet-dirs '("~/.emacs.d/custom/snippets/" "~/.emacs.d/el-get/yasnippet/snippets/"))
 (yas-global-mode t)
+
+(require 'auto-complete)
+(require 'auto-complete-config)
+(require 'auto-complete-yasnippet)
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:setup-keys t) 
+(setq jedi:complete-on-dot t)             
+(setq ac-fuzzy-enable t)
+(set-default 'ac-sources
+             '(ac-source-abbrev
+               ac-source-dictionary
+               ac-source-semantic
+               ac-source-yasnippet
+               ac-source-words-in-buffer
+               ac-source-words-in-same-mode-buffers
+               ))
+(ac-config-default)
+
+(global-auto-complete-mode t)
+(ac-set-trigger-key "TAB")
 (provide 'default-tweaks)
