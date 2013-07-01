@@ -21,7 +21,7 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings
+(defvar my-packages '(starter-kit starter-kit-lisp starter-kit-bindings robe
                       starter-kit-eshell starter-kit-js jedi haskell-mode)
   "A list of packages to ensure are installed at launch.")
 
@@ -65,6 +65,10 @@
                        (:name ac-nrepl
                               :type git
                               :url "https://github.com/purcell/ac-nrepl.git")
+
+                       (:name rcodetools
+                              :type http
+                              :url "https://raw.github.com/tnoda/rcodetools/master/rcodetools.el")
 
                        (:name popup
                               :type git
@@ -127,6 +131,7 @@
         linum+
         kpm-list
         golden-ratio
+        rcodetools
 
         ;;auto-complete
         yasnippet

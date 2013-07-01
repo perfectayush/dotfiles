@@ -56,18 +56,34 @@
 (require 'auto-complete)
 (require 'auto-complete-config)
 (require 'auto-complete-yasnippet)
+(require 'rcodetools)
+(require 'robe)
+
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:setup-keys t) 
 (setq jedi:complete-on-dot t)             
+
+(add-hook 'ruby-mode-hook 'robe-mode)
+(add-hook 'robe-mode-hook
+          (lambda ()
+            (add-to-list 'ac-sources 'ac-source-robe)
+            (setq completion-at-point-functions '(auto-complete))))
+
+
 (setq ac-fuzzy-enable t)
+
 (set-default 'ac-sources
              '(ac-source-abbrev
                ac-source-dictionary
-               ac-source-semantic
+               ac-source-files-in-current-dir
+               ac-source-filename
                ac-source-yasnippet
+               ac-source-semantic
+               ac-source-ropemacs
                ac-source-words-in-buffer
                ac-source-words-in-same-mode-buffers
                ))
+
 (ac-config-default)
 
 (global-auto-complete-mode t)
