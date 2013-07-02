@@ -124,13 +124,15 @@
         ack
         ace-jump-mode
         sudo-save
-        Enhanced-Ruby-Mode
         powerline
         popup
         fuzzy
         linum+
         kpm-list
         golden-ratio
+
+        ;;Ruby
+        Enhanced-Ruby-Mode
         rcodetools
 
         ;;auto-complete
