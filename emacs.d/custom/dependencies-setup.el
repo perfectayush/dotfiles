@@ -130,6 +130,8 @@
         linum+
         kpm-list
         golden-ratio
+        helm
+        multiple-cursors
 
         ;;Ruby
         Enhanced-Ruby-Mode
