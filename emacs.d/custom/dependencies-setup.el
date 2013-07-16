@@ -156,6 +156,7 @@
         ;;Extra-Language-modes
         puppet-mode
         haml-mode
+        yaml-mode
         lua-mode
         ))
 
