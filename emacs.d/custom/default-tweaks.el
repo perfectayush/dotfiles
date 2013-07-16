@@ -59,6 +59,11 @@
 (require 'rcodetools)
 (require 'robe)
 
+(ac-config-default)
+(setq ac-fuzzy-enable t)
+(global-auto-complete-mode t)
+(ac-set-trigger-key "TAB")
+
 (add-hook 'python-mode-hook 'jedi:setup)
 (setq jedi:setup-keys t) 
 (setq jedi:complete-on-dot t)             
@@ -69,23 +74,20 @@
             (add-to-list 'ac-sources 'ac-source-robe)
             (setq completion-at-point-functions '(auto-complete))))
 
+(setq-default ac-sources
+      '(ac-source-filename
+        ac-source-yasnippet
+        ac-source-functions
+        ac-source-variables
+        ac-source-symbols
+        ac-source-features
+        ac-source-abbrev
+        ac-source-dictionary
+        ac-source-semantic
+        ac-source-ropemacs
+        ac-source-words-in-buffer
+        ac-source-files-in-current-dir
+        ac-source-words-in-same-mode-buffers))
 
-(setq ac-fuzzy-enable t)
 
-(set-default 'ac-sources
-             '(ac-source-abbrev
-               ac-source-dictionary
-               ac-source-files-in-current-dir
-               ac-source-filename
-               ac-source-yasnippet
-               ac-source-semantic
-               ac-source-ropemacs
-               ac-source-words-in-buffer
-               ac-source-words-in-same-mode-buffers
-               ))
-
-(ac-config-default)
-
-(global-auto-complete-mode t)
-(ac-set-trigger-key "TAB")
 (provide 'default-tweaks)
