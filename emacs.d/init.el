@@ -3,4 +3,5 @@
 (require 'evil-tweaks)
 (require 'modeline-tweaks)
 (require 'linum-relativenumber)
-(require 'default-tweaks)
+(require 'misc-tweaks)
+(require 'ac-tweaks)
