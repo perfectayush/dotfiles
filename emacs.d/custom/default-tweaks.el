@@ -89,5 +89,7 @@
         ac-source-files-in-current-dir
         ac-source-words-in-same-mode-buffers))
 
+;; super key bindings
+(global-set-key (kbd  "s-x") 'helm-command-prefix)
 
 (provide 'default-tweaks)
