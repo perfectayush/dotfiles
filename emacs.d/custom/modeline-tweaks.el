@@ -73,7 +73,7 @@
   "Powerline evil emacs state face."
   :group 'powerline)
 
-(defface powerline-evil-unknown '((t (:background "red" :foreground "#FFFFFF" :inherit mode-line)))
+(defface powerline-evil-devil '((t (:background "#FFFFFF" :foreground "#5F005F" :inherit mode-line)))
   "Powerline evil unknown state face."
   :group 'powerline)
 
@@ -90,7 +90,7 @@
         ((evil-motion-state-p)   "MOTION")
         ((evil-replace-state-p)  "REPLACE")
         ((evil-emacs-state-p)    "EMACS")
-        (t                       "UNKNOWN")))
+        (t                       "DEVIL")))
 
 
 (defun custom-evil-face (&optional state)
@@ -104,7 +104,7 @@
        ((evil-motion-state-p)   'powerline-evil-motion)
        ((evil-replace-state-p)  'powerline-evil-replace)
        ((evil-emacs-state-p)    'powerline-evil-emacs)
-       (t                       'powerline-evil-normal)))
+       (t                       'powerline-evil-devil)))
 
 
 ;; Modeline tweaking
@@ -116,7 +116,6 @@
   (setq eol-mnemonic-dos       "d")
   (setq eol-mnemonic-mac       "m")
   (setq eol-mnemonic-undecided "?")
-
   (custom-powerline-things))
 
 
