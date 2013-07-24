@@ -4,7 +4,7 @@
 ;;functions
 (defun evil-eval-replace ()
   (interactive)
-  (end-of-line)
+  (end-of-sexp)
   (esk-eval-and-replace))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
