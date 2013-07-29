@@ -43,8 +43,9 @@
 
 ;; Adding the binding for the j character, then
 ;; the k is handled on the function
-(setq key-chord-two-keys-delay 0.2)
+(setq key-chord-two-keys-delay 0.25)
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
+(key-chord-define evil-emacs-state-map "jk" 'evil-normal-state)
 
 
 ;; evil quick buffer switching
