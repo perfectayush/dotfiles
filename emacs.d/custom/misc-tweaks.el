@@ -10,7 +10,7 @@
 (set-default-font "DejaVu Sans Mono-14")
 (setq default-frame-alist '((font . "DejaVu Sans Mono-14")))
 (global-linum-mode 1)
-(fringe-mode (quote (nil . 0)))
+(fringe-mode (quote (0 . nil)))
 (global-rainbow-delimiters-mode 1)
 (global-hl-line-mode 1)
 
