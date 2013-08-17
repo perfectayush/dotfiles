@@ -67,6 +67,8 @@
 
 ;; override default evil states for modes
 (evil-set-initial-state 'slime-repl-mode 'emacs)
+(evil-set-initial-state 'eshell-mode 'emacs)
+(evil-set-initial-state 'nrepl-mode 'emacs)
 
 ;; emacs like movement
 (define-key evil-motion-state-map "\C-e" 'evil-end-of-line)
