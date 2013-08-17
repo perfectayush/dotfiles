@@ -112,10 +112,10 @@
 
 (defun custom-modeline-things ()
   (interactive)
-  (setq eol-mnemonic-unix      "x")
-  (setq eol-mnemonic-dos       "d")
-  (setq eol-mnemonic-mac       "m")
-  (setq eol-mnemonic-undecided "?")
+  (setq eol-mnemonic-unix      "unix")
+  (setq eol-mnemonic-dos       "dos")
+  (setq eol-mnemonic-mac       "mac")
+  (setq eol-mnemonic-undecided "unknown")
   (custom-powerline-things))
 
 
@@ -175,7 +175,8 @@
                                 (powerline-arrow-right face2 face1)
 
                                     ; position percent
-                                (powerline-raw " %p" face1 'r)
+                                (powerline-raw (mode-line-eol-desc) face1 'l)
+                                (powerline-raw " | %p" face1 'r)
                                 ;; (powerline-narrow face0 'r)
                                 (powerline-arrow-right face1 face0)
 
