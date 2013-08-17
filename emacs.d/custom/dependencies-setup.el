@@ -147,6 +147,7 @@
         golden-ratio
         helm
         multiple-cursors
+        dictem
 
         ;;Ruby
         Enhanced-Ruby-Mode

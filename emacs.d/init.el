@@ -4,4 +4,5 @@
 (require 'modeline-tweaks)
 (require 'linum-relativenumber)
 (require 'ac-tweaks)
+(require 'dictem-setup)
 (require 'misc-tweaks)
