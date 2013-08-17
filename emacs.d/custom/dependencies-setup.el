@@ -46,6 +46,21 @@
                               :type git
                               :url "https://github.com/roman/evil-paredit.git")
 
+                       (:name ein
+                              :description "IPython notebook client in Emacs"
+                              :type github
+                              :pkgname "tkf/emacs-ipython-notebook"
+                              :depends (websocket request auto-complete)
+                              :load-path ("lisp")
+                              :submodule nil
+                              :features ein)
+
+                       (:name request
+                              :description "Easy HTTP request for Emacs Lisp"
+                              :type github
+                              :submodule nil
+                              :pkgname "tkf/emacs-request")
+
                        (:name golden-ratio
                               :type git
                               :url "https://github.com/roman/golden-ratio.el.git")
@@ -154,6 +169,7 @@
         nrepl
 
         ;;Extra-Language-modes
+        ein
         puppet-mode
         haml-mode
         yaml-mode
