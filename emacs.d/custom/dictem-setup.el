@@ -2,7 +2,7 @@
 (require 'dictem)
 (setq dictem-server "localhost")
 (setq dictem-user-databases-alist
-      `(("_en-en"  . ("gcide" "wn"))))
+      `(("_en-en"  . ("gcide" "wn" "moby"))))
 
 (setq dictem-use-user-databases-only t)
 
@@ -32,9 +32,6 @@
 (add-hook 'dictem-postprocess-show-info-hook
           'dictem-postprocess-definition-hyperlinks)
 
-
-(setq dictem-user-databases-alist
-      '(("_en-en"  . ("foldoc" "gcide" "wn"))))
 
 ;;; http://paste.lisp.org/display/89086
 (defun dictem-run-define-at-point-with-query ()
