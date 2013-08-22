@@ -1,5 +1,6 @@
 #
 # A theme based on sorins theme, with additional ruby prompt
+#
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
@@ -32,7 +33,8 @@ function prompt_archaic_precmd {
   if (( $+functions[git-info] )); then
     git-info
   fi
-  
+
+  # Get ruby env information.
   if (( $+functions[ruby-info] )); then
     ruby-info
   fi
@@ -50,11 +52,14 @@ function prompt_archaic_setup {
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_archaic_precmd
 
-  zstyle ':prezto:module:ruby:info:version' format '%%B%F{blue}[%v]%f%%b '
+  # Set editor-info parameters.
   zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary' format ' %B%F{red}❯%F{yellow}❯%F{green}❯%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}♺%f'
   zstyle ':prezto:module:editor:info:keymap:alternate' format ' %B%F{green}❮%F{yellow}❮%F{red}❮%f%b'
+
+  # Set git-info parameters.
+  zstyle ':prezto:module:git:info' verbose 'yes'
   zstyle ':prezto:module:git:info:action' format ':%%B%F{yellow}%s%f%%b'
   zstyle ':prezto:module:git:info:added' format ' %%B%F{green}✚%f%%b'
   zstyle ':prezto:module:git:info:ahead' format ' %%B%F{yellow}⬆%f%%b'
@@ -71,6 +76,9 @@ function prompt_archaic_setup {
   zstyle ':prezto:module:git:info:keys' format \
     'prompt' ' %F{blue}git%f$(coalesce "%b" "%p" "%c")%s' \
     'rprompt' '%A%B%S%a%d%m%r%U%u'
+
+  # Set ruby info parameters
+  zstyle ':prezto:module:ruby:info:version' format '%%B%F{blue}[%v]%f%%b '
 
   # Define prompts.
   PROMPT='${ruby_info[version]}%F{cyan}${_prompt_archaic_pwd}%f${git_info:+${(e)git_info[prompt]}}%(!. %B%F{red}#%f%b.)${editor_info[keymap]} '
