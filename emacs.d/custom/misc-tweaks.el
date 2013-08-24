@@ -55,4 +55,8 @@
 ;; super key bindings
 (global-set-key (kbd  "s-x") 'helm-command-prefix)
 
+;; global key bindings for cycling buffer
+(global-set-key (kbd  "C-x j") 'next-buffer)
+(global-set-key (kbd  "C-x J") 'previous-buffer)
+
 (provide 'misc-tweaks)

@@ -49,10 +49,10 @@
 
 
 ;; evil quick buffer switching
-(define-key evil-normal-state-map "K" 'evil-next-buffer)
-(define-key evil-normal-state-map "J" 'evil-prev-buffer)
-(define-key evil-motion-state-map "J" 'evil-prev-buffer)
-(define-key evil-motion-state-map "K" 'evil-next-buffer)
+(define-key evil-normal-state-map "J" 'evil-next-buffer)
+(define-key evil-normal-state-map "K" 'evil-prev-buffer)
+(define-key evil-motion-state-map "K" 'evil-prev-buffer)
+(define-key evil-motion-state-map "J" 'evil-next-buffer)
 
 ;; ace jump mode key bindings
 (key-chord-define evil-normal-state-map "  " #'ace-jump-char-mode)
