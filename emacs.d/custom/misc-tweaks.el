@@ -45,9 +45,12 @@
 (require 'golden-ratio)
 (golden-ratio-mode 1)
 
-;; Setting rbenv path
-(setenv "PATH" (concat (getenv "HOME") "/.rbenv/shims:" (getenv "HOME") "/.rbenv/bin:" (getenv "PATH")))
+;; Setting rbenv and java path
+(setenv "PATH" (concat (getenv "HOME") "/.rbenv/shims:" (getenv "HOME") "/.rbenv/bin:"        ;ruby
+                       "/opt/java/bin:/opt/java/db/bin:/opt/java/jre/bin:"                    ;java
+                       (getenv "PATH")))
 (setq exec-path (cons (concat (getenv "HOME") "/.rbenv/shims") (cons (concat (getenv "HOME") "/.rbenv/bin") exec-path)))
+(setq exec-path (append exec-path '("/opt/java/bin" "/opt/java/db/bin" "/opt/java/jre/bin")))
 
 ;; super key bindings
 (global-set-key (kbd  "s-x") 'helm-command-prefix)
