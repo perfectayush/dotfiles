@@ -61,6 +61,18 @@
                               :submodule nil
                               :pkgname "tkf/emacs-request")
 
+                       (:name dash
+                              :type git
+                              :url "https://github.com/magnars/dash.el.git") 
+
+                       (:name s
+                              :type git
+                              :url "https://github.com/magnars/s.el.git") 
+
+                       (:name pkg-info
+                              :type git
+                              :url "https://github.com/lunaryorn/pkg-info.el.git") 
+
                        (:name golden-ratio
                               :type git
                               :url "https://github.com/roman/golden-ratio.el.git")
@@ -135,6 +147,9 @@
         key-chord
 
         ;;utility
+        dash
+        pkg-info
+        s
         magit
         ack
         ace-jump-mode
