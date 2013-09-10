@@ -197,7 +197,7 @@
   `((auto-complete-mode . " α")
     (yas-minor-mode . " γ")
     (golden-ratio-mode . " φ")
-    (paredit-mode . " Φ")
+    (smartparens-mode . " Φ")
     (eldoc-mode . "")
     (abbrev-mode . "")
     (undo-tree-mode . " τ")

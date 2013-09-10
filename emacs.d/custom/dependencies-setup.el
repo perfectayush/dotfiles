@@ -42,9 +42,9 @@
 ;;extra source
 (setq el-get-generate-autoloads t
       el-get-sources '(
-                       (:name evil-paredit
+                       (:name smartparens
                               :type git
-                              :url "https://github.com/roman/evil-paredit.git")
+                              :url "https://github.com/Fuco1/smartparens.git")
 
                        (:name ein
                               :description "IPython notebook client in Emacs"
@@ -139,7 +139,6 @@
         
         ;;evil-mode
         evil
-        evil-paredit
         evil-leader
         evil-numbers
         evil-surround
@@ -175,7 +174,7 @@
         auto-complete-yasnippet
 
         ;;Lispy languages
-        paredit
+        smartparens
         rainbow-mode
         rainbow-delimiters
 
