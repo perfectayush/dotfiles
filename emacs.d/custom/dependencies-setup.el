@@ -162,6 +162,7 @@
         helm
         multiple-cursors
         dictem
+        xclip
 
         ;;Ruby
         Enhanced-Ruby-Mode

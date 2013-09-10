@@ -59,4 +59,7 @@
 (global-set-key (kbd  "C-c j") 'next-buffer)
 (global-set-key (kbd  "C-c k") 'previous-buffer)
 
+;; allow text to be copide to x-clipboard even from terminal
+(turn-on-xclip)
+
 (provide 'misc-tweaks)
