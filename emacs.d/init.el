@@ -6,4 +6,5 @@
 (require 'ac-tweaks)
 (require 'smartparens-tweaks)
 (require 'dictem-setup)
+(require 'mpris-defuns)
 (require 'misc-tweaks)
