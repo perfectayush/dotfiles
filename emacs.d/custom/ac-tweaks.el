@@ -1,5 +1,6 @@
 ;;auto-complete with yasnippets and jedi
-(setq yas-snippet-dirs '("~/.emacs.d/custom/snippets/" "~/.emacs.d/el-get/yasnippet/snippets/"))
+(setq yas-snippet-dirs '("~/.emacs.d/custom/snippets/"))
+(add-to-list 'yas-snippet-dirs (car (file-expand-wildcards "~/.emacs.d/elpa/yasnippet-*/snippets")))
 (yas-global-mode t)
 
 (require 'auto-complete)
