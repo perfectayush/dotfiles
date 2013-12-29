@@ -5,9 +5,8 @@
 
 (require 'auto-complete)
 (require 'auto-complete-config)
-(require 'auto-complete-yasnippet)
-(require 'rcodetools)
 (require 'robe)
+(require 'ac-nrepl)
 
 (ac-config-default)
 (setq ac-fuzzy-enable t)
@@ -30,6 +29,19 @@
             (add-to-list 'ac-sources 'ac-source-robe)
             (setq completion-at-point-functions '(auto-complete))))
 
+;;ac-nrepl
+(add-hook 'cider-repl-mode-hook 'ac-nrepl-setup)
+(add-hook 'cider-mode-hook 'ac-nrepl-setup)
+(eval-after-load "auto-complete"
+  '(add-to-list 'ac-modes 'cider-repl-mode))
+
+(defun set-auto-complete-as-completion-at-point-function ()
+  (setq completion-at-point-functions '(auto-complete)))
+(add-hook 'auto-complete-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
+(add-hook 'cider-repl-mode-hook 'set-auto-complete-as-completion-at-point-function)
+(add-hook 'cider-mode-hook 'set-auto-complete-as-completion-at-point-function)
+
 (setq-default ac-sources
       '(ac-source-filename
         ac-source-yasnippet
@@ -44,6 +56,5 @@
         ac-source-words-in-buffer
         ac-source-files-in-current-dir
         ac-source-words-in-same-mode-buffers))
-
 
 (provide 'ac-tweaks)
