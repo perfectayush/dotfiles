@@ -21,6 +21,15 @@
 (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
 (add-hook 'cider-mode-hook 'hl-sexp-mode)
 
+;;Cider config
+(require 'cider)
+(add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+(setq nrepl-hide-special-buffers t)
+(setq cider-repl-tab-command 'indent-for-tab-command)
+(add-hook 'cider-repl-mode-hook 'subword-mode)
+(add-hook 'cider-repl-mode-hook 'smartparens-strict-mode)
+(add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
+
 ;;kpm-list tweaks for evil
 (defadvice kpm-list (after no-evil-kpm-list activate)
   "Make kpm-list play along with evil-mode."
