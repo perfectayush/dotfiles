@@ -7,7 +7,6 @@
 (load-theme 'sanityinc-tomorrow-night t)
 
 
-(set-cursor-color (background-color-at-point))
 (set-default-font "DejaVu Sans Mono-14")
 (setq default-frame-alist '((font . "DejaVu Sans Mono-14")))
 (global-linum-mode 1)
