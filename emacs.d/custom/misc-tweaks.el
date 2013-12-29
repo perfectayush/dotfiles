@@ -14,12 +14,6 @@
 (global-rainbow-delimiters-mode 1)
 (global-hl-line-mode 1)
 
-;; Nrepl config
-(add-hook 'nrepl-mode-hook 'evil-emacs-state)
-(add-to-list 'evil-emacs-state-modes 'nrepl-mode)
-(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-(setq nrepl-popup-stacktraces nil)
-(add-to-list 'same-window-buffer-names "*nrepl*") 
 
 ;;kpm-list tweaks for evil
 (defadvice kpm-list (after no-evil-kpm-list activate)
