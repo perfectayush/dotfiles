@@ -4,9 +4,7 @@
 (setq server-socket-dir "/tmp/emacs1000/")
 
 ;;set-appearance-tweaks
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-tomorrow-night)
+(load-theme 'sanityinc-tomorrow-night t)
 
 
 (set-cursor-color (background-color-at-point))
