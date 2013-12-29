@@ -31,6 +31,7 @@
 (add-hook 'cider-repl-mode-hook 'rainbow-delimiters-mode)
 
 ;;kpm-list tweaks for evil
+(require 'kpm-list)
 (defadvice kpm-list (after no-evil-kpm-list activate)
   "Make kpm-list play along with evil-mode."
   (with-current-buffer (get-buffer kpm-list-buffer-name)
