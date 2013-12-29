@@ -1,5 +1,8 @@
 ;;Functions
 
+;;server-file
+(setq server-socket-dir "/tmp/emacs1000/")
+
 ;;set-appearance-tweaks
 (require 'color-theme)
 (color-theme-initialize)
