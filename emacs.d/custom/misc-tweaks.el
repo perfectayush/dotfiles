@@ -14,6 +14,12 @@
 (global-rainbow-delimiters-mode 1)
 (global-hl-line-mode 1)
 
+(require 'hl-sexp)
+(custom-set-faces
+ '(hl-sexp-face ((t (:underline "magenta" :weight bold)))))
+(add-hook 'lisp-mode-hook 'hl-sexp-mode)
+(add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
+(add-hook 'cider-mode-hook 'hl-sexp-mode)
 
 ;;kpm-list tweaks for evil
 (defadvice kpm-list (after no-evil-kpm-list activate)
