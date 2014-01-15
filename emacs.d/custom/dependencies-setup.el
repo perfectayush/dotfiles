@@ -32,8 +32,8 @@
                       
                       ;;evil-mode
                       evil
-                      evil-org-mode
-                      evil-visual-star
+                      evil-indent-textobject
+                      evil-visualstar
                       evil-leader
                       evil-numbers
                       evil-matchit
