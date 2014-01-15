@@ -16,7 +16,7 @@
 
 (require 'hl-sexp)
 (custom-set-faces
- '(hl-sexp-face ((t (:underline "magenta" :weight bold)))))
+ '(hl-sexp-face ((t (:underline "white" :weight bold)))))
 (add-hook 'lisp-mode-hook 'hl-sexp-mode)
 (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
 (add-hook 'cider-mode-hook 'hl-sexp-mode)
