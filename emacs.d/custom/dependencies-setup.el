@@ -32,8 +32,11 @@
                       
                       ;;evil-mode
                       evil
+                      evil-org-mode
+                      evil-visual-star
                       evil-leader
                       evil-numbers
+                      evil-matchit
                       surround
                       evil-nerd-commenter
                       key-chord
