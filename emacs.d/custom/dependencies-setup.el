@@ -93,4 +93,22 @@
   (when (not (package-installed-p p))
     (package-install p)))
 
+;; Load el-get for packages not available in elpa
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(defun install-el-get ()
+  (eval-url
+   "https://github.com/dimitri/el-get/raw/master/el-get-install.el"))
+
+(unless (require 'el-get nil t)
+  (install-el-get))
+
+(setq el-get-generate-autoloads t
+      el-get-sources '(      (:name rcodetools
+                              :type http
+                              :url "https://raw.github.com/tnoda/rcodetools/master/rcodetools.el")))
+
+(setq my-el-get-packages '(rcodetools dictem))
+
+(el-get 'sync my-el-get-packages)
 (provide 'dependencies-setup)
