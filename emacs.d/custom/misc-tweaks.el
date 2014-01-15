@@ -62,6 +62,9 @@
 (setq exec-path (cons (concat (getenv "HOME") "/.rbenv/shims") (cons (concat (getenv "HOME") "/.rbenv/bin") exec-path)))
 (setq exec-path (append exec-path '("/opt/java/bin" "/opt/java/db/bin" "/opt/java/jre/bin")))
 
+;;rcodetools for ruby
+(require 'rcodetools)
+
 ;; super key bindings
 (global-set-key (kbd  "s-x") 'helm-command-prefix)
 
