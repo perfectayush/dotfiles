@@ -94,6 +94,9 @@
 (define-key evil-normal-state-map "Q"    'call-last-kbd-macro)
 (define-key evil-visual-state-map "Q"    'call-last-kbd-macro)
 (define-key evil-motion-state-map ";"    'evil-ex)
+(define-key evil-motion-state-map "\M-p" 'evil-paste-pop)
+(define-key evil-motion-state-map "\M-P" 'evil-paste-pop-next)
+
 
 ;; evil-org-mode
 (require 'org)
