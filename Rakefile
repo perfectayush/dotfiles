@@ -8,7 +8,6 @@ namespace :dot do
   desc "install all"
   task :all do
     RAKE::TASK[:zsh].invoke
-    RAKE::TASK[:ackrc].invoke
     RAKE::TASK[:emacs].invoke
     RAKE::TASK[:tmux].invoke
   end
@@ -52,13 +51,6 @@ namespace :dot do
     end
   end
     
-  
-  desc "install ack config"
-  task :ack do
-    puts "Installing ack config ..."
-    FileUtils.ln_s(pwd + "/ackrc", home + "/.ackrc",:force => true)
-  end
-
   desc "install tmux config"
   task :tmux do
     puts "Installing tmux config ..."
