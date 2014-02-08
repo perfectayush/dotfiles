@@ -72,4 +72,7 @@
 (global-set-key (kbd  "C-c j") 'next-buffer)
 (global-set-key (kbd  "C-c k") 'previous-buffer)
 
+;;racket-mode tweaks
+(add-hook 'racket-mode-hook 'hl-sexp-mode)
+
 (provide 'misc-tweaks)
