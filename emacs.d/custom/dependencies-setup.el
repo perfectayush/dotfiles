@@ -30,7 +30,7 @@
                       color-theme
                       color-theme-sanityinc-tomorrow
                       
-                      ;;evil-mode
+                      ;; evil-mode
                       evil
                       evil-indent-textobject
                       evil-visualstar
@@ -41,8 +41,9 @@
                       evil-nerd-commenter
                       key-chord
                                                  
-                      ;;utility
-                      ack
+                      ;; utility
+                      ag
+                      projectile
                       ace-jump-mode
                       sudo-ext
                       powerline
@@ -55,38 +56,36 @@
 ;                      dictem
                       xclip
                                                  
-                      ;;Ruby
+                      ;; Ruby
                       robe
                                                  
-                      ;; python
+                      ;; Python
                       jedi
                       ein
                                                 
-                      ;;Lispy languages
+                      ;; Lispy languages
                       smartparens
                       hl-sexp
                       rainbow-mode
                       rainbow-delimiters
+                      racket-mode
                                                  
-                      ;;Clojure mode extensions
+                      ;; Clojure mode extensions
                       clojure-mode
                       cljsbuild-mode
                       cider
                                                  
-                      ;;Extra-Language-modes
+                      ;; Extra-Language-modes
                       puppet-mode
                       haskell-mode
                       haml-mode
                       yaml-mode
                       lua-mode
 
-                      ;;auto-complete
+                      ;; auto-complete
                       yasnippet
                       auto-complete
-                      ac-nrepl
-;                      auto-complete-yasnippet
- 
-                      )
+                      ac-nrepl)
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
@@ -95,6 +94,15 @@
 
 ;; Load el-get for packages not available in elpa
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(defun eval-url (url)
+  (let ((buffer (url-retrieve-synchronously url)))
+    (save-excursion
+      (set-buffer buffer)
+      (goto-char (point-min))
+      (re-search-forward "^$" nil 'move)
+      (eval-region (point) (point-max))
+      (kill-buffer (current-buffer)))))
 
 (defun install-el-get ()
   (eval-url
@@ -106,7 +114,11 @@
 (setq el-get-generate-autoloads t
       el-get-sources '(      (:name rcodetools
                               :type http
-                              :url "https://raw.github.com/tnoda/rcodetools/master/rcodetools.el")))
+                              :url "https://raw.github.com/tnoda/rcodetools/master/rcodetools.el")
+
+                             (:name dictem
+                              :type git
+                              :url "https://github.com/cheusov/dictem.git")))
 
 (setq my-el-get-packages '(rcodetools dictem))
 
