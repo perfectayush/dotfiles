@@ -18,7 +18,7 @@ zstyle ':prezto:*:*' color 'yes'
 zstyle ':prezto:load' pmodule 'environment' 'terminal' 'editor' 'history'       \
                               'completion' 'directory' 'spectrum' 'git'         \
                               'utility' 'ruby' 'prompt' 'syntax-highlighting'   \
-                              'history-substring-search' 'python'
+                              'history-substring-search' 'python' 'pacman'
                               
 #############################################################################
 ################################# Modules ###################################
