@@ -91,8 +91,8 @@
 ;;rcodetools for ruby
 (require 'rcodetools)
 
-;; super key bindings
-(global-set-key (kbd  "s-x") 'helm-command-prefix)
+;; helm config
+(require 'helm-config)
 
 ;; global key bindings for cycling buffer
 (global-set-key (kbd  "C-c j") 'next-buffer)
