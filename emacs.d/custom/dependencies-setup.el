@@ -27,8 +27,10 @@
                       starter-kit-eshell
                       starter-kit-js
 
+                      ;; appearance
                       color-theme
                       color-theme-sanityinc-tomorrow
+                      sublimity
                       
                       ;; evil-mode
                       evil

@@ -75,4 +75,12 @@
 ;;racket-mode tweaks
 (add-hook 'racket-mode-hook 'hl-sexp-mode)
 
+;; sublimity
+(require 'sublimity)
+(require 'sublimity-scroll)
+(sublimity-global-mode)
+
+(setq sublimity-scroll-weight 5
+      sublimity-scroll-drift-length 3)
+
 (provide 'misc-tweaks)
