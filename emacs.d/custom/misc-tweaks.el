@@ -14,6 +14,15 @@
 (global-rainbow-delimiters-mode 1)
 (global-hl-line-mode 1)
 
+;; make emacsclient transparent in terminal and in window-mode
+(require 'alpha)
+(add-hook 'after-make-frame-functions
+          '(lambda (frame)
+             (select-frame frame)
+             (if window-system
+               (transparency-set-value 90)
+               (set-frame-parameter nil 'background-color "unspecified-bg"))))
+
 (require 'hl-sexp)
 (custom-set-faces
  '(hl-sexp-face ((t (:underline "white" :weight bold)))))
