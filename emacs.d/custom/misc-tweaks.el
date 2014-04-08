@@ -21,6 +21,25 @@
 (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
 (add-hook 'cider-mode-hook 'hl-sexp-mode)
 
+;; linum appearance
+(set-face-attribute 'linum nil :foreground "#111" :background "grey70")
+
+(defface linum-relativenumber-zero
+  '((t :inherit linum :foreground "grey70" :background "#5F00AF" :weight bold))
+  "Face for displaying line number 0"
+  :group 'linum)
+
+(defface linum-relativenumber-top
+  '((t :inherit linum :weight normal))
+  "Face for displaying top line number"
+  :group 'linum)
+
+(defface linum-relativenumber-line
+  '((t :inherit linum :foreground "grey70" :background "#111" :weight normal))
+  "Face for displaying absolute line number"
+  :group 'linum)
+
+
 ;;Cider config
 (require 'cider)
 (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
