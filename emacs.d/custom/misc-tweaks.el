@@ -5,8 +5,6 @@
 
 ;;set-appearance-tweaks
 (load-theme 'sanityinc-tomorrow-night t)
-
-
 (set-default-font "DejaVu Sans Mono-14")
 (setq default-frame-alist '((font . "DejaVu Sans Mono-14")))
 (global-linum-mode 1)
@@ -25,7 +23,7 @@
 
 (require 'hl-sexp)
 (custom-set-faces
- '(hl-sexp-face ((t (:underline "white" :weight bold)))))
+ '(hl-sexp-face ((t (:foreground "#FF4C4C" :weight bold)))))
 (add-hook 'lisp-mode-hook 'hl-sexp-mode)
 (add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
 (add-hook 'cider-mode-hook 'hl-sexp-mode)
