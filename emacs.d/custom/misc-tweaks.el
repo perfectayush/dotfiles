@@ -109,4 +109,7 @@
 (setq sublimity-scroll-weight 5
       sublimity-scroll-drift-length 3)
 
+;; truncate lines (don't wrap)
+(set-default 'truncate-lines t)
+
 (provide 'misc-tweaks)
