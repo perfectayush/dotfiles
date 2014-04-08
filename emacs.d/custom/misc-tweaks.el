@@ -112,4 +112,7 @@
 ;; truncate lines (don't wrap)
 (set-default 'truncate-lines t)
 
+;; don't ask follow symlinks
+(setq vc-follow-symlinks t)
+
 (provide 'misc-tweaks)
