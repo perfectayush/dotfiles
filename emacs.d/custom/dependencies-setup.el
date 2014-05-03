@@ -78,6 +78,7 @@
                       cider
                                                  
                       ;; Extra-Language-modes
+                      dockerfile-mode
                       puppet-mode
                       haskell-mode
                       haml-mode
