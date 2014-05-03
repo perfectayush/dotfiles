@@ -95,4 +95,4 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND=(fg=red)
 #custom fasd settings. prezto settings primitive
 eval "$(fasd --init auto)"
 
-alsi -a -u
+alsi -a -u 2>/dev/null
