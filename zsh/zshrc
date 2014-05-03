@@ -84,6 +84,7 @@ alias stop='sudo systemctl stop'
 
 #ENVIRONMENT VARS
 export TERM=xterm-256color
+export LANG="en_US.UTF-8"
 export EDITOR=vim
 export VISUAL=vim
 export GREP_COLOR='1;34'
