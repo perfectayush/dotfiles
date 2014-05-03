@@ -18,7 +18,7 @@
           '(lambda (frame)
              (select-frame frame)
              (if window-system
-               (transparency-set-value 90)
+               (transparency-set-value 80)
                (set-frame-parameter nil 'background-color "unspecified-bg"))))
 
 (require 'hl-sexp)
