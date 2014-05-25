@@ -42,6 +42,7 @@
                       surround
                       evil-nerd-commenter
                       key-chord
+                      iedit
                                                  
                       ;; utility
                       ag
@@ -55,7 +56,7 @@
                       golden-ratio
                       helm
                       multiple-cursors
-;                      dictem
+                      keychain-environment
                       xclip
                                                  
                       ;; Ruby
@@ -123,7 +124,7 @@
                               :type git
                               :url "https://github.com/cheusov/dictem.git")))
 
-(setq my-el-get-packages '(rcodetools dictem))
+(setq my-el-get-packages '(rcodetools dictem sudo-save))
 
 (el-get 'sync my-el-get-packages)
 (provide 'dependencies-setup)
