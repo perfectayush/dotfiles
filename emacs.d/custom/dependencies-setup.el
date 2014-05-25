@@ -77,6 +77,11 @@
                       clojure-mode
                       cljsbuild-mode
                       cider
+
+                      ;;golang
+                      go-mode
+                      go-snippets
+                      golint
                                                  
                       ;; Extra-Language-modes
                       dockerfile-mode
