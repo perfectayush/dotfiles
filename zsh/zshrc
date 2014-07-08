@@ -28,12 +28,14 @@ bindkey -M viins '^h'    backward-delete-char
 bindkey -M viins '^?'    backward-delete-char
 bindkey -M viins '^_'    undo
 bindkey -M viins '^x^r'  redisplay
-bindkey -M viins '\eOH'  beginning-of-line # Home
-bindkey -M viins '\eOF'  end-of-line       # End
-bindkey -M viins '\e[2~' overwrite-mode    # Insert
-bindkey -M viins '\ef'   forward-word      # Alt-f
-bindkey -M viins '\eb'   backward-word     # Alt-b
-bindkey -M viins '\ed'   kill-word         # Alt-d
+bindkey -M viins '\eOH'  beginning-of-line                 # Home
+bindkey -M viins '\eOF'  end-of-line                       # End
+bindkey -M viins '\e[2~' overwrite-mode                    # Insert
+bindkey -M viins '\ef'   forward-word                      # Alt-f
+bindkey -M viins '\eb'   backward-word                     # Alt-b
+bindkey -M viins '\ed'   kill-word                         # Alt-d
+bindkey -M viins '\e^h'  backward-kill-word                # Alt-backspace
+bindkey -M viins '\e^?'  backward-kill-word                # Alt-backspace
 bindkey -M viins 'jk'    vi-cmd-mode
 bindkey -M viins '\e.'   insert-last-word
 
@@ -56,6 +58,9 @@ bindkey -M vicmd '\eb'   backward-word                     # Alt-b
 bindkey -M vicmd '\ed'   kill-word                         # Alt-d
 bindkey -M vicmd '\e[5~' history-beginning-search-backward # PageUp
 bindkey -M vicmd '\e[6~' history-beginning-search-forward  # PageDown
+bindkey -M vicmd '\e^h'  backward-kill-word                # Alt-backspace
+bindkey -M vicmd '\e^?'  backward-kill-word                # Alt-backspace
+bindkey -M vicmd '\e.'   insert-last-word
 
 #aliases
 alias .='cd ../'
