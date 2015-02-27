@@ -143,4 +143,9 @@
          '((tramp-parse-sconfig "/etc/ssh_config")
            (tramp-parse-sconfig "~/.ssh/config")))
 
+(setq vc-ignore-dir-regexp
+      (format "\\(%s\\)\\|\\(%s\\)"
+              vc-ignore-dir-regexp
+              tramp-file-name-regexp))
+
 (provide 'misc-tweaks)
