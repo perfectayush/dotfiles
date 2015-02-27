@@ -4,12 +4,11 @@
 (setq server-socket-dir "/tmp/emacs1000/")
 
 ;;set-appearance-tweaks
-(load-theme 'sanityinc-tomorrow-night t)
+(load-theme 'bubbleberry t)
 (set-default-font "DejaVu Sans Mono-14")
 (setq default-frame-alist '((font . "DejaVu Sans Mono-14")))
 (global-linum-mode 1)
 (fringe-mode (quote (0 . nil)))
-(global-rainbow-delimiters-mode 1)
 (global-hl-line-mode 1)
 
 ;; make emacsclient transparent in terminal and in window-mode
