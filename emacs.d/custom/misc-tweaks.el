@@ -21,12 +21,21 @@
                (transparency-set-value 95)
                (set-frame-parameter nil 'background-color "unspecified-bg"))))
 
-(require 'hl-sexp)
-(custom-set-faces
- '(hl-sexp-face ((t (:foreground "#FF4C4C" :weight bold)))))
-(add-hook 'lisp-mode-hook 'hl-sexp-mode)
-(add-hook 'emacs-lisp-mode-hook 'hl-sexp-mode)
-(add-hook 'cider-mode-hook 'hl-sexp-mode)
+;; highlight parenthesis for lispy languages
+(global-highlight-parentheses-mode t)
+(require 'rainbow-delimiters)
+(set-face-attribute 'hl-paren-face nil :underline t :inherit 'rainbow-delimiters-faces :foreground "blue")
+(set-face-attribute 'sp-show-pair-match-face nil :underline t)
+
+(set-face-attribute 'rainbow-delimiters-depth-1-face nil :inherit 'rainbow-delimiters-faces :foreground "grey")
+(set-face-attribute 'rainbow-delimiters-depth-2-face nil :inherit 'rainbow-delimiters-faces :foreground "#04F103")
+(set-face-attribute 'rainbow-delimiters-depth-3-face nil :inherit 'rainbow-delimiters-faces :foreground "#04F179")
+(set-face-attribute 'rainbow-delimiters-depth-4-face nil :inherit 'rainbow-delimiters-faces :foreground "#04F1F1")
+(set-face-attribute 'rainbow-delimiters-depth-5-face nil :inherit 'rainbow-delimiters-faces :foreground "#7C6AE3")
+(set-face-attribute 'rainbow-delimiters-depth-6-face nil :inherit 'rainbow-delimiters-faces :foreground "#F103E3")
+(set-face-attribute 'rainbow-delimiters-depth-7-face nil :inherit 'rainbow-delimiters-faces :foreground "#932FE3")
+(set-face-attribute 'rainbow-delimiters-depth-8-face nil :inherit 'rainbow-delimiters-faces :foreground "#04F179")
+(set-face-attribute 'rainbow-delimiters-depth-9-face nil :inherit 'rainbow-delimiters-faces :foreground "#04F1F1")
 
 ;; linum appearance
 (set-face-attribute 'linum nil :foreground "#111" :background "grey70")
