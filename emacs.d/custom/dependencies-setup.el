@@ -58,6 +58,7 @@
                       multiple-cursors
                       keychain-environment
                       xclip
+                      flycheck
                                                  
                       ;; Ruby
                       robe
@@ -89,6 +90,7 @@
                       haskell-mode
                       haml-mode
                       yaml-mode
+                      markdown-mode
                       lua-mode
 
                       ;; auto-complete
