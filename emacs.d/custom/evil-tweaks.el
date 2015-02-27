@@ -27,6 +27,7 @@
   "-"  'evil-numbers/dec-at-pt
   "cc" 'evilnc-comment-or-uncomment-lines
   "ci" 'evilnc-comment-or-uncomment-to-the-line
+  "w"  'toggle-truncate-lines
 )
 (global-evil-leader-mode 1)
 
@@ -91,6 +92,7 @@
 (define-key evil-normal-state-map "\C-k" 'kill-line)
 (define-key evil-insert-state-map "\C-k" 'kill-line)
 (define-key evil-visual-state-map "\C-k" 'kill-line)
+(define-key evil-normal-state-map "\C-t" 'transpose-chars)
 (define-key evil-normal-state-map "Q"    'call-last-kbd-macro)
 (define-key evil-visual-state-map "Q"    'call-last-kbd-macro)
 (define-key evil-motion-state-map ";"    'evil-ex)
