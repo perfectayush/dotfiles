@@ -126,4 +126,12 @@
 (setq interprogram-cut-function 'x-select-text)
 (xclip-mode 1)
 
+;;ssh settings for tramp
+(setenv "SSH_AUTH_SOCK" "/run/user/1000/keyring/ssh")
+(setq tramp-use-ssh-controlmaster-options nil)
+
+(tramp-set-completion-function "ssh"
+         '((tramp-parse-sconfig "/etc/ssh_config")
+           (tramp-parse-sconfig "~/.ssh/config")))
+
 (provide 'misc-tweaks)
