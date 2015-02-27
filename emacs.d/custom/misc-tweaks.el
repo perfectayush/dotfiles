@@ -115,4 +115,9 @@
 ;; don't ask follow symlinks
 (setq vc-follow-symlinks t)
 
+;; xclip mode
+(setq x-select-enable-clipboard t)
+(setq interprogram-cut-function 'x-select-text)
+(xclip-mode 1)
+
 (provide 'misc-tweaks)
