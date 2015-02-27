@@ -80,12 +80,22 @@ alias zshconfig='emacsclient -t -a 'nano' ~/.zshrc'
 alias wn='dict -d wn'
 alias ff='ffind'
 alias imdb='/usr/bin/lm'
+alias cmyip="curl ifconfig.me"
 
 #systemd alias
 alias restart='sudo systemctl restart'
 alias status='sudo systemctl status'
 alias start='sudo systemctl start'
 alias stop='sudo systemctl stop'
+
+#custom functions
+sortdiff() {
+  bash -c "diff <(sort $1) <(sort $2)"
+}
+
+sortmeld() {
+  bash -c "meld <(sort $1) <(sort $2)"
+}
 
 #ENVIRONMENT VARS
 export TERM=xterm-256color
@@ -101,3 +111,4 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND=(fg=red)
 eval "$(fasd --init auto)"
 
 alsi -a -u 2>/dev/null
+
