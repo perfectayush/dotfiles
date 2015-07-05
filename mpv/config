@@ -1,0 +1,23 @@
+# Write your default config options here!
+[default]
+vo=vaapi,opengl
+hr-seek=yes
+hwdec=vaapi
+hwdec-codecs=all
+af=drc
+softvol-max=600
+force-rgba-osd-rendering
+ass-use-margins
+ass-hinting=native
+sub-text-shadow-color="#000000"
+sub-text-shadow-offset=1
+sub-text-border-size=1
+osd-shadow-color="#000000"
+osd-shadow-offset=1
+osd-border-size=1
+cache=300000
+cache-initial=100
+use-filedir-conf
+
+[dec-v-hevc]
+hr-seek=no
