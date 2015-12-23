@@ -50,10 +50,10 @@ namespace :dot do
     end
   end
 
-  desc "install spacemacs..."
+  desc "install spacemacs"
   task :spacemacs do
     begin
-      puts "Installing spacemacs"
+      puts "Installing spacemacs ..."
       unless File.exists?(home + "/.emacs.d/")
         `git clone --recursive https://github.com/syl20bnr/spacemacs ~/.emacs.d`
       end
@@ -63,10 +63,15 @@ namespace :dot do
     end
   end
 
-  desc "install tmux config"
+  desc "install tmux config ..."
   task :tmux do
     puts "Installing tmux config ..."
     FileUtils.ln_s(pwd + "/tmux.conf", home + "/.tmux.conf",:force => true)
   end
 
+  desc "install mpv config"
+  task :mpv do
+    puts "Installing mpv config ..."
+    FileUtils.ln_s(pwd + "/mpv", home + "/.mpv",:force => true)
+  end
 end

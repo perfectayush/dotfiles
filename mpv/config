@@ -1,13 +1,13 @@
 # Write your default config options here!
 [default]
-vo=vaapi,opengl
+vo=opengl-hq
 hr-seek=yes
-hwdec=vaapi
+hwdec=auto
 hwdec-codecs=all
 af=drc
 softvol-max=600
 force-rgba-osd-rendering
-ass-use-margins
+sub-use-margins
 ass-hinting=native
 sub-text-shadow-color="#000000"
 sub-text-shadow-offset=1
@@ -15,9 +15,10 @@ sub-text-border-size=1
 osd-shadow-color="#000000"
 osd-shadow-offset=1
 osd-border-size=1
-cache=300000
+cache=1000000
 cache-initial=100
 use-filedir-conf
-
-[dec-v-hevc]
-hr-seek=no
+cache-secs=100
+save-position-on-quit
+af=drc
+input-file=~/.mpv/fifo
