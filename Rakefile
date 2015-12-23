@@ -4,24 +4,23 @@ require 'fileutils'
 namespace :dot do
   home = ENV['HOME']
   pwd  = FileUtils.pwd
-  
+
   desc "install all"
   task :all do
     RAKE::TASK[:zsh].invoke
     RAKE::TASK[:emacs].invoke
     RAKE::TASK[:tmux].invoke
   end
-  
+
+
   desc "install emacs config"
   task :emacs do
     puts "Installing emacs config ..."
-    FileUtils.mkdir_p(home + "/.emacs.d/custom/")
-    FileUtils.ln_s(pwd + "/emacs.d/init.el", home + "/.emacs.d/",:force => true)
-    Dir[ pwd + "/emacs.d/custom/*"].each do |elisp|
-      FileUtils.ln_s(elisp, home + "/.emacs.d/custom/" + File.basename(elisp),:force => true)
-    end
+    FileUtils.mkdir_p(home + "/.spacemacs.d/")
+    FileUtils.ln_s(pwd + "/emacs/init.el", home + "/.spacemacs.d/",:force => true)
+    Rake::Task["prezto"].invoke unless File.exists?(home + "/.emacs.d")
   end
-  
+
   desc "install zsh config"
   task :zsh do
     puts "Installing zsh config ..."
@@ -34,7 +33,7 @@ namespace :dot do
                    home + "/.zprezto/modules/prompt/functions/prompt_archaic_setup",
                   :force => true)
   end
-    
+
   desc "install prezto"
   task :prezto do
     begin
@@ -50,11 +49,24 @@ namespace :dot do
       puts "Failed while installing prezto from internet"
     end
   end
-    
+
+  desc "install spacemacs..."
+  task :spacemacs do
+    begin
+      puts "Installing spacemacs"
+      unless File.exists?(home + "/.emacs.d/")
+        `git clone --recursive https://github.com/syl20bnr/spacemacs ~/.emacs.d`
+      end
+    rescue => e
+      puts e
+      puts "Failed while installing spacemacs from internet"
+    end
+  end
+
   desc "install tmux config"
   task :tmux do
     puts "Installing tmux config ..."
     FileUtils.ln_s(pwd + "/tmux.conf", home + "/.tmux.conf",:force => true)
   end
-  
+
 end
