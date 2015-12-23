@@ -72,6 +72,9 @@ namespace :dot do
   desc "install mpv config"
   task :mpv do
     puts "Installing mpv config ..."
+    FileUtils.rm_rf(home + "/.mpv")
     FileUtils.ln_s(pwd + "/mpv", home + "/.mpv",:force => true)
+    fifofile = "#{pwd}/mpv/fifo"
+    `mkfifo #{fifofile}` unless File.exists? fifofile
   end
 end
