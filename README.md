@@ -1,7 +1,7 @@
 Dotfiles
 ==============================
 
-My dotfiles for zsh, emacs and ack.
+My dotfiles for zsh, emacs, tmux and mpv
 
 Installation
 ------------
@@ -24,7 +24,7 @@ License
 
 (The MIT License)
 
-Copyright (c) 2013 Ayush Goyal
+Copyright (c) 2013-2016 Ayush Goyal
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
