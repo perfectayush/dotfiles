@@ -112,3 +112,5 @@ eval "$(fasd --init auto)"
 #jenv
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init - zsh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
