@@ -2,10 +2,6 @@
 [default]
 vo=opengl-hq
 hr-seek=yes
-hwdec=auto
-hwdec-codecs=all
-af=drc
-softvol-max=600
 force-rgba-osd-rendering
 sub-use-margins
 ass-hinting=native
@@ -20,5 +16,5 @@ cache-initial=100
 use-filedir-conf
 cache-secs=100
 save-position-on-quit
-af=drc
 input-file=~/.mpv/fifo
+fs-black-out-screens
