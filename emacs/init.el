@@ -37,7 +37,9 @@ values."
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      ;; languages/frameworks
      html
-     org
+     (org :variables
+          org-enable-github-support t
+          org-enable-reveal-js-support t)
      emacs-lisp
      lua
      python
@@ -281,8 +283,6 @@ in `dotspacemacs/user-config'.")
     ;; evil-state settings
     (evil-set-initial-state 'anaconda-mode-view-mode 'motion)
     (evil-set-initial-state 'help-mode 'motion)
-    ;; tramp settings
-    (setq tramp-default-method "ssh")
     ;;global leader bindings
     (spacemacs/set-leader-keys "wn" 'evil-window-new)
     (spacemacs/set-leader-keys "ps" 'spacemacs/helm-project-smart-do-search)
