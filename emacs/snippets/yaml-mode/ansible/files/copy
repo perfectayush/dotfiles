@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name : Copies files to remote locations.
+# key : copy
+# condition: ansible
+# expand-env: ((yas-indent-line 'fixed))
+# --
+- name: ${1:Copies files to remote locations.}
+  copy:
+    src: $2
+    dest: $3
+    mode: ${4:0644}
+    owner: ${5:root}
+    group: ${6:root}
+    $0

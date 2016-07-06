@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name : enable package caching for vagrant
+# key : cachier
+# group : vagrant
+# contributor : Ayush Goyal
+# expand-env: ((yas-indent-line 'fixed))
+# --
+if Vagrant.has_plugin?("vagrant-cachier")
+  config.cache.scope = ${1:$$(yas-choose-value '(":box" ":machine"))}
+  config.cache.synced_folder_opts = {
+    type: :nfs,
+    mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
+  }
+end

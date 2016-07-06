@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name : runrole
+# key : runrole
+# contributor : Ayush Goyal
+# --
+---
+- name: Run a role
+  hosts: all
+  max_fail_percentage: "{{cli_max_fail_percentage|default(100)}}"
+  sudo: True
+# tasks:
+  roles:
+    - "{{cli_roles}}"$0

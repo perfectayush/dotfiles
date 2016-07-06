@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name : Sets attributes of files
+# key : file
+# condition: ansible
+# --
+- name: ${1:Sets attributes of files}
+  file: path=${2:path} state=${3:$$(yas-choose-value '("file" "link" "directory" "hard" "touch" "absent"))} mode=${4:0644} owner=${5:root} group=${6:root} $0

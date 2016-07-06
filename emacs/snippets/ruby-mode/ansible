@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name : add ansible provision block
+# key : ansible
+# group : vagrant
+# contributor : Ayush Goyal
+# --
+config.vm.provision "ansible" do |ansible|
+  ansible.playbook = "playbook.yml"$0
+  #ansible.tags = "logrotate"
+  #ansible.groups = {
+  #  "group1" => ["machine1"],
+  #  "group2" => ["machine2", "machine3"],
+  #  "all_groups:children" => ["group1", "group2", "group3"],
+  #  "group1:vars" => { "variable1" => 9, "variable2" => "example" }
+  #}
+end
