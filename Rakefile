@@ -4,6 +4,9 @@ require 'fileutils'
 namespace :dot do
   home = ENV['HOME']
   pwd  = FileUtils.pwd
+  spacemacs_d = home + "/.spacemacs.d/"
+  emacs_d     = home + "/.emacs.d"
+  prezto_d    = home + "./zprezto"
 
   desc "install all"
   task :all do
@@ -16,16 +19,30 @@ namespace :dot do
   desc "install emacs config"
   task :emacs do
     puts "Installing emacs config ..."
-    FileUtils.mkdir_p(home + "/.spacemacs.d/")
-    FileUtils.ln_s(pwd + "/emacs/init.el", home + "/.spacemacs.d/",:force => true)
-    Rake::Task["prezto"].invoke unless File.exists?(home + "/.emacs.d")
+    FileUtils.mkdir_p(spacemacs_d)
+    FileUtils.ln_s(pwd + "/emacs/init.el", spacemacs_d,:force => true)
+    FileUtils.ln_s(pwd + "/emacs/snippets", spacemacs_d,:force => true)
+    Rake::Task[:spacemacs].invoke unless File.exists?(emacs_d)
+  end
+
+  desc "install spacemacs"
+  task :spacemacs do
+    begin
+      puts "Installing spacemacs ..."
+      unless File.exists?(emacs_d)
+        `git clone --recursive https://github.com/syl20bnr/spacemacs #{emacs_d}`
+      end
+    rescue => e
+      puts e
+      puts "Failed while installing spacemacs from internet"
+    end
   end
 
   desc "install zsh config"
   task :zsh do
     puts "Installing zsh config ..."
 
-    Rake::Task["prezto"].invoke unless File.exists?(home + "/.zprezto")
+    Rake::Task[:prezto].invoke unless File.exists?(zprezto_d)
 
     FileUtils.ln_s(pwd + "/zsh/zshrc", home + "/.zshrc",:force => true)
     FileUtils.ln_s(pwd + "/zsh/zpreztorc", home + "/.zpreztorc",:force => true)
@@ -38,8 +55,8 @@ namespace :dot do
   task :prezto do
     begin
       puts "Installing prezto"
-      unless File.exists?(home + "/.zprezto")
-        `git clone --recursive https://github.com/sorin-ionescu/prezto.git #{home}/.zprezto`
+      unless File.exists?(zprezto_d)
+        `git clone --recursive https://github.com/sorin-ionescu/prezto.git #{zprezto_d}`
       end
       Dir[home + "/.zprezto/runcoms/*"].reject{|f| f[/rc$|md$/]}.each do |file|
         FileUtils.ln_s(file,home + "/." + File.basename(file),:force => true)
@@ -50,18 +67,6 @@ namespace :dot do
     end
   end
 
-  desc "install spacemacs"
-  task :spacemacs do
-    begin
-      puts "Installing spacemacs ..."
-      unless File.exists?(home + "/.emacs.d/")
-        `git clone --recursive https://github.com/syl20bnr/spacemacs ~/.emacs.d`
-      end
-    rescue => e
-      puts e
-      puts "Failed while installing spacemacs from internet"
-    end
-  end
 
   desc "install tmux config ..."
   task :tmux do
