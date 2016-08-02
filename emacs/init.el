@@ -35,6 +35,7 @@ values."
      ;; evil
      evil-cleverparens
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
+     (vinegar :variables vinegar-reuse-dired-buffer t)
      ;; languages/frameworks
      html
      (org :variables
@@ -43,8 +44,10 @@ values."
      emacs-lisp
      lua
      python
-     ruby
+     (ruby :variables ruby-version-manager 'rbenv
+                      ruby-enable-enh-ruby-mode t)
      ansible
+     shell
      clojure
      javascript
      markdown
@@ -63,6 +66,7 @@ values."
      speed-reading
      command-log
      version-control
+     ranger
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -272,9 +276,14 @@ in `dotspacemacs/user-config'.")
     ;;set custom file and load it
     (setq custom-file "~/.spacemacs.d/custom.el")
     (load custom-file 'no-error)
-    ;;global modes
+    ;;enable evil multicursor globally
     (global-evil-mc-mode)
+    ;; evil-cleverparens
+
     (spacemacs/toggle-evil-cleverparens-on)
+    (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
+    (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
+
     (yas-global-mode)
     ;; keychord bindings
     (require 'key-chord)
@@ -283,6 +292,7 @@ in `dotspacemacs/user-config'.")
     ;; evil-state settings
     (evil-set-initial-state 'anaconda-mode-view-mode 'motion)
     (evil-set-initial-state 'help-mode 'motion)
+
     ;;global leader bindings
     (spacemacs/set-leader-keys "wn" 'evil-window-new)
     (spacemacs/set-leader-keys "ps" 'spacemacs/helm-project-smart-do-search)
@@ -291,7 +301,13 @@ in `dotspacemacs/user-config'.")
     (spacemacs/set-leader-keys "qq" 'save-buffers-kill-terminal)
     (spacemacs/set-leader-keys "bd" 'kill-this-buffer)
     ;;evil-surround
-    (add-hook 'yaml-mode-hook (lambda () (push '(?a . ("\"{{" . "}}\"")) evil-surround-pairs-alist)))
+    (add-hook 'yaml-mode-hook     (lambda () (progn  (push '(?q . ("\"{{" . "}}\""))
+                                                           evil-surround-pairs-alist)
+                                                     (push '(?a . ("{{" . "}}"))
+                                                           evil-surround-pairs-alist))))
+
+    (add-hook 'jinja2-mode-hook    (lambda () (push '(?a . ("{{" . "}}"))
+                                                    evil-surround-pairs-alist)))
 
     ;; use ag search in projectile mode
     (with-eval-after-load 'helm-projectile
@@ -316,4 +332,10 @@ in `dotspacemacs/user-config'.")
     (add-hook 'subword-mode-hook   #'(lambda ()
                                        (progn (modify-syntax-entry ?_ "_")
                                               (modify-syntax-entry ?- "_"))))
+
+    ;; ipython 5 tweak
+    (setq python-shell-interpreter-args "--simple-prompt")
+
+    ;; smartparens for yaml mode
+    (add-hook 'yaml-mode-hook #'smartparens-mode)
     ))
