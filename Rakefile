@@ -4,9 +4,9 @@ require 'fileutils'
 namespace :dot do
   home = ENV['HOME']
   pwd  = FileUtils.pwd
-  spacemacs_d = home + "/.spacemacs.d/"
-  emacs_d     = home + "/.emacs.d"
-  prezto_d    = home + "./zprezto"
+  spacemacs_d   = home + "/.spacemacs.d/"
+  emacs_d       = home + "/.emacs.d"
+  hammerspoon_d = home + "/.hammerspoon"
 
   desc "install all"
   task :all do
@@ -81,5 +81,12 @@ namespace :dot do
     FileUtils.ln_s(pwd + "/mpv", home + "/.mpv",:force => true)
     fifofile = "#{pwd}/mpv/fifo"
     `mkfifo #{fifofile}` unless File.exists? fifofile
+  end
+
+  desc "install hammerspoon config"
+  task :hs do
+    puts "Installing hammerspoon config ..."
+    FileUtils.rm_rf(hammerspoon_d)
+    FileUtils.ln_s(pwd + "/hammerspoon", hammerspoon_d,:force => true)
   end
 end
