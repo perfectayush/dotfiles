@@ -116,3 +116,7 @@ function highlighActiveWin()
   rect:show()
   hs.timer.doAfter(0.5, function() rect:delete() end)
 end
+
+function maximize_window()
+  rect({0,0,1,1})()
+end
