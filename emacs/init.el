@@ -47,6 +47,7 @@ values."
      (ruby :variables ruby-version-manager 'rbenv
                       ruby-enable-enh-ruby-mode t)
      ansible
+     go
      shell
      clojure
      javascript
@@ -67,6 +68,7 @@ values."
      command-log
      version-control
      ranger
+     gtags
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
