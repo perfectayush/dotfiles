@@ -334,9 +334,9 @@ in `dotspacemacs/user-config'.")
                                        (progn (modify-syntax-entry ?_ "_")
                                               (modify-syntax-entry ?- "_"))))
 
-    ;; ipython 5 tweak
-    (setq python-shell-interpreter-args "--simple-prompt")
-
     ;; smartparens for yaml mode
     (add-hook 'yaml-mode-hook #'smartparens-mode)
+
+    ;; global-git-commit-mode
+    (global-git-commit-mode t)
     ))
