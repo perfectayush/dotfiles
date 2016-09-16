@@ -75,7 +75,7 @@ alias v='vim'
 alias ssa='ssh'
 alias dsdb='udisksctl unmount --block-device /dev/sdb1;udisksctl unmount --block-device /dev/sdb2;udisks --detach /dev/sdb;'
 alias cnet='ping 8.8.8.8'
-alias zshconfig='emacsclient -t -a 'nano' ~/.zshrc'
+alias zshconfig='emacsclient -t -a 'vim' ~/.zshrc'
 alias wn='dict -d wn'
 alias ff='ffind'
 alias imdb='/usr/bin/lm'
@@ -99,8 +99,8 @@ sortmeld() {
 #ENVIRONMENT VARS
 export TERM=xterm-256color
 export LANG="en_US.UTF-8"
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR="emacsclient -t -a vim"
+export VISUAL="emacsclient -t -a vim"
 export GREP_COLOR='1;34'
 export PATH=~/.bin:$PATH:/opt/android-sdk/tools
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND=(fg=blue)
