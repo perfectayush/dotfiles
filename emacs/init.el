@@ -77,7 +77,8 @@ values."
    dotspacemacs-additional-packages '(key-chord
                                       rainbow-identifiers
                                       rainbow-blocks
-                                      rainbow-mode)
+                                      rainbow-mode
+                                      jammer)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -339,4 +340,19 @@ in `dotspacemacs/user-config'.")
 
     ;; global-git-commit-mode
     (global-git-commit-mode t)
+
+    ;; jammer mode to emulate vim hard time
+    (define-globalized-minor-mode global-jammer-mode jammer-mode (lambda() (jammer-mode 1)))
+
+    (setq jammer-block-type 'blacklist)
+    (setq jammer-repeat-delay 0.1)
+    (setq jammer-repeat-window 0.1)
+    (setq jammer-repeat-type 'constant)
+    (setq jammer-block-list '(evil-forward-char
+                              evil-backward-char
+                              forward-char
+                              backward-char
+                              next-line
+                              previous-line))
+    (global-jammer-mode)
     ))
