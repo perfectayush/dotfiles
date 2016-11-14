@@ -52,6 +52,7 @@ values."
      clojure
      javascript
      markdown
+     java
 
      ;; emacs tooling
      vagrant
