@@ -269,23 +269,24 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
-in `dotspacemacs/user-config'.")
+in `dotspacemacs/user-config'."
+  (progn
+    ;;set custom file and load it
+    (setq custom-file "~/.spacemacs.d/custom.el")
+    (load custom-file 'no-error))
+  )
 
 (defun dotspacemacs/user-config ()
   "Configuration function.
  This function is called at the very end of Spacemacs initialization after
  layers configuration."
   (progn
-    ;;set custom file and load it
-    (setq custom-file "~/.spacemacs.d/custom.el")
-    (load custom-file 'no-error)
-    ;;enable evil multicursor globally
-    (global-evil-mc-mode)
-    ;; evil-cleverparens
 
+    ;; evil-cleverparens
     (spacemacs/toggle-evil-cleverparens-on)
     (add-hook 'clojure-mode-hook #'evil-cleverparens-mode)
     (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
+    (global-evil-matchit-mode)
 
     (yas-global-mode)
     ;; keychord bindings
@@ -356,4 +357,6 @@ in `dotspacemacs/user-config'.")
                               next-line
                               previous-line))
     (global-jammer-mode)
+
+    (load "~/.spacemacs.d/custom-config.el" 'no-error)
     ))
