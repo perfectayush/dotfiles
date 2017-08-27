@@ -3,7 +3,6 @@
 
 require "preload"
 require "window"
-require "slack"
 require "emacs"
 
 hs.alert.show("Config Loaded")
