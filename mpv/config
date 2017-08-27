@@ -1,6 +1,7 @@
 # Write your default config options here!
 [default]
-vo=opengl-hq
+vo=opengl
+profile=opengl-hq
 hr-seek=yes
 force-rgba-osd-rendering
 sub-use-margins
