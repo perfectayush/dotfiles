@@ -23,15 +23,19 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     helm
+     ivy
      ;; auto-completion
      (auto-completion :variables
-                       auto-completion-return-key-behavior 'complete
-                       auto-completion-enable-snippets-in-popup t
-                       auto-completion-enable-help-tooltip t
-                       auto-completion-enable-sort-by-usage t
-                       auto-completion-tab-key-behavior 'cycle
-                       auto-completion-complete-with-key-sequence nil)
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-return-key-behavior 'complete
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-sort-by-usage t
+                      auto-completion-tab-key-behavior 'cycle
+                      auto-completion-complete-with-key-sequence nil
+                      spacemacs-default-company-backends '(company-files
+                                                           company-capf
+                                                           company-dabbrev
+                                                           company-dabbrev-code))
      ;; evil
      evil-cleverparens
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
@@ -40,21 +44,23 @@ values."
      html
      (org :variables
           org-enable-github-support t
+          org-projectile-file "~/Dropbox/orgs/projectile-todos.org"
           org-enable-reveal-js-support t)
      emacs-lisp
      lua
      python
      (ruby :variables ruby-version-manager 'rbenv
-                      ruby-enable-enh-ruby-mode t)
-     ansible
+           ruby-enable-enh-ruby-mode t)
      go
-     shell
+     (shell :variables shell-default-shell 'eshell)
      clojure
      javascript
      markdown
      java
+     (ansible :packages (not company-ansible))
 
      ;; emacs tooling
+     confluence
      vagrant
      git
      dash
@@ -64,21 +70,21 @@ values."
      ibuffer
      osx
      pandoc
+     colors
      fasd
      speed-reading
      command-log
+     restclient
      version-control
      ranger
      gtags
+     nginx
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages '(key-chord
-                                      rainbow-identifiers
-                                      rainbow-blocks
-                                      rainbow-mode
                                       jammer)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -134,7 +140,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(base16-tomorrow-night)
+   dotspacemacs-themes '(gruvbox base16-tomorrow-night)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -199,7 +205,7 @@ values."
    dotspacemacs-helm-position 'bottom
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
-   dotspacemacs-enable-paste-micro-state nil
+   dotspacemacs-enable-paste-transient-state t
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
    dotspacemacs-which-key-delay 0.4
@@ -240,6 +246,9 @@ values."
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
    dotspacemacs-line-numbers 'relative
+   ;; Code folding method. Possible values are `evil' and `origami'.
+   ;; (default 'evil)
+   dotspacemacs-folding-method 'origami
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode t
@@ -262,7 +271,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup 'trailing
+   dotspacemacs-whitespace-cleanup nil
    ))
 
 (defun dotspacemacs/user-init ()
@@ -288,7 +297,10 @@ in `dotspacemacs/user-config'."
     (add-hook 'emacs-lisp-mode-hook #'evil-cleverparens-mode)
     (global-evil-matchit-mode)
 
+    ;; autocomplete mode
     (yas-global-mode)
+    (global-company-mode)
+    (setq yas-triggers-in-field nil)
     ;; keychord bindings
     (require 'key-chord)
     (key-chord-mode 1)
@@ -297,38 +309,35 @@ in `dotspacemacs/user-config'."
     (evil-set-initial-state 'anaconda-mode-view-mode 'motion)
     (evil-set-initial-state 'help-mode 'motion)
 
-    ;;global leader bindings
+    ;; global leader bindings
     (spacemacs/set-leader-keys "wn" 'evil-window-new)
-    (spacemacs/set-leader-keys "ps" 'spacemacs/helm-project-smart-do-search)
-    (spacemacs/set-leader-keys "pS" 'spacemacs/helm-project-smart-do-search-region-or-symbol)
+    (spacemacs/set-leader-keys "ps" 'spacemacs/search-project-auto)
+    (spacemacs/set-leader-keys "pS" 'spacemacs/search-project-auto-region-or-symbol)
     (spacemacs/set-leader-keys "qc" 'spacemacs/save-buffers-kill-emacs)
     (spacemacs/set-leader-keys "qq" 'save-buffers-kill-terminal)
     (spacemacs/set-leader-keys "bd" 'kill-this-buffer)
-    ;;evil-surround
-    (add-hook 'yaml-mode-hook     (lambda () (progn  (push '(?q . ("\"{{" . "}}\""))
-                                                           evil-surround-pairs-alist)
-                                                     (push '(?a . ("{{" . "}}"))
-                                                           evil-surround-pairs-alist))))
+    ;; evil-surround
+    (add-hook 'yaml-mode-hook    #'(lambda () (progn  (push '(?q . ("\"{{" . "}}\""))
+                                                            evil-surround-pairs-alist)
+                                                      (push '(?a . ("{{" . "}}"))
+                                                            evil-surround-pairs-alist))))
 
-    (add-hook 'jinja2-mode-hook    (lambda () (push '(?a . ("{{" . "}}"))
-                                                    evil-surround-pairs-alist)))
-
-    ;; use ag search in projectile mode
-    (with-eval-after-load 'helm-projectile
-      (defun spacemacs/helm-project-smart-do-search-in-dir (dir)
-        (interactive)
-        (let ((default-directory dir))
-          (spacemacs/helm-project-smart-do-search)))
-      (define-key helm-projectile-find-file-map
-        (kbd "C-s")
-        (lambda ()
-          (interactive)
-          (helm-exit-and-execute-action
-           'spacemacs/helm-project-smart-do-search-in-dir))))
+    (add-hook 'jinja2-mode-hook   #'(lambda () (push '(?a . ("{{" . "}}"))
+                                                     evil-surround-pairs-alist)))
 
 
-    ;; disable save hook as it deletes trailing whitespace
-    (setq before-save-hook nil)
+    ;; wgrep settings
+    (setq wgrep-auto-save-buffer t)
+
+    ;; ivy add actions
+    (ivy-add-actions
+     'counsel-projectile-switch-project
+     '(("R" (lambda (dir)
+              (let ((projectile-switch-project-action 'counsel-projectile-rg))
+                (projectile-switch-project-by-name dir arg)))
+        "search with rg")))
+
+    ;; modify super/sub word mode for evil
     (add-hook 'superword-mode-hook #'(lambda ()
                                        (progn (modify-syntax-entry ?_ "w")
                                               (modify-syntax-entry ?- "w"))))
@@ -337,8 +346,10 @@ in `dotspacemacs/user-config'."
                                        (progn (modify-syntax-entry ?_ "_")
                                               (modify-syntax-entry ?- "_"))))
 
-    ;; smartparens for yaml mode
+    ;; yaml-mode hooks
+    (add-hook 'yaml-mode-hook #'superword-mode)
     (add-hook 'yaml-mode-hook #'smartparens-mode)
+    (add-hook 'yaml-mode-hook #'spacemacs/load-yasnippet)
 
     ;; global-git-commit-mode
     (global-git-commit-mode t)
@@ -356,7 +367,7 @@ in `dotspacemacs/user-config'."
                               backward-char
                               next-line
                               previous-line))
-    (global-jammer-mode)
+    ;; (global-jammer-mode)
 
     (load "~/.spacemacs.d/custom-config.el" 'no-error)
     ))
