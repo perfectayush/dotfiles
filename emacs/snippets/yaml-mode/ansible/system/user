@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: user
+# key: user
+# --
+- name: create $1 user
+  user: name=$2 state=${3:$$(yas-choose-value '("present" "absent"))} group=$4 shell=/bin/bash home=$5

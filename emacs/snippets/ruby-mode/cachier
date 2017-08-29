@@ -12,3 +12,9 @@ if Vagrant.has_plugin?("vagrant-cachier")
     mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
   }
 end
+
+if Vagrant.has_plugin?("vagrant-proxyconf")
+  config.proxy.http     = "http://192.168.33.1:8123/"
+  config.proxy.https    = "http://192.168.33.1:8123/"
+  config.proxy.no_proxy = "localhost,127.0.0.1,.example.com"
+end

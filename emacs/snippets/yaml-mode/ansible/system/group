@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: group
+# key: group
+# --
+- name: create $1 group
+  group: name=$2 state=${3:$$(yas-choose-value '("present" "absent"))}

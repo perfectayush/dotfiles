@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+#name : new_kafka_topic
+#key : new_kafka_topic
+#contributor : Ayush Goyal
+# --
+- name: ${1:topic_name}
+  partitions: ${2:partitions}
+  replication_factor: ${3:replication_factor}
+  config:
+    - "retention.bytes=${4:specify in bytes}"
+    - "retention.ms=${5:specify in ms}"
