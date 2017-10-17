@@ -143,6 +143,23 @@ settings.theme = `
 #sk_richKeystroke kbd{
     background: ${base06};
 }
+#sk_banner {
+    color: ${base00};
+    padding: 0.5rem;
+    position: fixed;
+    left: 10%;
+    top: -3rem;
+    z-index: 2147483000;
+    width: 80%;
+    border-radius: 0px 0px 4px 4px;
+    border: 1px solid ${base0A};
+    border-top-style: none;
+    text-align: center;
+    background: ${base0A};
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 
 #sk_richKeystroke kbd>.candidates{
     color: ${base0F};
