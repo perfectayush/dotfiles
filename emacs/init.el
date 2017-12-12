@@ -388,5 +388,8 @@ in `dotspacemacs/user-config'."
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . 'nil))
 
+    ;; gpg settings
+    (setq epa-pinentry-mode 'loopback)
+
     (load "~/.spacemacs.d/custom-config.el" 'no-error)
     ))
