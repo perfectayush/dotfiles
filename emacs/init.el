@@ -282,7 +282,12 @@ in `dotspacemacs/user-config'."
   (progn
     ;;set custom file and load it
     (setq custom-file "~/.spacemacs.d/custom.el")
-    (load custom-file 'no-error))
+    (load custom-file 'no-error)
+    (setq configuration-layer-elpa-archives
+          '(("melpa"    . "melpa.org/packages/")
+            ("org"      . "orgmode.org/elpa/")
+            ("gnu"      . "elpa.gnu.org/packages/")))
+    )
   )
 
 (defun dotspacemacs/user-config ()
