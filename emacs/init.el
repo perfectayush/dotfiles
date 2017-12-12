@@ -44,7 +44,6 @@ values."
      html
      (org :variables
           org-enable-github-support t
-          org-projectile-file "~/Dropbox/orgs/projectile-todos.org"
           org-enable-reveal-js-support t)
      emacs-lisp
      lua
