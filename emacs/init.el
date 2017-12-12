@@ -75,6 +75,8 @@ values."
      command-log
      restclient
      version-control
+     treemacs
+     theming
      ranger
      gtags
      nginx
@@ -84,6 +86,7 @@ values."
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages '(key-chord
+                                      org-jira
                                       jammer)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
