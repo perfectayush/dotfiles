@@ -317,12 +317,18 @@ in `dotspacemacs/user-config'."
     (evil-set-initial-state 'help-mode 'motion)
 
     ;; global leader bindings
-    (spacemacs/set-leader-keys "wn" 'evil-window-new)
+    (spacemacs/set-leader-keys "wn" #'(lambda() (interactive) (new-buffer-with-mode 'text-mode)))
     (spacemacs/set-leader-keys "ps" 'spacemacs/search-project-auto)
     (spacemacs/set-leader-keys "pS" 'spacemacs/search-project-auto-region-or-symbol)
     (spacemacs/set-leader-keys "qc" 'spacemacs/save-buffers-kill-emacs)
     (spacemacs/set-leader-keys "qq" 'save-buffers-kill-terminal)
     (spacemacs/set-leader-keys "bd" 'kill-this-buffer)
+
+    ;; open empty buffer
+    (defun new-buffer-with-mode (mode)
+      (interactive)
+      (let ((new-buffer (spacemacs/new-empty-buffer-above))) (with-current-buffer new-buffer (funcall mode))))
+
     ;; evil-surround
     (add-hook 'yaml-mode-hook    #'(lambda () (progn  (push '(?q . ("\"{{" . "}}\""))
                                                             evil-surround-pairs-alist)
