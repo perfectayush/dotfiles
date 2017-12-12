@@ -370,6 +370,7 @@ in `dotspacemacs/user-config'."
     ;; jammer mode to emulate vim hard time
     (define-globalized-minor-mode global-jammer-mode jammer-mode (lambda() (jammer-mode 1)))
 
+    ;; vim hard mode emulation
     (setq jammer-block-type 'blacklist)
     (setq jammer-repeat-delay 0.1)
     (setq jammer-repeat-window 0.1)
@@ -380,7 +381,12 @@ in `dotspacemacs/user-config'."
                               backward-char
                               next-line
                               previous-line))
+
     ;; (global-jammer-mode)
+
+    ;; transparent title bar
+    (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+    (add-to-list 'default-frame-alist '(ns-appearance . 'nil))
 
     (load "~/.spacemacs.d/custom-config.el" 'no-error)
     ))
