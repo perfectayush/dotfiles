@@ -47,9 +47,9 @@ mapkey("`","#10Jump to vim-like-mark", Normal.jumpVIMark);
 
 aceVimMap('jk', '<Esc>', 'insert');
 
-command('jira', '#14Go to jira ticket', function(args){
-    tabOpenLink("https://helpshift.atlassian.net/browse/" + args);
-});
+// command('jira', '#14Go to jira ticket', function(args){
+//     tabOpenLink("https://helpshift.atlassian.net/browse/" + args);
+// });
 
 var base00= "#1d1f21";
 var base01= "#282a2e";
