@@ -8,10 +8,19 @@
 // @grant        none
 // ==/UserScript==
 'use strict';
+(() => {
+  const hidecss = ".player-timedtext-text-container { display: none !important}";
+  let isSubtitleVisible = true;
 
-document.addEventListener('keydown', e => {
-  if(e.keyCode !== 86) return;
-
-  const subtitle = document.querySelector('.player-timedtext-text-container');
-  subtitle.style.display = (subtitle.style.display === 'none') ? 'block' : 'none';
-}, false);
+  document.addEventListener('keydown', e => {
+      if (e.keyCode !== 86) return;
+  
+      if (isSubtitleVisible) {
+              document.styleSheets[0].insertRule(hidecss);
+              isSubtitleVisible = false;
+          } else {
+              document.styleSheets[0].removeRule(hidecss);
+              isSubtitleVisible = true;
+          }
+    }, false);
+})()
