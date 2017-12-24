@@ -7,23 +7,20 @@
 // @match        https://www.netflix.com/*
 // @grant        none
 // ==/UserScript==
+'use strict';
+(() => {
+  const hidecss = ".player-timedtext-text-container { display: none !important}";
+  let isSubtitleVisible = true;
 
-(function() {
-    'use strict';
-    function hideSubtitle(){
-        var hidecss = ".player-timedtext-text-container { display: none !important}";
-        if ((typeof document.subtitleVisible == "undefined") || document.subtitleVisible === true) {
-            document.styleSheets[0].insertRule(hidecss);
-            document.subtitleVisible = false;
-        } else
-        {
-            document.styleSheets[0].removeRule(hidecss);
-            document.subtitleVisible = true;
-        }
-    }
-    document.addEventListener('keydown', function(e) {
-        if (e.keyCode == 86 && !e.shiftKey && !e.ctrlKey && !e.altKey && !e.metaKey) {
-            hideSubtitle();
-        }
+  document.addEventListener('keydown', e => {
+      if (e.keyCode !== 86) return;
+  
+      if (isSubtitleVisible) {
+              document.styleSheets[0].insertRule(hidecss);
+              isSubtitleVisible = false;
+          } else {
+              document.styleSheets[0].removeRule(hidecss);
+              isSubtitleVisible = true;
+          }
     }, false);
 })();
