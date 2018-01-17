@@ -5,10 +5,10 @@ profile=opengl-hq
 hr-seek=yes
 force-rgba-osd-rendering
 sub-use-margins
-ass-hinting=native
-sub-text-shadow-color="#000000"
-sub-text-shadow-offset=1
-sub-text-border-size=1
+sub-ass-hinting=native
+sub-shadow-color="#000000"
+sub-shadow-offset=1
+sub-border-size=1
 osd-shadow-color="#000000"
 osd-shadow-offset=1
 osd-border-size=1
@@ -18,4 +18,3 @@ use-filedir-conf
 cache-secs=100
 save-position-on-quit
 input-file=~/.mpv/fifo
-fs-black-out-screens
