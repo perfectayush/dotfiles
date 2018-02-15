@@ -88,7 +88,6 @@ alias restart='sudo systemctl restart'
 alias status='sudo systemctl status'
 alias start='sudo systemctl start'
 alias stop='sudo systemctl stop'
-alias mux='tmuxinator'
 alias flix='flix -port 6060 -player mpv'
 
 #custom functions
@@ -130,4 +129,8 @@ eval "$(jenv init - zsh)"
 eval "$(pyenv virtualenv-init -)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# gem_home
+source /usr/local/share/gem_home/gem_home.sh
+gem_home ~/.gem/global
 

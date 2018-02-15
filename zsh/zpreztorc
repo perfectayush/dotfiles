@@ -53,7 +53,7 @@ zstyle ':prezto:module:editor' key-bindings 'vi'
 ###########
 #history preferences
 zstyle ':prezto:module:history-substring-search' color 'yes'
-    
+
 
 
 ##########
@@ -62,6 +62,10 @@ zstyle ':prezto:module:history-substring-search' color 'yes'
 # Set the Pacman frontend.
 # zstyle ':prezto:module:pacman' frontend 'yaourt'
 
+########
+# Ruby #
+########
+zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
 
 ##########
 # Prompt #
