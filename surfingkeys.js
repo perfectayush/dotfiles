@@ -85,6 +85,10 @@ settings.theme = `
     color: ${base0A};
 }
 
+.sk_theme ul > li {
+    font-size: 15px;
+}
+
 .sk_theme ul > li > .title {
     color: ${base06};
 }
