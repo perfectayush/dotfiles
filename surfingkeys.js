@@ -35,6 +35,7 @@ map('gt', 'R');
 map('gT', 'E');
 map('K', 'R');
 map('J', 'E');
+cmap('<Ctrl-Alt-i>','<Ctrl-i>');
 
 mapkey("'","#10Jump to vim-like-mark quickly", function(mark) {
     Normal.jumpVIMark(mark.toUpperCase());
