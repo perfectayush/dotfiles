@@ -106,6 +106,7 @@ This function should only modify configuration layer settings."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages '(key-chord
                                       org-jira
+                                      evil-textobj-column
                                       sphinx-doc
                                       jammer)
    ;; A list of packages and/or extensions that will not be install and loaded.
@@ -499,6 +500,10 @@ before packages are loaded."
     ;; evil-state settings
     (evil-set-initial-state 'anaconda-mode-view-mode 'motion)
     (evil-set-initial-state 'help-mode 'motion)
+
+    ;; evil-textobj-column settings
+    (define-key evil-inner-text-objects-map "c" 'evil-textobj-column-word)
+    (define-key evil-inner-text-objects-map "C" 'evil-textobj-column-WORD)
 
     ;; global leader bindings
     (spacemacs/set-leader-keys "wn" #'(lambda() (interactive) (new-buffer-with-mode 'text-mode)))
