@@ -582,10 +582,9 @@ before packages are loaded."
 
     ;; transparent title bar
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-    (add-to-list 'default-frame-alist '(ns-appearance . 'nil))
+    (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
     ;; gpg settings
     (setq epa-pinentry-mode 'loopback)
 
-    (load "~/.spacemacs.d/custom-config.el" 'no-error)
-    ))
+    (load "~/.spacemacs.d/custom-config.el" 'no-error))
