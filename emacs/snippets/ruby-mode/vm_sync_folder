@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name  : add a sync folder in vagrant file
+# key   : vm_sync_folder
+# group : vagrant
+# contributor : Ayush Goyal
+# --
+config.vm.synced_folder "${1:/src}", "${2:/dest}"
