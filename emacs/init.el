@@ -527,6 +527,8 @@ before packages are loaded."
     (add-hook 'yaml-mode-hook    #'(lambda () (progn  (push '(?q . ("\"{{" . "}}\""))
                                                             evil-surround-pairs-alist)
                                                       (push '(?a . ("{{" . "}}"))
+                                                            evil-surround-pairs-alist))
+                                                      (push '(?e . ("^(" . ")$"))
                                                             evil-surround-pairs-alist))))
 
     (add-hook 'jinja2-mode-hook   #'(lambda () (push '(?a . ("{{" . "}}"))
