@@ -60,7 +60,8 @@ This function should only modify configuration layer settings."
           org-enable-reveal-js-support t)
      emacs-lisp
      lua
-     python
+     (python :variables python-backend 'lsp)
+     lsp
      (ruby :variables ruby-version-manager 'rbenv
            ruby-enable-enh-ruby-mode t)
      go
@@ -105,6 +106,7 @@ This function should only modify configuration layer settings."
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages '(key-chord
                                       org-jira
+                                      sphinx-doc
                                       jammer)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -505,6 +507,11 @@ before packages are loaded."
     (spacemacs/set-leader-keys "qc" 'spacemacs/save-buffers-kill-emacs)
     (spacemacs/set-leader-keys "qq" 'save-buffers-kill-terminal)
     (spacemacs/set-leader-keys "bd" 'kill-this-buffer)
+    (add-hook 'python-mode-hook (lambda ()
+                                  (require 'sphinx-doc)
+                                  (sphinx-doc-mode t)
+                                  (spacemacs/set-leader-keys-for-minor-mode
+                                    'sphinx-doc-mode "id" 'sphinx-doc)))
 
     ;; open empty buffer
     (defun new-buffer-with-mode (mode)
