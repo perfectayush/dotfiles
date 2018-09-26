@@ -37,14 +37,18 @@ map('K', 'R');
 map('J', 'E');
 cmap('<Ctrl-Alt-i>','<Ctrl-i>');
 
-mapkey("'","#10Jump to vim-like-mark quickly", function(mark) {
+mapkey("om","#10Jump to vim-like-mark quickly", function(mark) {
     Normal.jumpVIMark(mark.toUpperCase());
 });
 
-mapkey("<Ctrl-'>", '#10Jump to vim-like mark in new tab.', function(mark) {
+mapkey("oM", '#10Jump to vim-like mark in new tab.', function(mark) {
     Normal.jumpVIMark(mark.toUpperCase(), true);
 });
 mapkey("`","#10Jump to vim-like-mark", Normal.jumpVIMark);
+
+mapkey("'", "#80Open URL from vim-like marks", function() {
+    Front.openOmnibar({type: "VIMarks"});
+});
 
 aceVimMap('jk', '<Esc>', 'insert');
 
