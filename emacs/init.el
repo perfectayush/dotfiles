@@ -109,6 +109,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(key-chord
                                       org-jira
                                       evil-textobj-column
+                                      speeddating
                                       sphinx-doc
                                       jammer)
    ;; A list of packages and/or extensions that will not be install and loaded.
