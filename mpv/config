@@ -1,8 +1,8 @@
 # Write your default config options here!
 [default]
-vo=opengl
-profile=opengl-hq
+vo=gpu
 hr-seek=yes
+hr-seek-framedrop=yes
 force-rgba-osd-rendering
 sub-use-margins
 sub-ass-hinting=native
@@ -12,9 +12,11 @@ sub-border-size=1
 osd-shadow-color="#000000"
 osd-shadow-offset=1
 osd-border-size=1
-cache=1000000
-cache-initial=100
+osd-fractions=yes
+osd-level=2
+cache=yes
 use-filedir-conf
 cache-secs=100
 save-position-on-quit
 input-file=~/.mpv/fifo
+glsl-shaders="~/.config/mpv/shaders/Anime4K_Adaptive.glsl"
