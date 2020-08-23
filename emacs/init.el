@@ -32,7 +32,9 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/private/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(systemd
+     php
+     rust
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -53,18 +55,24 @@ This function should only modify configuration layer settings."
                                                            company-capf
                                                            company-dabbrev
                                                            company-dabbrev-code))
+     lsp
+     dap
      ;; evil
-     (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
+;;     (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      (vinegar :variables vinegar-reuse-dired-buffer t)
+     multiple-cursors
+
      ;; languages/frameworks
      html
      (org :variables
           org-enable-github-support t
           org-enable-reveal-js-support t)
+     plantuml
      emacs-lisp
      lua
-     (python :variables python-backend 'lsp)
-     lsp
+     (python :variables
+             python-backend 'lsp
+             python-fill-column 80)
      (ruby :variables ruby-version-manager 'rbenv
            ruby-enable-enh-ruby-mode t)
      go
@@ -72,11 +80,17 @@ This function should only modify configuration layer settings."
      clojure
      javascript
      markdown
-     java
+     (java :variables java-backend 'lsp)
+     (yaml :variables yaml-enable-lsp t)
      (ansible :packages (not company-ansible))
+     terraform
      csv
 
+     ;; private layers
+     palantir
+
      ;; emacs tooling
+     helpful
      confluence
      vagrant
      git
@@ -85,7 +99,6 @@ This function should only modify configuration layer settings."
      spell-checking
      better-defaults
      ibuffer
-     osx
      pandoc
      colors
      fasd
@@ -98,19 +111,23 @@ This function should only modify configuration layer settings."
      ranger
      gtags
      nginx
-
-     ;; private layers
-     palantir
+     slack
+     spotify
+     osx
+     org-roam
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
    dotspacemacs-additional-packages '(key-chord
+                                      exec-path-from-shell
                                       org-jira
                                       evil-textobj-column
+                                      yamlmod-wrapper
                                       speeddating
                                       sphinx-doc
+                                      nord-theme
                                       jammer)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
