@@ -244,10 +244,11 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Monaco"
-                               :size 16
-                               :weight normal
-                               :width normal)
+   dotspacemacs-default-font '("Iosevka SS09"
+                               :size 18
+                               :weight light
+                               ;; :width expanded
+                               :powerline-scale 1.0)
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
