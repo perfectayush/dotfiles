@@ -622,20 +622,23 @@ before packages are loaded."
                                   (spacemacs/set-leader-keys-for-minor-mode
                                     'sphinx-doc-mode "id" 'sphinx-doc)))
 
+    (require 'exec-path-from-shell)
+    (setq exec-path-from-shell-name "zsh")
+    (exec-path-from-shell-initialize)
     ;; open empty buffer
     (defun new-buffer-with-mode (mode)
       (interactive)
       (let ((new-buffer (spacemacs/new-empty-buffer-above))) (with-current-buffer new-buffer (funcall mode))))
 
     ;; evil-surround
-    (add-hook 'yaml-mode-hook    #'(lambda () (progn  (push '(?q . ("\"{{" . "}}\""))
+    (add-hook 'yaml-mode-hook    #'(lambda () (progn  (push '(?q . ("\"{{ " . " }}\""))
                                                             evil-surround-pairs-alist)
-                                                      (push '(?a . ("{{" . "}}"))
+                                                      (push '(?a . ("{{ " . " }}"))
                                                             evil-surround-pairs-alist))
                                                       (push '(?e . ("^(" . ")$"))
                                                             evil-surround-pairs-alist))))
 
-    (add-hook 'jinja2-mode-hook   #'(lambda () (push '(?a . ("{{" . "}}"))
+    (add-hook 'jinja2-mode-hook   #'(lambda () (push '(?a . ("{{ " . " }}"))
                                                      evil-surround-pairs-alist)))
 
 
@@ -683,6 +686,9 @@ before packages are loaded."
                               previous-line))
 
     ;; (global-jammer-mode)
+
+    ;; avy settings
+    (setq avy-style 'words)
 
     ;; transparent title bar
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
