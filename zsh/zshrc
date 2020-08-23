@@ -117,7 +117,7 @@ function ediff() {
 }
 
 #ENVIRONMENT VARS
-export TERM=xterm-256color
+export TERM=screen-256color
 export LANG="en_US.UTF-8"
 export EDITOR="emacsclient -c -a vim"
 export VISUAL="emacsclient -c -a vim"
@@ -128,7 +128,8 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND=(fg=blue)
 HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND=(fg=red)
 
 #custom fasd settings. prezto settings primitive
-eval "$(fasd --init auto)"
+# eval "$(fasd --init auto)"
+eval "$(lua /Users/ayush/Work/playground/z.lua/z.lua --init zsh enhanced once)"
 
 #jenv
 export PATH="$HOME/.jenv/bin:$PATH"
