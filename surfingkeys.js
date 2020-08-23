@@ -23,6 +23,7 @@ mapkey('p', "Open the clipboard's URL in the current tab", function() {
 //mapkey('gx0', 'close tabs left', 'RUNTIME(closeTabsToLeft)');
 
 showModeStatus	= false;
+
 map('P', 'cc');
 map('gi', 'i');
 map('F', 'af');
@@ -35,7 +36,6 @@ map('gt', 'R');
 map('gT', 'E');
 map('K', 'R');
 map('J', 'E');
-cmap('<Ctrl-Alt-i>','<Ctrl-i>');
 
 mapkey("om","#10Jump to vim-like-mark quickly", function(mark) {
     Normal.jumpVIMark(mark.toUpperCase());
@@ -45,10 +45,6 @@ mapkey("oM", '#10Jump to vim-like mark in new tab.', function(mark) {
     Normal.jumpVIMark(mark.toUpperCase(), true);
 });
 mapkey("`","#10Jump to vim-like-mark", Normal.jumpVIMark);
-
-mapkey("'", "#80Open URL from vim-like marks", function() {
-    Front.openOmnibar({type: "VIMarks"});
-});
 
 aceVimMap('jk', '<Esc>', 'insert');
 
@@ -75,7 +71,7 @@ var base0F= "#a3685a";
 
 Visual.style('marks', 'background-color: ${base0C};');
 Visual.style('cursor', 'background-color: ${base09};');
-Hints.style(`color:${base00}; background: ${base0A}; font-size: 9pt`);
+Hints.style('color:${base00}; background: ${base0A}; font-size: 9pt');
 
 settings.theme = `
 .sk_theme {
