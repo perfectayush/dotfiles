@@ -258,7 +258,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(gruvbox base16-tomorrow-night)
+   dotspacemacs-themes '(nord base16-gruvbox-dark-hard base16-tomorrow-night)
    ;; If non nil the cursor color matches the state color.
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
@@ -542,8 +542,45 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     ;;set custom file and load it
     (setq custom-file "~/.spacemacs.d/custom.el")
     (load custom-file 'no-error)
+
+    (let
+        ((nord0  "#2E3440")
+         (nord1  "#3B4252")
+         (nord2  "#434C5E")
+         (nord3  "#4C566A")
+         (nord4  "#D8DEE9")
+         (nord5  "#E5E9F0")
+         (nord6  "#ECEFF4")
+         (nord7  "#8FBCBB")
+         (nord8  "#88C0D0")
+         (nord9  "#81A1C1")
+         (nord10 "#5E81AC")
+         (nord11 "#BF616A")
+         (nord12 "#D08770")
+         (nord13 "#EBCB8B")
+         (nord14 "#A3BE8C")
+         (nord15 "#B48EAD")
+         (nord11+1 "#8c3941")
+         (nord14+1 "#64824a")
+         )
+
+      (setq theming-modifications
+            `((nord
+               (diff-refine-removed :foreground ,nord5 :background ,nord11)
+               (diff-refine-added  :foreground ,nord5 :background ,nord14)
+               (magit-diff-removed :foreground ,nord5 :background ,nord11+1)
+               (magit-diff-removed-highlight :foreground ,nord5 :background ,nord11+1)
+               (magit-diff-added-highlight :foreground ,nord5 :background ,nord14+1)
+               (magit-diff-added :foreground ,nord5 :background ,nord14+1)
+               ))))
+  ))
+
+(defun dotspacemacs/user-load ()
+  "Library to load while dumping.
+This function is called only while dumping Spacemacs configuration. You can
+`require' or `load' the libraries of your choice that will be included in the
+dump."
   )
-)
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
