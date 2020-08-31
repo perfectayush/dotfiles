@@ -127,6 +127,8 @@ This function should only modify configuration layer settings."
                                       speeddating
                                       sphinx-doc
                                       nord-theme
+                                      tree-sitter
+                                      tree-sitter-langs
                                       jammer)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -572,6 +574,12 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
                (magit-diff-added-highlight :foreground ,nord5 :background ,nord14+1)
                (magit-diff-added :foreground ,nord5 :background ,nord14+1)
                ))))
+
+    (setq configuration-layer-elpa-archives
+          '(("melpa"    . "melpa.org/packages/")
+            ("org"      . "orgmode.org/elpa/")
+            ("ublt"     . "elpa.ubolonton.org/packages/")
+            ("gnu"      . "elpa.gnu.org/packages/")))
   ))
 
 (defun dotspacemacs/user-load ()
@@ -692,6 +700,11 @@ before packages are loaded."
     ;; transparent title bar
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
+
+    ;; Setup tree-sitter
+    (require 'tree-sitter-langs)
+    (global-tree-sitter-mode)
+    (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
     ;; gpg settings
     (setq epa-pinentry-mode 'loopback)
