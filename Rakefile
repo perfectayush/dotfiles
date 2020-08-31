@@ -5,14 +5,15 @@ namespace :dot do
   home = ENV['HOME']
   pwd  = FileUtils.pwd
   spacemacs_d   = home + "/.spacemacs.d/"
+  zprezto_d     = home + "/.zprezto"
   emacs_d       = home + "/.emacs.d"
   hammerspoon_d = home + "/.hammerspoon"
 
   desc "install all"
   task :all do
-    RAKE::TASK[:zsh].invoke
-    RAKE::TASK[:emacs].invoke
-    RAKE::TASK[:tmux].invoke
+    Rake::Task['dot:zsh'].invoke
+    Rake::Task['dot:emacs'].invoke
+    Rake::Task['dot:tmux'].invoke
   end
 
 
@@ -22,7 +23,7 @@ namespace :dot do
     FileUtils.mkdir_p(spacemacs_d)
     FileUtils.ln_s(pwd + "/emacs/init.el", spacemacs_d,:force => true)
     FileUtils.ln_s(pwd + "/emacs/snippets", spacemacs_d,:force => true)
-    Rake::Task[:spacemacs].invoke unless File.exists?(emacs_d)
+    Rake::Task['dot:spacemacs'].invoke unless File.exists?(emacs_d)
   end
 
   desc "install spacemacs"
@@ -42,7 +43,7 @@ namespace :dot do
   task :zsh do
     puts "Installing zsh config ..."
 
-    Rake::Task[:prezto].invoke unless File.exists?(zprezto_d)
+    Rake::Task['dot:prezto'].invoke unless File.exists?(zprezto_d)
 
     FileUtils.ln_s(pwd + "/zsh/zshrc", home + "/.zshrc",:force => true)
     FileUtils.ln_s(pwd + "/zsh/zpreztorc", home + "/.zpreztorc",:force => true)
