@@ -1,6 +1,6 @@
 # Write your default config options here!
 [default]
-vo=gpu
+vo=libmpv
 hr-seek=yes
 hr-seek-framedrop=yes
 force-rgba-osd-rendering
@@ -19,4 +19,4 @@ use-filedir-conf
 cache-secs=100
 save-position-on-quit
 input-file=~/.mpv/fifo
-glsl-shaders="~/.config/mpv/shaders/Anime4K_Adaptive.glsl"
+#glsl-shaders="~/.config/mpv/shaders/Anime4K_Adaptive.glsl"
