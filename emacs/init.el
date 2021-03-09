@@ -32,7 +32,8 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/private/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(systemd
+   '(sql
+     systemd
      php
      rust
      ;; ----------------------------------------------------------------
