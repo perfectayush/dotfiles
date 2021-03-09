@@ -82,6 +82,7 @@ This function should only modify configuration layer settings."
      lua
      (python :variables
              python-backend 'lsp
+             python-lsp-server 'pyright
              python-fill-column 80)
      (ruby :variables ruby-version-manager 'rbenv
            ruby-enable-enh-ruby-mode t)
