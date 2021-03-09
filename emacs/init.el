@@ -695,8 +695,6 @@ before packages are loaded."
     (add-hook 'yaml-mode-hook #'smartparens-mode)
     (add-hook 'yaml-mode-hook #'spacemacs/load-yasnippet)
 
-    ;; global-git-commit-mode
-    (global-git-commit-mode t)
 
     ;; jammer mode to emulate vim hard time
     (define-globalized-minor-mode global-jammer-mode jammer-mode (lambda() (jammer-mode 1)))
