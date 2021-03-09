@@ -136,6 +136,7 @@ This function should only modify configuration layer settings."
                                       org-jira
                                       evil-textobj-column
                                       yamlmod-wrapper
+                                      disable-mouse
                                       (music-chord
                                        :location (recipe :fetcher github
                                                          :branch "add-package-desc"
@@ -725,5 +726,14 @@ before packages are loaded."
     ;; gpg settings
     (setq epa-pinentry-mode 'loopback)
 
-    (load "~/.spacemacs.d/custom-config.el" 'no-error))
+    (load "~/.spacemacs.d/custom-config.el" 'no-error)
+
+    ;; disable mouse
+    (global-disable-mouse-mode)
+    (mapc #'disable-mouse-in-keymap
+          (list evil-motion-state-map
+                evil-normal-state-map
+                evil-visual-state-map
+                evil-insert-state-map))
     (doom-themes-treemacs-config)
+)
