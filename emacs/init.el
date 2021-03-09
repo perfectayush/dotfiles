@@ -84,9 +84,11 @@ This function should only modify configuration layer settings."
              python-backend 'lsp
              python-lsp-server 'pyright
              python-fill-column 80)
-     (ruby :variables ruby-version-manager 'rbenv
-           ruby-enable-enh-ruby-mode t)
-     go
+     (ruby :variables
+           ruby-version-manager 'chruby
+           ruby-enable-enh-ruby-mode t
+           ruby-backend 'lsp)
+     (go :variables go-backend 'lsp)
      (shell :variables shell-default-shell 'eshell)
      clojure
      javascript
