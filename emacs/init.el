@@ -65,7 +65,7 @@ This function should only modify configuration layer settings."
           )
      dap
      ;; evil
-;;     (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
+     evil-snipe
      (vinegar :variables vinegar-reuse-dired-buffer t)
      multiple-cursors
 
