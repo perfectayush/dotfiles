@@ -96,6 +96,7 @@ This function should only modify configuration layer settings."
      (java :variables java-backend 'lsp)
      (yaml :variables yaml-enable-lsp t)
      (ansible :packages (not company-ansible))
+     docker
      terraform
      csv
 
