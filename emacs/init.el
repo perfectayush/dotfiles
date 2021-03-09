@@ -145,6 +145,7 @@ This function should only modify configuration layer settings."
                                       speeddating
                                       sphinx-doc
                                       nord-theme
+                                      doom-themes
                                       tree-sitter
                                       tree-sitter-langs
                                       jammer)
@@ -277,7 +278,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(nord base16-gruvbox-dark-hard base16-tomorrow-night)
+   dotspacemacs-themes '(doom-nord modus-operandi)
    ;; If non nil the cursor color matches the state color.
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
@@ -728,3 +729,4 @@ before packages are loaded."
     (setq epa-pinentry-mode 'loopback)
 
     (load "~/.spacemacs.d/custom-config.el" 'no-error))
+    (doom-themes-treemacs-config)
