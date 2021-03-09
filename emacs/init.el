@@ -108,6 +108,7 @@ This function should only modify configuration layer settings."
      confluence
      vagrant
      git
+     github
      dash
      syntax-checking
      spell-checking
