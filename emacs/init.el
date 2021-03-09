@@ -51,11 +51,8 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-help-tooltip t
                       auto-completion-enable-sort-by-usage t
                       auto-completion-tab-key-behavior 'cycle
-                      auto-completion-complete-with-key-sequence nil
-                      spacemacs-default-company-backends '(company-files
-                                                           company-capf
-                                                           company-dabbrev
-                                                           company-dabbrev-code))
+                      auto-completion-complete-with-key-sequence nil)
+
      (lsp :variables
           lsp-headerline-breadcrumb-enable t
           lsp-headerline-breadcrumb-segments '(file symbols)
