@@ -141,6 +141,9 @@ This function should only modify configuration layer settings."
                                        :location (recipe :fetcher github
                                                          :branch "add-package-desc"
                                                          :repo "perfectayush/emacs-music-chord"))
+                                      (evil-motion-trainer
+                                       :location (recipe :fetcher github
+                                                         :repo "martinbaillie/evil-motion-trainer"))
                                       speeddating
                                       sphinx-doc
                                       nord-theme
@@ -718,4 +721,10 @@ before packages are loaded."
                 evil-visual-state-map
                 evil-insert-state-map))
     (doom-themes-treemacs-config)
+
+    ;; evil-motion-trainer
+    (require 'evil-motion-trainer)
+    (setq evil-motion-trainer-threshold 6)
+    (emt-add-suggestions 'evil-previous-line '(evil-ex-search-backward evil-find-char-backward evil-scroll-up))
+    (emt-add-suggestions 'evil-next-line '(evil-ex-search-forward evil-find-char-forward evil-scroll-down))
 )
