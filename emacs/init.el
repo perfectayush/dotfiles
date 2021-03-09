@@ -100,7 +100,7 @@ This function should only modify configuration layer settings."
      csv
 
      ;; private layers
-     palantir
+     archcode
 
      ;; emacs tooling
      helpful
