@@ -138,6 +138,10 @@ This function should only modify configuration layer settings."
                                       org-jira
                                       evil-textobj-column
                                       yamlmod-wrapper
+                                      (music-chord
+                                       :location (recipe :fetcher github
+                                                         :branch "add-package-desc"
+                                                         :repo "perfectayush/emacs-music-chord"))
                                       speeddating
                                       sphinx-doc
                                       nord-theme
