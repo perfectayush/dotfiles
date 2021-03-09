@@ -55,7 +55,16 @@ This function should only modify configuration layer settings."
                                                            company-capf
                                                            company-dabbrev
                                                            company-dabbrev-code))
-     lsp
+     (lsp :variables
+          lsp-headerline-breadcrumb-enable t
+          lsp-headerline-breadcrumb-segments '(file symbols)
+          lsp-lens-enable t
+          lsp-navigation 'peek
+          lsp-ui-remap-xref-keybindings t
+          lsp-ui-remap-xref-keybindings t
+          lsp-ui-doc-enable nil
+          lsp-ui-sideline-enable nil
+          )
      dap
      ;; evil
 ;;     (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
