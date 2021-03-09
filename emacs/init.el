@@ -146,8 +146,7 @@ This function should only modify configuration layer settings."
                                       nord-theme
                                       doom-themes
                                       tree-sitter
-                                      tree-sitter-langs
-                                      jammer)
+                                      tree-sitter-langs)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -693,23 +692,6 @@ before packages are loaded."
     (add-hook 'yaml-mode-hook #'smartparens-mode)
     (add-hook 'yaml-mode-hook #'spacemacs/load-yasnippet)
 
-
-    ;; jammer mode to emulate vim hard time
-    (define-globalized-minor-mode global-jammer-mode jammer-mode (lambda() (jammer-mode 1)))
-
-    ;; vim hard mode emulation
-    (setq jammer-block-type 'blacklist)
-    (setq jammer-repeat-delay 0.1)
-    (setq jammer-repeat-window 0.1)
-    (setq jammer-repeat-type 'constant)
-    (setq jammer-block-list '(evil-forward-char
-                              evil-backward-char
-                              forward-char
-                              backward-char
-                              next-line
-                              previous-line))
-
-    ;; (global-jammer-mode)
 
     ;; avy settings
     (setq avy-style 'words)
