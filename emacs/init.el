@@ -61,8 +61,8 @@ This function should only modify configuration layer settings."
           lsp-ui-remap-xref-keybindings t
           lsp-ui-remap-xref-keybindings t
           lsp-ui-doc-enable nil
-          lsp-ui-sideline-enable nil
-          )
+          lsp-ui-sideline-enable nil)
+
      dap
      ;; evil
      evil-snipe
@@ -125,8 +125,8 @@ This function should only modify configuration layer settings."
      slack
      spotify
      (osx :variables osx-command-as       'super
-                     osx-right-command-as 'hyper)
-     )
+                     osx-right-command-as 'hyper))
+
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
@@ -583,8 +583,8 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
          (nord14 "#A3BE8C")
          (nord15 "#B48EAD")
          (nord11+1 "#8c3941")
-         (nord14+1 "#64824a")
-         )
+         (nord14+1 "#64824a"))
+
 
       (setq theming-modifications
             `((nord
@@ -593,22 +593,22 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
                (magit-diff-removed :foreground ,nord5 :background ,nord11+1)
                (magit-diff-removed-highlight :foreground ,nord5 :background ,nord11+1)
                (magit-diff-added-highlight :foreground ,nord5 :background ,nord14+1)
-               (magit-diff-added :foreground ,nord5 :background ,nord14+1)
-               ))))
+               (magit-diff-added :foreground ,nord5 :background ,nord14+1)))))
+
 
     (setq configuration-layer-elpa-archives
           '(("melpa"    . "melpa.org/packages/")
             ("org"      . "orgmode.org/elpa/")
             ("ublt"     . "elpa.ubolonton.org/packages/")
-            ("gnu"      . "elpa.gnu.org/packages/")))
-  ))
+            ("gnu"      . "elpa.gnu.org/packages/")))))
+  
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
-dump."
-  )
+dump.")
+  
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
@@ -663,68 +663,72 @@ before packages are loaded."
                                                             evil-surround-pairs-alist)
                                                       (push '(?a . ("{{ " . " }}"))
                                                             evil-surround-pairs-alist))
-                                                      (push '(?e . ("^(" . ")$"))
-                                                            evil-surround-pairs-alist))))
+                                              (push '(?e . ("^(" . ")$"))
+                                                    evil-surround-pairs-alist))))
 
-    (add-hook 'jinja2-mode-hook   #'(lambda () (push '(?a . ("{{ " . " }}"))
-                                                     evil-surround-pairs-alist)))
+  (add-hook 'jinja2-mode-hook   #'(lambda () (push '(?a . ("{{ " . " }}"))
+                                                   evil-surround-pairs-alist)))
+
+  ;; wgrep settings
+  (setq wgrep-auto-save-buffer t)
+
+  ;; ivy add actions
+  (ivy-add-actions
+   'counsel-projectile-switch-project
+   '(("R" (lambda (dir)
+            (let ((projectile-switch-project-action 'counsel-projectile-rg))
+              (projectile-switch-project-by-name dir arg)))
+      "search with rg")))
+
+  ;; modify super/sub word mode for evil
+  (add-hook 'superword-mode-hook #'(lambda ()
+                                     (progn (modify-syntax-entry ?_ "w")
+                                            (modify-syntax-entry ?- "w"))))
+
+  (add-hook 'subword-mode-hook   #'(lambda ()
+                                     (progn (modify-syntax-entry ?_ "_")
+                                            (modify-syntax-entry ?- "_"))))
+
+  ;; yaml-mode hooks
+  (add-hook 'yaml-mode-hook #'superword-mode)
+  (add-hook 'yaml-mode-hook #'smartparens-mode)
+  (add-hook 'yaml-mode-hook #'spacemacs/load-yasnippet)
 
 
-    ;; wgrep settings
-    (setq wgrep-auto-save-buffer t)
+  ;; avy settings
+  (setq avy-style 'words)
 
-    ;; ivy add actions
-    (ivy-add-actions
-     'counsel-projectile-switch-project
-     '(("R" (lambda (dir)
-              (let ((projectile-switch-project-action 'counsel-projectile-rg))
-                (projectile-switch-project-by-name dir arg)))
-        "search with rg")))
+  ;; transparent title bar
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
-    ;; modify super/sub word mode for evil
-    (add-hook 'superword-mode-hook #'(lambda ()
-                                       (progn (modify-syntax-entry ?_ "w")
-                                              (modify-syntax-entry ?- "w"))))
+  ;; Setup tree-sitter
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
-    (add-hook 'subword-mode-hook   #'(lambda ()
-                                       (progn (modify-syntax-entry ?_ "_")
-                                              (modify-syntax-entry ?- "_"))))
+  ;; gpg settings
+  (setq epa-pinentry-mode 'loopback)
 
-    ;; yaml-mode hooks
-    (add-hook 'yaml-mode-hook #'superword-mode)
-    (add-hook 'yaml-mode-hook #'smartparens-mode)
-    (add-hook 'yaml-mode-hook #'spacemacs/load-yasnippet)
+  (load "~/.spacemacs.d/custom-config.el" 'no-error)
 
+  ;; disable mouse
+  (global-disable-mouse-mode)
+  (mapc #'disable-mouse-in-keymap
+        (list evil-motion-state-map
+              evil-normal-state-map
+              evil-visual-state-map
+              evil-insert-state-map))
+  (doom-themes-treemacs-config)
 
-    ;; avy settings
-    (setq avy-style 'words)
+  ;; evil-motion-trainer
+  (require 'evil-motion-trainer)
+  (setq evil-motion-trainer-threshold 6)
+  (global-evil-motion-trainer-mode 1)
+  (emt-add-suggestions 'evil-previous-line '(evil-ex-search-backward evil-find-char-backward evil-scroll-up))
+  (emt-add-suggestions 'evil-next-line '(evil-ex-search-forward evil-find-char-forward evil-scroll-down))
 
-    ;; transparent title bar
-    (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-    (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  ;; Songwriting
+  (require 'music-chord)
+  (add-to-list 'auto-mode-alist '("\\.song\\'" . music-chord-mode)))
 
-    ;; Setup tree-sitter
-    (require 'tree-sitter-langs)
-    (global-tree-sitter-mode)
-    (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-
-    ;; gpg settings
-    (setq epa-pinentry-mode 'loopback)
-
-    (load "~/.spacemacs.d/custom-config.el" 'no-error)
-
-    ;; disable mouse
-    (global-disable-mouse-mode)
-    (mapc #'disable-mouse-in-keymap
-          (list evil-motion-state-map
-                evil-normal-state-map
-                evil-visual-state-map
-                evil-insert-state-map))
-    (doom-themes-treemacs-config)
-
-    ;; evil-motion-trainer
-    (require 'evil-motion-trainer)
-    (setq evil-motion-trainer-threshold 6)
-    (emt-add-suggestions 'evil-previous-line '(evil-ex-search-backward evil-find-char-backward evil-scroll-up))
-    (emt-add-suggestions 'evil-next-line '(evil-ex-search-forward evil-find-char-forward evil-scroll-down))
-)
