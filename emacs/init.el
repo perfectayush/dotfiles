@@ -148,6 +148,7 @@ This function should only modify configuration layer settings."
                                       sphinx-doc
                                       nord-theme
                                       doom-themes
+                                      tron-legacy-theme
                                       tree-sitter
                                       tree-sitter-langs)
    ;; A list of packages and/or extensions that will not be install and loaded.
@@ -279,7 +280,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-nord modus-operandi)
+   dotspacemacs-themes '(tron-legacy doom-nord modus-operandi)
    ;; If non nil the cursor color matches the state color.
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
