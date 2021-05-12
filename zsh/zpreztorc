@@ -15,10 +15,11 @@ zstyle ':prezto:*:*' color 'yes'
 
 # Set the Prezto modules to load (browse modules).
 # The order matters.
-zstyle ':prezto:load' pmodule 'environment' 'terminal' 'editor' 'history'       \
-                              'completion' 'directory' 'spectrum' 'git'         \
-                              'utility' 'ruby' 'prompt' 'syntax-highlighting'   \
-                              'history-substring-search' 'python'
+zstyle ':prezto:load' pmodule 'environment' 'terminal' 'editor' 'history'         \
+                              'utility' 'directory' 'spectrum' 'git'              \
+                              'completion' 'ruby' 'prompt' 'syntax-highlighting'  \
+                              'history-substring-search' 'autosuggestions'        \
+                              'python'
                               
 #############################################################################
 ################################# Modules ###################################
@@ -123,3 +124,10 @@ zstyle ':prezto:module:terminal' auto-title 'yes'
 ########
 # Auto start a session when Zsh is launched.
 # zstyle ':prezto:module:tmux' auto-start 'yes'
+
+
+
+###################
+# Autosuggestions #
+###################
+zstyle ':prezto:module:autosuggestions' color 'yes'
