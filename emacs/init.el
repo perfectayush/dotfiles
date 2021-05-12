@@ -88,11 +88,12 @@ This function should only modify configuration layer settings."
      (go :variables go-backend 'lsp)
      (shell :variables shell-default-shell 'eshell)
      clojure
+     julia
      javascript
      markdown
      (java :variables java-backend 'lsp)
      (yaml :variables yaml-enable-lsp t)
-     (ansible :packages (not company-ansible))
+     ansible
      docker
      terraform
      csv
@@ -101,6 +102,7 @@ This function should only modify configuration layer settings."
      archcode
 
      ;; emacs tooling
+     parinfer
      helpful
      confluence
      vagrant
@@ -135,8 +137,10 @@ This function should only modify configuration layer settings."
                                       exec-path-from-shell
                                       org-jira
                                       evil-textobj-column
+                                      evil-python-movement
                                       yamlmod-wrapper
                                       disable-mouse
+                                      good-scroll
                                       (music-chord
                                        :location (recipe :fetcher github
                                                          :branch "add-package-desc"
