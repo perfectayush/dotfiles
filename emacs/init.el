@@ -670,6 +670,11 @@ before packages are loaded."
   (add-hook 'jinja2-mode-hook   #'(lambda () (push '(?a . ("{{ " . " }}"))
                                                    evil-surround-pairs-alist)))
 
+  ;; Global Super/Hyper key bindings
+  (global-set-key (kbd "s-g") 'magit-status)
+  (global-set-key (kbd "s-b") 'org-brain-visualize)
+  (global-set-key (kbd "H-g") 'magit-dispatch)
+
   ;; wgrep settings
   (setq wgrep-auto-save-buffer t)
 
