@@ -148,7 +148,7 @@ chruby system
 pushd ~
 
 # Update homebrew only once a day, not every 60 secs(default)
-HOMEBREW_AUTO_UPDATE_SECS=86400
+export HOMEBREW_AUTO_UPDATE_SECS=86400
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
