@@ -698,4 +698,9 @@ before packages are loaded."
   ;; doom treemacs config
   (doom-themes-treemacs-config)
 
-  (load "~/.spacemacs.d/custom-config.el" 'no-error))
+  ;; org settings
+  (setq org-brain-path "~/Dropbox/orgs/brain/")
+
+  ;; paradox settings
+  (setq paradox-automatically-star nil)
+  (setq paradox-github-token t))
