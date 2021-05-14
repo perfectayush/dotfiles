@@ -636,58 +636,59 @@ before packages are loaded."
     (define-key evil-inner-text-objects-map "C" 'evil-textobj-column-WORD)
 
     ;; evil-surround
+
     (add-hook 'yaml-mode-hook    #'(lambda () (progn  (push '(?q . ("\"{{ " . " }}\""))
                                                             evil-surround-pairs-alist)
                                                       (push '(?a . ("{{ " . " }}"))
                                                             evil-surround-pairs-alist))
-                                              (push '(?e . ("^(" . ")$"))
-                                                    evil-surround-pairs-alist))))
+                                     (push '(?e . ("^(" . ")$"))
+                                           evil-surround-pairs-alist)))
 
-  (add-hook 'jinja2-mode-hook   #'(lambda () (push '(?a . ("{{ " . " }}"))
-                                                   evil-surround-pairs-alist)))
+    (add-hook 'jinja2-mode-hook   #'(lambda () (push '(?a . ("{{ " . " }}"))
+                                                     evil-surround-pairs-alist)))
 
-  ;; wgrep settings
-  (setq wgrep-auto-save-buffer t)
+    ;; wgrep settings
+    (setq wgrep-auto-save-buffer t)
 
-  ;; ivy add actions
-  (ivy-add-actions
-   'counsel-projectile-switch-project
-   '(("R" (lambda (dir)
-            (let ((projectile-switch-project-action 'counsel-projectile-rg))
-              (projectile-switch-project-by-name dir arg)))
-      "search with rg")))
+    ;; ivy add actions
+    (ivy-add-actions
+     'counsel-projectile-switch-project
+     '(("R" (lambda (dir)
+              (let ((projectile-switch-project-action 'counsel-projectile-rg))
+                (projectile-switch-project-by-name dir arg)))
+        "search with rg")))
 
-  ;; modify super/sub word mode for evil
-  (add-hook 'superword-mode-hook #'(lambda ()
-                                     (progn (modify-syntax-entry ?_ "w")
-                                            (modify-syntax-entry ?- "w"))))
+    ;; modify super/sub word mode for evil
+    (add-hook 'superword-mode-hook #'(lambda ()
+                                       (progn (modify-syntax-entry ?_ "w")
+                                              (modify-syntax-entry ?- "w"))))
 
-  (add-hook 'subword-mode-hook   #'(lambda ()
-                                     (progn (modify-syntax-entry ?_ "_")
-                                            (modify-syntax-entry ?- "_"))))
+    (add-hook 'subword-mode-hook   #'(lambda ()
+                                       (progn (modify-syntax-entry ?_ "_")
+                                              (modify-syntax-entry ?- "_"))))
 
-  ;; yaml-mode hooks
-  (add-hook 'yaml-mode-hook #'superword-mode)
-  (add-hook 'yaml-mode-hook #'smartparens-mode)
-  (add-hook 'yaml-mode-hook #'spacemacs/load-yasnippet)
+    ;; yaml-mode hooks
+    (add-hook 'yaml-mode-hook #'superword-mode)
+    (add-hook 'yaml-mode-hook #'smartparens-mode)
+    (add-hook 'yaml-mode-hook #'spacemacs/load-yasnippet)
 
 
-  ;; avy settings
-  (setq avy-style 'words)
+    ;; avy settings
+    (setq avy-style 'words)
 
-  ;; transparent title bar
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+    ;; transparent title bar
+    (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+    (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
-  ;; gpg settings
-  (setq epa-pinentry-mode 'loopback)
+    ;; gpg settings
+    (setq epa-pinentry-mode 'loopback)
 
-  ;; doom treemacs config
-  (doom-themes-treemacs-config)
+    ;; doom treemacs config
+    (doom-themes-treemacs-config)
 
-  ;; org settings
-  (setq org-brain-path "~/Dropbox/orgs/brain/")
+    ;; org settings
+    (setq org-brain-path "~/Dropbox/orgs/brain/")
 
-  ;; paradox settings
-  (setq paradox-automatically-star nil)
-  (setq paradox-github-token t))
+    ;; paradox settings
+    (setq paradox-automatically-star nil)
+    (setq paradox-github-token t)))
