@@ -156,9 +156,7 @@ This function should only modify configuration layer settings."
                                       sphinx-doc
                                       nord-theme
                                       doom-themes
-                                      tron-legacy-theme
-                                      tree-sitter
-                                      tree-sitter-langs)
+                                      tron-legacy-theme)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -698,11 +696,6 @@ before packages are loaded."
   ;; transparent title bar
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
-
-  ;; Setup tree-sitter
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
   ;; gpg settings
   (setq epa-pinentry-mode 'loopback)
