@@ -149,12 +149,10 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(key-chord
-                                      exec-path-from-shell
+   dotspacemacs-additional-packages '(exec-path-from-shell
                                       org-jira
                                       evil-textobj-column
                                       evil-python-movement
-                                      yamlmod-wrapper
                                       good-scroll
                                       (music-chord
                                        :location (recipe :fetcher github
@@ -645,10 +643,7 @@ before packages are loaded."
     (yas-global-mode)
     (global-company-mode)
     (setq yas-triggers-in-field nil)
-    ;; keychord bindings
-    (require 'key-chord)
-    (key-chord-mode 1)
-    (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
+
     ;; evil-state settings
     (evil-set-initial-state 'anaconda-mode-view-mode 'motion)
     (evil-set-initial-state 'help-mode 'motion)
