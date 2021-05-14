@@ -149,8 +149,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '(exec-path-from-shell
-                                      org-jira
+   dotspacemacs-additional-packages '(org-jira
                                       evil-textobj-column
                                       evil-python-movement
                                       good-scroll
@@ -657,10 +656,6 @@ before packages are loaded."
                                   (sphinx-doc-mode t)
                                   (spacemacs/set-leader-keys-for-minor-mode
                                     'sphinx-doc-mode "id" 'sphinx-doc)))
-
-    (require 'exec-path-from-shell)
-    (setq exec-path-from-shell-name "zsh")
-    (exec-path-from-shell-initialize)
 
     ;; evil-surround
     (add-hook 'yaml-mode-hook    #'(lambda () (progn  (push '(?q . ("\"{{ " . " }}\""))
