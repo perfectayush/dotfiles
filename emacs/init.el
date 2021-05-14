@@ -720,8 +720,7 @@ before packages are loaded."
   ;; gpg settings
   (setq epa-pinentry-mode 'loopback)
 
-  (load "~/.spacemacs.d/custom-config.el" 'no-error)
-
+  ;; doom treemacs config
   (doom-themes-treemacs-config)
 
   ;; evil-motion-trainer
@@ -733,5 +732,6 @@ before packages are loaded."
 
   ;; Songwriting
   (require 'music-chord)
-  (add-to-list 'auto-mode-alist '("\\.song\\'" . music-chord-mode)))
+  (add-to-list 'auto-mode-alist '("\\.song\\'" . music-chord-mode))
 
+  (load "~/.spacemacs.d/custom-config.el" 'no-error))
