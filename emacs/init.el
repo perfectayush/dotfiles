@@ -139,7 +139,6 @@ This function should only modify configuration layer settings."
                                       evil-textobj-column
                                       evil-python-movement
                                       yamlmod-wrapper
-                                      disable-mouse
                                       good-scroll
                                       (music-chord
                                        :location (recipe :fetcher github
@@ -722,13 +721,6 @@ before packages are loaded."
 
   (load "~/.spacemacs.d/custom-config.el" 'no-error)
 
-  ;; disable mouse
-  (global-disable-mouse-mode)
-  (mapc #'disable-mouse-in-keymap
-        (list evil-motion-state-map
-              evil-normal-state-map
-              evil-visual-state-map
-              evil-insert-state-map))
   (doom-themes-treemacs-config)
 
   ;; evil-motion-trainer
