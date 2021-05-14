@@ -621,14 +621,14 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
             ("org"      . "orgmode.org/elpa/")
             ("ublt"     . "elpa.ubolonton.org/packages/")
             ("gnu"      . "elpa.gnu.org/packages/")))))
-  
+
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
 dump.")
-  
+
 
 (defun dotspacemacs/user-config ()
   "Configuration for user code:
