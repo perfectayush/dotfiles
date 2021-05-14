@@ -148,7 +148,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(evil-textobj-column
                                       evil-python-movement
                                       good-scroll
-                                      speeddating
                                       sphinx-doc
                                       nord-theme
                                       doom-themes
