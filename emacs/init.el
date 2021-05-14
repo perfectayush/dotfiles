@@ -32,11 +32,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/private/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(sql
-     systemd
-     php
-     rust
-     ;; ----------------------------------------------------------------
+   '(;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
@@ -97,6 +93,11 @@ This function should only modify configuration layer settings."
      docker
      terraform
      csv
+     sql
+     systemd
+     php
+     rust
+     nginx
 
      ;; private layers
      archcode
@@ -121,7 +122,6 @@ This function should only modify configuration layer settings."
      version-control
      treemacs
      theming
-     nginx
      (unicode-fonts :variables
                     unicode-fonts-enable-ligatures t
                     unicode-fonts-ligature-set '("!!" "!!." "!=" "!==" "#!" "##" "###" "####" "#(" "#:" "#="
