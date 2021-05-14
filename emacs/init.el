@@ -148,7 +148,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(evil-textobj-column
                                       evil-python-movement
                                       good-scroll
-                                      sphinx-doc
                                       nord-theme
                                       doom-themes
                                       tron-legacy-theme)
@@ -635,12 +634,6 @@ before packages are loaded."
     ;; evil-textobj-column settings
     (define-key evil-inner-text-objects-map "c" 'evil-textobj-column-word)
     (define-key evil-inner-text-objects-map "C" 'evil-textobj-column-WORD)
-
-    (add-hook 'python-mode-hook (lambda ()
-                                  (require 'sphinx-doc)
-                                  (sphinx-doc-mode t)
-                                  (spacemacs/set-leader-keys-for-minor-mode
-                                    'sphinx-doc-mode "id" 'sphinx-doc)))
 
     ;; evil-surround
     (add-hook 'yaml-mode-hook    #'(lambda () (progn  (push '(?q . ("\"{{ " . " }}\""))
