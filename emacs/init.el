@@ -121,11 +121,7 @@ This function should only modify configuration layer settings."
      version-control
      treemacs
      theming
-     ranger
-     gtags
      nginx
-     slack
-     spotify
      (unicode-fonts :variables
                     unicode-fonts-enable-ligatures t
                     unicode-fonts-ligature-set '("!!" "!!." "!=" "!==" "#!" "##" "###" "####" "#(" "#:" "#="
