@@ -652,13 +652,6 @@ before packages are loaded."
     (define-key evil-inner-text-objects-map "c" 'evil-textobj-column-word)
     (define-key evil-inner-text-objects-map "C" 'evil-textobj-column-WORD)
 
-    ;; global leader bindings
-    (spacemacs/set-leader-keys "wn" #'(lambda() (interactive) (new-buffer-with-mode 'text-mode)))
-    (spacemacs/set-leader-keys "ps" 'spacemacs/search-project-auto)
-    (spacemacs/set-leader-keys "pS" 'spacemacs/search-project-auto-region-or-symbol)
-    (spacemacs/set-leader-keys "qc" 'spacemacs/save-buffers-kill-emacs)
-    (spacemacs/set-leader-keys "qq" 'save-buffers-kill-terminal)
-    (spacemacs/set-leader-keys "bd" 'kill-this-buffer)
     (add-hook 'python-mode-hook (lambda ()
                                   (require 'sphinx-doc)
                                   (sphinx-doc-mode t)
@@ -668,10 +661,6 @@ before packages are loaded."
     (require 'exec-path-from-shell)
     (setq exec-path-from-shell-name "zsh")
     (exec-path-from-shell-initialize)
-    ;; open empty buffer
-    (defun new-buffer-with-mode (mode)
-      (interactive)
-      (let ((new-buffer (spacemacs/new-empty-buffer-above))) (with-current-buffer new-buffer (funcall mode))))
 
     ;; evil-surround
     (add-hook 'yaml-mode-hook    #'(lambda () (progn  (push '(?q . ("\"{{ " . " }}\""))
