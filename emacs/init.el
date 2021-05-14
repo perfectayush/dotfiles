@@ -636,16 +636,16 @@ before packages are loaded."
     (define-key evil-inner-text-objects-map "C" 'evil-textobj-column-WORD)
 
     ;; evil-surround
+    (setq yaml-mode-evil-surround-extras '((?q . ("\"{{ " . " }}\""))
+                                           (?a . ("{{ " . " }}"))
+                                           (?e . ("^(" . ")$"))))
 
-    (add-hook 'yaml-mode-hook    #'(lambda () (progn  (push '(?q . ("\"{{ " . " }}\""))
-                                                            evil-surround-pairs-alist)
-                                                      (push '(?a . ("{{ " . " }}"))
-                                                            evil-surround-pairs-alist))
-                                     (push '(?e . ("^(" . ")$"))
-                                           evil-surround-pairs-alist)))
+    (setq jinja2-mode-evil-surround-extras '((?a . ("{{ " . " }}"))))
+    (defun update-surround-list (surround-items)
+      (dolist (item surround-items) (add-to-list 'evil-surround-pairs-alist item)))
 
-    (add-hook 'jinja2-mode-hook   #'(lambda () (push '(?a . ("{{ " . " }}"))
-                                                     evil-surround-pairs-alist)))
+    (add-hook 'yaml-mode-hook (lambda () (update-surround-list yaml-mode-evil-surround-extras)))
+    (add-hook 'jinja2-mode-hook (lambda () (update-surround-list jinja2-mode-evil-surround-extras)))
 
     ;; wgrep settings
     (setq wgrep-auto-save-buffer t)
