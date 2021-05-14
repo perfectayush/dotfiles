@@ -148,10 +148,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(evil-textobj-column
                                       evil-python-movement
                                       good-scroll
-                                      (music-chord
-                                       :location (recipe :fetcher github
-                                                         :branch "add-package-desc"
-                                                         :repo "perfectayush/emacs-music-chord"))
                                       speeddating
                                       sphinx-doc
                                       nord-theme
@@ -702,9 +698,5 @@ before packages are loaded."
 
   ;; doom treemacs config
   (doom-themes-treemacs-config)
-
-  ;; Songwriting
-  (require 'music-chord)
-  (add-to-list 'auto-mode-alist '("\\.song\\'" . music-chord-mode))
 
   (load "~/.spacemacs.d/custom-config.el" 'no-error))
