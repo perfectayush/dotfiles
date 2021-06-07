@@ -136,9 +136,6 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND=(fg=red)
 
 
 source /usr/local/share/gem_home/gem_home.sh
-gem_home ~/.gem/global
-chruby system
-pushd ~
 
 # Update homebrew only once a day, not every 60 secs(default)
 export HOMEBREW_AUTO_UPDATE_SECS=86400
@@ -165,6 +162,10 @@ if [[ -z $TMUX ]]; then
   # pyenv. (NOT using zprezto python module as it is very slow)
   # _evalcache pyenv init - --no-rehash zsh
   # eval "$(pyenv virtualenv-init -)"
+
+  # Gem Home env can be loaded just once
+  gem_home ~/.gem/global; pushd ~
+  chruby system
 
 fi
 
