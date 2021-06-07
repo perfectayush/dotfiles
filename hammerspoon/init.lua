@@ -4,6 +4,7 @@
 require "preload"
 require "window"
 require "emacs"
+require "brightness"
 hs.loadSpoon("SpoonInstall")
 hs.loadSpoon("ModalMgr")
 -- require "yabai"
