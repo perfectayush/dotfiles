@@ -691,4 +691,15 @@ before packages are loaded."
 
     ;; paradox settings
     (setq paradox-automatically-star nil)
-    (setq paradox-github-token t)))
+    (setq paradox-github-token t)
+
+    ;; counsel search override
+    (setq counsel-rg-base-command
+          '("rg"
+            "--max-columns" "240"
+            "--field-context-separator" ":"
+            "--with-filename"
+            "--no-heading"
+            "--line-number"
+            "--color" "never" "%s"))))
+
