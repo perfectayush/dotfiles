@@ -37,8 +37,8 @@ This function should only modify configuration layer settings."
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (ivy :variables
-          ivy-enable-advanced-buffer-information t)
+
+     compleseus
 
      ;; auto-completion
      (auto-completion :variables
@@ -649,14 +649,6 @@ before packages are loaded."
 
     ;; wgrep settings
     (setq wgrep-auto-save-buffer t)
-
-    ;; ivy add actions
-    (ivy-add-actions
-     'counsel-projectile-switch-project
-     '(("R" (lambda (dir)
-              (let ((projectile-switch-project-action 'counsel-projectile-rg))
-                (projectile-switch-project-by-name dir arg)))
-        "search with rg")))
 
     ;; modify super/sub word mode for evil
     (add-hook 'superword-mode-hook #'(lambda ()
