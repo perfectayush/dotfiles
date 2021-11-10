@@ -714,6 +714,9 @@ before packages are loaded."
 
     (global-set-key (kbd "s-c") 'org-roam-capture)
 
+    ;; lsp settings
+    (setq lsp-enable-file-watchers nil)
+
     ;; paradox settings
     (setq paradox-automatically-star nil)
     (setq paradox-github-token t)
