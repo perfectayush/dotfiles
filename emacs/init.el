@@ -154,6 +154,10 @@ This function should only modify configuration layer settings."
                                       good-scroll
                                       nord-theme
                                       doom-themes
+                                      websocket
+                                      (nano-theme :location (recipe
+                                                             :fetcher github
+                                                             :repo "rougier/nano-theme"))
                                       tron-legacy-theme)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(org-contrib)
@@ -549,7 +553,14 @@ It should only modify the values of Spacemacs settings."
    ;; Run `spacemacs/prettify-org-buffer' when
    ;; visiting README.org files of Spacemacs.
    ;; (default nil)
-   dotspacemacs-pretty-docs nil))
+   dotspacemacs-pretty-docs nil
+
+   ;; If nil the home buffer shows the full path of agenda items
+   ;; and todos. If non nil only the file name is shown.
+   dotspacemacs-home-shorten-agenda-source nil
+
+   ;; If non-nil then byte-compile some of Spacemacs files.
+   dotspacemacs-byte-compile nil))
 
 (defun dotspacemacs/user-env ()
   "Environment variables setup.
