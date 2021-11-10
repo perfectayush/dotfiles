@@ -69,7 +69,11 @@ This function should only modify configuration layer settings."
      html
      (org :variables
           org-enable-github-support t
-          org-enable-reveal-js-support t)
+          org-enable-reveal-js-support t
+          org-enable-roam-support t
+          org-roam-v2-ack t
+          org-enable-roam-protocol t
+          org-enable-roam-server t)
      plantuml
      emacs-lisp
      lua
@@ -152,7 +156,7 @@ This function should only modify configuration layer settings."
                                       doom-themes
                                       tron-legacy-theme)
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(org-contrib)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and deletes any unused
@@ -673,13 +677,42 @@ before packages are loaded."
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
     ;; gpg settings
+    (require 'epa-file)
     (setq epa-pinentry-mode 'loopback)
+    (epa-file-enable)
 
     ;; doom treemacs config
     (doom-themes-treemacs-config)
 
     ;; org settings
     (setq org-brain-path "~/Dropbox/orgs/brain/")
+    (setq org-roam-directory "~/Dropbox/orgs/roam/")
+
+    (setq org-roam-capture-templates
+          '(
+            ("d" "default" plain "%?"
+             :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                                "#+title: ${title}\n")
+             :unnarrowed t)
+            ("m" "master_nodes" plain "%?"
+             :if-new (file+head "master_nodes/%<%Y%m%d%H%M%S>-${slug}.org"
+                                "#+title: ${title}\n")
+             :unnarrowed t)
+            ("p" "personal" entry "* %?"
+             :if-new (file+head "personal/personal.org.gpg"
+                                "#+title: Personal\n#+filetags: personal\n\n")
+             :empty-lines 1
+             :unnarrowed t)
+            ("i" "interviews" plain "[[id:507B7F0B-0856-48C5-88CF-C2D4AB1DAE50][Interviews]]\n\n%?"
+             :if-new (file+head "interviews/%<%Y-%m-%d-%H%M%S>-${slug}.org"
+                                "#+title: ${title}\n#+filetags: interview\n\n")
+             :empty-lines 1
+             :unnarrowed t)
+            ("f" "fairmatic" plain "[[id:3A8D1164-1AA0-4DDA-8D6E-581EB744B283][Fairmatic]]\n\n%?"
+             :if-new (file+head "fairmatic/%<%Y-%m-%d-%H%M%S>-${slug}.org"
+                                "#+title: ${title}\n#+filetags: fairmatic\n\n"))))
+
+    (global-set-key (kbd "s-c") 'org-roam-capture)
 
     ;; paradox settings
     (setq paradox-automatically-star nil)
