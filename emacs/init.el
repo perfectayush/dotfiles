@@ -781,6 +781,16 @@ before packages are loaded."
              :if-new (file+head "fairmatic/%<%Y-%m-%d-%H%M%S>-${slug}.org"
                                 "#+title: ${title}\n#+filetags: fairmatic\n\n"))))
 
+    (add-hook 'org-mode-hook 'org-modern-mode)
+    (setq org-hide-emphasis-markers t
+          org-pretty-entities t
+          org-auto-align-tags nil
+          org-tags-column 0
+          org-ellipsis "…"
+          org-catch-invisible-edits 'show-and-error
+          org-special-ctrl-a/e t
+          org-insert-heading-respect-content t)
+
     (global-set-key (kbd "s-c") 'org-roam-capture)
 
     ;; lsp settings
