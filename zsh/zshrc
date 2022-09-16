@@ -24,6 +24,10 @@ fi
 
 # Customize to your needs...
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
 #custom key bindings
 # VI MODE KEYBINDINGS (ins mode)
 bindkey -M viins '^a'    beginning-of-line
@@ -124,7 +128,7 @@ function ediff() {
 #ENVIRONMENT VARS
 export TERM=screen-256color
 export LANG="en_US.UTF-8"
-export EDITOR="emacsclient -c -a vim"
+export EDITOR="/usr/local/bin/emacsclient -c -a vim"
 export VISUAL="emacsclient -c -a vim"
 export GREP_COLOR='1;34'
 export SHELL="/bin/zsh"
@@ -142,17 +146,15 @@ export HOMEBREW_AUTO_UPDATE_SECS=86400
 
 if [[ -z $TMUX ]]; then
   path=(
-    $path
-    # Spacedout
-    ~/SpacedOut/sense/bin
     # Personal
-    # ~/.bin/
+    "$HOME/.local/bin"
+    # existing path
+    $path
     # Android
-    /opt/android-sdk/tools
+    # /opt/android-sdk/tools
     # Rust
     "$HOME/.cargo/bin"
-    # Farsight
-    ~/Work/Repos/farsight/bin
+    "/Users/ayush/Work/Repos/poneglyph/bin"
   )
 
 
@@ -160,17 +162,27 @@ if [[ -z $TMUX ]]; then
   _evalcache jenv init - zsh
 
   # pyenv. (NOT using zprezto python module as it is very slow)
-  # _evalcache pyenv init - --no-rehash zsh
-  # eval "$(pyenv virtualenv-init -)"
 
   # Gem Home env can be loaded just once
-  gem_home ~/.gem/global; pushd ~
-  chruby system
+ # gem_home ~/.gem/global; pushd ~
+ # chruby system
 
 fi
 
 #custom fasd settings. prezto settings primitive
 _evalcache zoxide init zsh
+_evalcache atuin init zsh
+#_evalcache pyenv init -
+#_evalcache pyenv virtualenv-init -
 
 ## Finish zprof, by printing
 # zprof
+
+alias urldecode='python3 -c "import sys, urllib.parse as ul; print(ul.unquote_plus(sys.argv[1]))"'
+alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus(sys.argv[1]))"'
+
+export VISUAL=vim
+autoload edit-command-line; zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+export EMACS_SOCKET_NAME=~/.emacs.d/server/server
+

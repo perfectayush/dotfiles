@@ -19,7 +19,7 @@ zstyle ':prezto:load' pmodule 'environment' 'terminal' 'editor' 'history'       
                               'utility' 'directory' 'spectrum' 'git'              \
                               'completion' 'ruby' 'prompt' 'syntax-highlighting'  \
                               'history-substring-search' 'autosuggestions'        \
-                              'evalcache'
+                              'evalcache' 'zsh-iterm2'
                               
 #############################################################################
 ################################# Modules ###################################
