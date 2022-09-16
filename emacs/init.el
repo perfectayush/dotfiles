@@ -73,7 +73,10 @@ This function should only modify configuration layer settings."
           org-roam-v2-ack t
           org-enable-roam-protocol t
           org-enable-roam-server t
-          org-enable-roam-ui t)
+          org-enable-roam-ui t
+          org-brain-path "~/Dropbox/orgs/brain/"
+          org-roam-directory "~/Dropbox/orgs/roam/")
+
      plantuml
      emacs-lisp
      lua
@@ -764,34 +767,6 @@ before packages are loaded."
 
     ;; doom treemacs config
     (doom-themes-treemacs-config)
-
-    ;; org settings
-    (setq org-brain-path "~/Dropbox/orgs/brain/")
-    (setq org-roam-directory "~/Dropbox/orgs/roam/")
-
-    (setq org-roam-capture-templates
-          '(
-            ("d" "default" plain "%?"
-             :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                                "#+title: ${title}\n")
-             :unnarrowed t)
-            ("m" "master_nodes" plain "%?"
-             :if-new (file+head "master_nodes/%<%Y%m%d%H%M%S>-${slug}.org"
-                                "#+title: ${title}\n")
-             :unnarrowed t)
-            ("p" "personal" entry "* %?"
-             :if-new (file+head "personal/personal.org.gpg"
-                                "#+title: Personal\n#+filetags: personal\n\n")
-             :empty-lines 1
-             :unnarrowed t)
-            ("i" "interviews" plain "[[id:507B7F0B-0856-48C5-88CF-C2D4AB1DAE50][Interviews]]\n\n%?"
-             :if-new (file+head "interviews/%<%Y-%m-%d-%H%M%S>-${slug}.org"
-                                "#+title: ${title}\n#+filetags: interview\n\n")
-             :empty-lines 1
-             :unnarrowed t)
-            ("f" "fairmatic" plain "[[id:3A8D1164-1AA0-4DDA-8D6E-581EB744B283][Fairmatic]]\n\n%?"
-             :if-new (file+head "fairmatic/%<%Y-%m-%d-%H%M%S>-${slug}.org"
-                                "#+title: ${title}\n#+filetags: fairmatic\n\n"))))
 
     (add-hook 'org-mode-hook 'org-modern-mode)
     (setq org-hide-emphasis-markers t
