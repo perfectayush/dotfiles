@@ -60,6 +60,7 @@ This function should only modify configuration layer settings."
      dap
      ;; evil
      evil-snipe
+     evil-better-jumper
      (vinegar :variables vinegar-reuse-dired-buffer t)
      multiple-cursors
 
@@ -96,7 +97,7 @@ This function should only modify configuration layer settings."
      docker
      terraform
      csv
-     sql
+     (sql :variables sql-auto-indent nil)
      systemd
      php
      rust
@@ -112,6 +113,7 @@ This function should only modify configuration layer settings."
                   tree-sitter-fold-enable t)
      parinfer
      helpful
+     nav-flash
      ;; confluence
      vagrant
      git
@@ -157,11 +159,19 @@ This function should only modify configuration layer settings."
                                       nord-theme
                                       doom-themes
                                       websocket
+                                      (flycheck :location (recipe
+                                                           :fetcher github
+                                                           :repo "perfectayush/flycheck"
+                                                           :branch "add-sqlfluff-linter"))
                                       (nano-theme :location (recipe
                                                              :fetcher github
                                                              :repo "rougier/nano-theme"))
                                       org-modern
                                       tron-legacy-theme)
+
+   ;; A list of packages that cannot be updated.
+   dotspacemacs-frozen-packages '()
+
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(org-contrib)
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -455,7 +465,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
    ;; borderless fullscreen. (default nil)
-   dotspacemacs-undecorated-at-startup t
+   dotspacemacs-undecorated-at-startup nil
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
@@ -506,8 +516,7 @@ It should only modify the values of Spacemacs settings."
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
    dotspacemacs-line-numbers '(:relative t
-                               :disabled-for-modes org-mode
-                               :size-limit-kb 2000)
+                               :size-limit-kb 8000)
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -524,7 +533,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc...
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
-   dotspacemacs-smart-closing-parenthesis t
+   dotspacemacs-smart-closing-parenthesis nil
 
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
@@ -577,7 +586,9 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil - same as frame-title-format)
    dotspacemacs-icon-title-format nil
 
-   ;; Show trailing whitespace (default t)
+   ;; Color highlight trailing whitespace in all prog-mode and text-mode derived
+   ;; modes such as c++-mode, python-mode, emacs-lisp, html-mode, rst-mode etc.
+   ;; (default t)
    dotspacemacs-show-trailing-whitespace t
 
    ;; Delete whitespace while saving buffer. Possible values are `all'
