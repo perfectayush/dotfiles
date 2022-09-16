@@ -169,7 +169,6 @@ This function should only modify configuration layer settings."
                                       (nano-theme :location (recipe
                                                              :fetcher github
                                                              :repo "rougier/nano-theme"))
-                                      org-modern
                                       tron-legacy-theme)
 
    ;; A list of packages that cannot be updated.
@@ -752,7 +751,6 @@ before packages are loaded."
     (add-hook 'yaml-mode-hook #'smartparens-mode)
     (add-hook 'yaml-mode-hook #'spacemacs/load-yasnippet)
 
-
     ;; avy settings
     (setq avy-style 'words)
 
@@ -767,18 +765,6 @@ before packages are loaded."
 
     ;; doom treemacs config
     (doom-themes-treemacs-config)
-
-    (add-hook 'org-mode-hook 'org-modern-mode)
-    (setq org-hide-emphasis-markers t
-          org-pretty-entities t
-          org-auto-align-tags nil
-          org-tags-column 0
-          org-ellipsis "…"
-          org-catch-invisible-edits 'show-and-error
-          org-special-ctrl-a/e t
-          org-insert-heading-respect-content t)
-
-    (global-set-key (kbd "s-c") 'org-roam-capture)
 
     ;; lsp settings
     (setq lsp-enable-file-watchers nil)
