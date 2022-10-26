@@ -47,18 +47,8 @@ This function should only modify configuration layer settings."
                       auto-completion-tab-key-behavior 'cycle
                       auto-completion-complete-with-key-sequence nil)
 
-     (lsp :variables
-          lsp-headerline-breadcrumb-enable t
-          lsp-headerline-breadcrumb-segments '(file symbols)
-          lsp-lens-enable t
-          lsp-navigation 'peek
-          lsp-ui-remap-xref-keybindings t
-          lsp-ui-remap-xref-keybindings t
-          lsp-ui-doc-enable nil
-          lsp-ui-sideline-enable nil)
+     debug
 
-     dap
-     ;; evil
      evil-snipe
      evil-better-jumper
      (vinegar :variables vinegar-reuse-dired-buffer t)
@@ -80,22 +70,18 @@ This function should only modify configuration layer settings."
      plantuml
      emacs-lisp
      lua
-     (python :variables
-             python-backend 'lsp
-             python-lsp-server 'pyright
-             python-fill-column 80)
+     python
      (ruby :variables
            ruby-version-manager 'chruby
-           ruby-enable-enh-ruby-mode t
-           ruby-backend 'lsp)
-     (go :variables go-backend 'lsp)
+           ruby-enable-enh-ruby-mode t)
+     go
      (shell :variables shell-default-shell 'eshell)
      clojure
      julia
      javascript
      markdown
-     (java :variables java-backend 'lsp)
-     (yaml :variables yaml-enable-lsp t)
+     java
+     yaml
      ansible
      docker
      terraform
@@ -765,9 +751,6 @@ before packages are loaded."
 
     ;; doom treemacs config
     (doom-themes-treemacs-config)
-
-    ;; lsp settings
-    (setq lsp-enable-file-watchers nil)
 
     ;; paradox settings
     (setq paradox-automatically-star nil)
