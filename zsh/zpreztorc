@@ -15,12 +15,25 @@ zstyle ':prezto:*:*' color 'yes'
 
 # Set the Prezto modules to load (browse modules).
 # The order matters.
-zstyle ':prezto:load' pmodule 'environment' 'terminal' 'editor' 'history'         \
-                              'utility' 'directory' 'spectrum' 'git'              \
-                              'completion' 'ruby' 'prompt' 'syntax-highlighting'  \
-                              'history-substring-search' 'autosuggestions'        \
-                              'evalcache' 'zsh-iterm2'
-                              
+zstyle ':prezto:load' pmodule  \
+  'environment'              \
+  'editor'                   \
+  'history'                  \
+  'utility'                  \
+  'directory'                \
+  'git'                      \
+  'completion'               \
+  'ruby'                     \
+  'prompt'                   \
+  'syntax-highlighting'      \
+  'history-substring-search' \
+  'autosuggestions'          \
+  'evalcache'                \
+  'zsh-defer'                \
+  'zsh-iterm2'
+
+
+
 #############################################################################
 ################################# Modules ###################################
 #############################################################################

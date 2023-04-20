@@ -80,6 +80,9 @@ bindkey -M vicmd '\e^h'  backward-kill-word                # Alt-backspace
 bindkey -M vicmd '\e^?'  backward-kill-word                # Alt-backspace
 bindkey -M vicmd '\e.'   insert-last-word
 
+autoload edit-command-line; zle -N edit-command-line
+bindkey -M vicmd v       edit-command-line
+
 #aliases
 alias .='cd ../'
 alias ..='cd ../../'
@@ -137,9 +140,9 @@ HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND=(fg=red)
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
 source /usr/local/share/gem_home/gem_home.sh
+source "$HOME/.cargo/env"
+
 
 # Update homebrew only once a day, not every 60 secs(default)
 export HOMEBREW_AUTO_UPDATE_SECS=86400
@@ -157,32 +160,24 @@ if [[ -z $TMUX ]]; then
     "/Users/ayush/Work/Repos/poneglyph/bin"
   )
 
-
-  # jenv
-  _evalcache jenv init - zsh
-
-  # pyenv. (NOT using zprezto python module as it is very slow)
-
-  # Gem Home env can be loaded just once
+ # Gem Home env can be loaded just once
  # gem_home ~/.gem/global; pushd ~
  # chruby system
 
 fi
 
 #custom fasd settings. prezto settings primitive
-_evalcache zoxide init zsh
-_evalcache atuin init zsh
-#_evalcache pyenv init -
-#_evalcache pyenv virtualenv-init -
+zsh-defer _evalcache jenv init - zsh
+zsh-defer _evalcache zoxide init zsh
+zsh-defer _evalcache atuin init zsh
+zsh-defer _evalcache pdm --pep582 zsh
 
-## Finish zprof, by printing
-# zprof
 
 alias urldecode='python3 -c "import sys, urllib.parse as ul; print(ul.unquote_plus(sys.argv[1]))"'
 alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus(sys.argv[1]))"'
 
 export VISUAL=vim
-autoload edit-command-line; zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
 export EMACS_SOCKET_NAME=~/.emacs.d/server/server
 
+## Finish zprof, by printing
+# zprof
