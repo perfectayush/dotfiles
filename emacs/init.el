@@ -31,27 +31,21 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/private/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(;; ----------------------------------------------------------------
+   '(
+     ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
 
      compleseus
-
-     (auto-completion :variables
-                      auto-completion-enable-snippets-in-popup t
-                      auto-completion-return-key-behavior 'complete
-                      auto-completion-enable-help-tooltip t
-                      auto-completion-enable-sort-by-usage t
-                      auto-completion-tab-key-behavior 'cycle
-                      auto-completion-complete-with-key-sequence nil)
-
      debug
+     auto-completion
 
-     evil-snipe
+     (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      evil-better-jumper
-     (vinegar :variables vinegar-reuse-dired-buffer t)
+     (vinegar :variables vinegar-reuse-dired-buffer t
+                         vinegar-dired-hide-details nil)
      multiple-cursors
 
      ;; languages/frameworks
@@ -92,20 +86,23 @@ This function should only modify configuration layer settings."
      rust
      nginx
 
-     ;; private layers
-     archcode
 
      ;; emacs tooling
      (tree-sitter :variables
                   tree-sitter-syntax-highlight-enable t
                   tree-sitter-ident t
-                  tree-sitter-fold-enable t)
+                  tree-sitter-fold-enable nil
+                  tree-sitter-fold-indicators-enable nil)
      parinfer
      helpful
      nav-flash
      ;; confluence
      vagrant
-     git
+     (git :variables
+          git-magit-status-fullscreen t
+          git-enable-magit-delta-plugin t
+          magit-executable "/usr/local/bin/git")
+
      dash
      syntax-checking
      spell-checking
@@ -136,12 +133,21 @@ This function should only modify configuration layer settings."
                                                  "||" "||=" "||>" "|||>" "|}" "~-" "~=" "~>" "~@" "~~" "~~>"))
 
      (osx :variables osx-command-as       'super
-                     osx-right-command-as 'hyper))
+                     osx-right-command-as 'hyper)
 
-   ;; List of additional packages that will be installed without being
-   ;; wrapped in a layer. If you need some configuration for these
-   ;; packages then consider to create a layer, you can also put the
-   ;; configuration in `dotspacemacs/config'.
+     (openai :variables
+             openai-key #'openai-key-auth-source)
+     ;; private layers
+     archcode)
+
+   ;; List of additional packages that will be installed without being wrapped
+   ;; in a layer (generally the packages are installed only and should still be
+   ;; loaded using load/require/use-package in the user-config section below in
+   ;; this file). If you need some configuration for these packages, then
+   ;; consider creating a layer. You can also put the configuration in
+   ;; `dotspacemacs/user-config'. To use a local version of a package, use the
+   ;; `:location' property: '(your-package :location "~/path/to/your-package/")
+   ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(evil-textobj-column
                                       evil-python-movement
                                       good-scroll
@@ -152,16 +158,17 @@ This function should only modify configuration layer settings."
                                                            :fetcher github
                                                            :repo "perfectayush/flycheck"
                                                            :branch "add-sqlfluff-linter"))
-                                      (nano-theme :location (recipe
-                                                             :fetcher github
-                                                             :repo "rougier/nano-theme"))
+                                      nano-theme
                                       tron-legacy-theme)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages and/or extensions that will not be install and loaded.
-   dotspacemacs-excluded-packages '(org-contrib)
+   dotspacemacs-excluded-packages '(org-contrib
+                                    tern
+                                    lsp
+                                    company)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and deletes any unused
@@ -327,7 +334,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(modus-vivendi tron-legacy doom-nord)
+   dotspacemacs-themes '(doom-gruvbox modus-vivendi tron-legacy doom-nord)
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
    ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
@@ -335,7 +342,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme 'doom
+   dotspacemacs-mode-line-theme '(doom :separator wave :separator-scale 1.5)
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
@@ -447,12 +454,12 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
-   ;; (default nil) (Emacs 24.4+ only)
+   ;; (default t) (Emacs 24.4+ only)
    dotspacemacs-maximized-at-startup t
 
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
-   ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
-   ;; borderless fullscreen. (default nil)
+   ;; variable with `dotspacemacs-maximized-at-startup' to obtain fullscreen
+   ;; without external boxes. Also disables the internal border. (default nil)
    dotspacemacs-undecorated-at-startup nil
 
    ;; A value from the range (0..100), in increasing opacity, which describes
@@ -474,7 +481,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil unicode symbols are displayed in the mode line.
    ;; If you use Emacs as a daemon and wants unicode characters only in GUI set
    ;; the value to quoted `display-graphic-p'. (default t)
-   dotspacemacs-mode-line-unicode-symbols t
+   dotspacemacs-mode-line-unicode-symbols nil
 
    ;; If non-nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
@@ -638,6 +645,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     ;;set custom file and load it
     (setq custom-file "~/.spacemacs.d/custom.el")
     (load custom-file 'no-error)
+    (setq-default quelpa-build-tar-executable "/usr/local/bin/gtar")
 
     (let
         ((nord0  "#2E3440")
@@ -674,7 +682,8 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
           '(("melpa"    . "melpa.org/packages/")
             ("org"      . "orgmode.org/elpa/")
             ("ublt"     . "elpa.ubolonton.org/packages/")
-            ("gnu"      . "elpa.gnu.org/packages/")))))
+            ("gnu"      . "elpa.gnu.org/packages/")
+            ("nongnu"   . "elpa.nongnu.org/nongnu/")))))
 
 
 (defun dotspacemacs/user-load ()
@@ -697,8 +706,16 @@ before packages are loaded."
 
     ;; autocomplete mode
     (yas-global-mode)
-    (global-company-mode)
+    ;; (global-company-mode)
     (setq yas-triggers-in-field nil)
+
+
+    ;; YAsnippet in ts modes
+    (advice-add 'yas--modes-to-activate :around
+                (defun yas--get-snippet-tables@tree-sitter (orig-fn &optional mode)
+                  (funcall orig-fn
+                           (or (car (rassq (or mode major-mode) major-mode-remap-alist))
+                               mode))))
 
     ;; evil-state settings
     (evil-set-initial-state 'anaconda-mode-view-mode 'motion)
@@ -714,10 +731,12 @@ before packages are loaded."
                                            (?e . ("^(" . ")$"))))
 
     (setq jinja2-mode-evil-surround-extras '((?a . ("{{ " . " }}"))))
+
     (defun update-surround-list (surround-items)
       (dolist (item surround-items) (add-to-list 'evil-surround-pairs-alist item)))
 
     (add-hook 'yaml-mode-hook (lambda () (update-surround-list yaml-mode-evil-surround-extras)))
+    (add-hook 'yaml-ts-mode-hook (lambda () (update-surround-list yaml-mode-evil-surround-extras)))
     (add-hook 'jinja2-mode-hook (lambda () (update-surround-list jinja2-mode-evil-surround-extras)))
 
     ;; wgrep settings
@@ -732,10 +751,10 @@ before packages are loaded."
                                        (progn (modify-syntax-entry ?_ "_")
                                               (modify-syntax-entry ?- "_"))))
 
+
     ;; yaml-mode hooks
     (add-hook 'yaml-mode-hook #'superword-mode)
     (add-hook 'yaml-mode-hook #'smartparens-mode)
-    (add-hook 'yaml-mode-hook #'spacemacs/load-yasnippet)
 
     ;; avy settings
     (setq avy-style 'words)
@@ -743,20 +762,51 @@ before packages are loaded."
     ;; transparent title bar
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
+    (add-to-list 'spacemacs-indent-sensitive-modes 'sql-mode)
+    (set-fringe-style '(1 . 1))
+
+    (add-to-list 'treesit-language-source-alist
+                 '(sql . ("https://github.com/DerekStride/tree-sitter-sql" "gh-pages" "src")))
+
+    (setq treesit-load-name-override-list
+     '((sql "libtree-sitter-sql" "tree_sitter_sql")))
+
+     ;;;###autoload
+    (define-derived-mode sql-ts-mode sql-mode "SQL[ts]"
+      "Major mode for editing SQL with tree-sitter."
+      :syntax-table sql-mode-syntax-table
+
+      (setq-local font-lock-defaults nil)
+      (when (treesit-ready-p 'sql)
+        (treesit-parser-create 'sql)))
+
+    (treesit-major-mode-setup)
+
 
     ;; gpg settings
     (require 'epa-file)
     (setq epa-pinentry-mode 'loopback)
     (epa-file-enable)
 
-    ;; doom treemacs config
-    (doom-themes-treemacs-config)
+
+    ;; orderless completion settings
+    (setq completion-category-overrides '((eglot (styles orderless))
+                                          (file (styles basic partial-completion))))
 
     ;; paradox settings
-    (setq paradox-automatically-star nil)
     (setq paradox-github-token t)
 
     ;; counsel search override
+    (setq consult-ripgrep-args
+          "rg --null --line-buffered --color=never --max-columns=1000 --path-separator / --field-context-separator :  --smart-case --no-heading --with-filename --line-number --search-zip")
+
+    (with-eval-after-load 'parinfer-rust-mode
+      (add-to-list 'parinfer-rust-treat-command-as '(evil-paste-after . "paren"))
+      (add-to-list 'parinfer-rust-treat-command-as '(evil-paste-before . "paren"))
+      (add-to-list 'parinfer-rust-treat-command-as '(spacemacs/evil-mc-paste-after . "paren"))
+      (add-to-list 'parinfer-rust-treat-command-as '(spacemacs/evil-mc-paste-before . "paren"))
+      (add-to-list 'parinfer-rust-treat-command-as '(yank . "paren")))
+
     (setq counsel-rg-base-command
           '("rg"
             "--max-columns" "240"
