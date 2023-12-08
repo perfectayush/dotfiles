@@ -92,7 +92,8 @@ alias ....='cd ../../../../'
 alias fget='aria2c -c --max-connection-per-server=8 --min-split-size=1M'
 alias en='emacsclient -t -a vim'
 alias e='emacsclient -n -a vim'
-alias v='vim'
+alias vim=nvim
+alias v=nvim
 alias ssa='ssh'
 alias dsdb='udisksctl unmount --block-device /dev/sdb1;udisksctl unmount --block-device /dev/sdb2;udisks --detach /dev/sdb;'
 alias cnet='ping 8.8.8.8'
@@ -101,6 +102,7 @@ alias wn='dict -d wn'
 alias ff='fd'
 alias imdb='/usr/bin/lm'
 alias cmyip="curl ifconfig.me"
+alias ssh="kitty +kitten ssh"
 
 #systemd alias
 alias restart='sudo systemctl restart'
@@ -129,7 +131,6 @@ function ediff() {
 }
 
 #ENVIRONMENT VARS
-export TERM=screen-256color
 export LANG="en_US.UTF-8"
 export EDITOR="/usr/local/bin/emacsclient -c -a vim"
 export VISUAL="emacsclient -c -a vim"
@@ -158,6 +159,7 @@ if [[ -z $TMUX ]]; then
     # Rust
     "$HOME/.cargo/bin"
     "/Users/ayush/Work/Repos/poneglyph/bin"
+    "/Users/ayush/Work/Repos/mint/validation_scripts/validate_backend_files/bin"
   )
 
  # Gem Home env can be loaded just once
@@ -178,6 +180,9 @@ alias urlencode='python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus
 
 export VISUAL=vim
 export EMACS_SOCKET_NAME=~/.emacs.d/server/server
+
+
+function gam() { "/Users/ayush/bin/gam/gam" "$@" ; }
 
 ## Finish zprof, by printing
 # zprof
