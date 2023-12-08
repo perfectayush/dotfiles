@@ -29,8 +29,7 @@ zstyle ':prezto:load' pmodule  \
   'history-substring-search' \
   'autosuggestions'          \
   'evalcache'                \
-  'zsh-defer'                \
-  'zsh-iterm2'
+  'zsh-defer'
 
 
 
@@ -88,6 +87,8 @@ zstyle ':prezto:module:ruby:chruby' auto-switch 'yes'
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
 #zstyle ':prezto:module:ruby:info:version' format '%%B%F{blue}[%v]%f%%b '
+
+
 zstyle ':prezto:module:prompt' theme 'powerlevel10k'
 
 ########
