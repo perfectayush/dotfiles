@@ -31,7 +31,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/private/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(shell-scripts
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -334,7 +334,9 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-gruvbox modus-vivendi tron-legacy doom-nord)
+   dotspacemacs-themes '(dracula
+                         tron-legacy
+                         modus-vivendi)
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
    ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
@@ -347,7 +349,9 @@ It should only modify the values of Spacemacs settings."
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
 
-   ;; Default font or prioritized list of fonts. The `:size' can be specified as
+   ;; Default font or prioritized list of fonts. This setting has no effect when
+   ;; running Emacs in terminal. The font set here will be used for default and
+   ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Iosevka SS09"
@@ -429,6 +433,10 @@ It should only modify the values of Spacemacs settings."
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
+   ;; It is also possible to use a posframe with the following cons cell
+   ;; `(posframe . position)' where position can be one of `center',
+   ;; `top-center', `bottom-center', `top-left-corner', `top-right-corner',
+   ;; `top-right-corner', `bottom-left-corner' or `bottom-right-corner'
    ;; (default 'bottom)
    dotspacemacs-which-key-position 'bottom
 
@@ -471,6 +479,11 @@ It should only modify the values of Spacemacs settings."
    ;; the transparency level of a frame when it's inactive or deselected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
    dotspacemacs-inactive-transparency 90
+
+   ;; A value from the range (0..100), in increasing opacity, which describes the
+   ;; transparency level of a frame background when it's active or selected. Transparency
+   ;; can be toggled through `toggle-background-transparency'. (default 90)
+   dotspacemacs-background-transparency 90
 
    ;; If non-nil show the titles of transient states. (default t)
    dotspacemacs-show-transient-state-title t
@@ -519,7 +532,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil and `dotspacemacs-activate-smartparens-mode' is also non-nil,
    ;; `smartparens-strict-mode' will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode t
+   dotspacemacs-smartparens-strict-mode nil
 
    ;; If non-nil smartparens-mode will be enabled in programming modes.
    ;; (default t)
@@ -632,7 +645,8 @@ This function defines the environment variables for your Emacs session. By
 default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
-  (spacemacs/load-spacemacs-env))
+  (spacemacs/load-spacemacs-env)
+  )
 
 
 (defun dotspacemacs/user-init ()
@@ -642,10 +656,11 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   (progn
+
     ;;set custom file and load it
     (setq custom-file "~/.spacemacs.d/custom.el")
     (load custom-file 'no-error)
-    (setq-default quelpa-build-tar-executable "/usr/local/bin/gtar")
+    (setq-default quelpa-build-tar-executable "/opt/homebrew/bin/gtar")
 
     (let
         ((nord0  "#2E3440")
@@ -665,17 +680,9 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
          (nord14 "#A3BE8C")
          (nord15 "#B48EAD")
          (nord11+1 "#8c3941")
-         (nord14+1 "#64824a"))
+         (nord14+1 "#64824a")))
 
 
-      (setq theming-modifications
-            `((nord
-               (diff-refine-removed :foreground ,nord5 :background ,nord11)
-               (diff-refine-added  :foreground ,nord5 :background ,nord14)
-               (magit-diff-removed :foreground ,nord5 :background ,nord11+1)
-               (magit-diff-removed-highlight :foreground ,nord5 :background ,nord11+1)
-               (magit-diff-added-highlight :foreground ,nord5 :background ,nord14+1)
-               (magit-diff-added :foreground ,nord5 :background ,nord14+1)))))
 
 
     (setq configuration-layer-elpa-archives
@@ -769,7 +776,7 @@ before packages are loaded."
                  '(sql . ("https://github.com/DerekStride/tree-sitter-sql" "gh-pages" "src")))
 
     (setq treesit-load-name-override-list
-     '((sql "libtree-sitter-sql" "tree_sitter_sql")))
+          '((sql "libtree-sitter-sql" "tree_sitter_sql")))
 
      ;;;###autoload
     (define-derived-mode sql-ts-mode sql-mode "SQL[ts]"
