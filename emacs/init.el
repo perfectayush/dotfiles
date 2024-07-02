@@ -93,7 +93,7 @@ This function should only modify configuration layer settings."
                   tree-sitter-ident t
                   tree-sitter-fold-enable nil
                   tree-sitter-fold-indicators-enable nil)
-     parinfer
+     ;; parinfer
      helpful
      nav-flash
      ;; confluence
@@ -806,13 +806,6 @@ before packages are loaded."
     ;; counsel search override
     (setq consult-ripgrep-args
           "rg --null --line-buffered --color=never --max-columns=1000 --path-separator / --field-context-separator :  --smart-case --no-heading --with-filename --line-number --search-zip")
-
-    (with-eval-after-load 'parinfer-rust-mode
-      (add-to-list 'parinfer-rust-treat-command-as '(evil-paste-after . "paren"))
-      (add-to-list 'parinfer-rust-treat-command-as '(evil-paste-before . "paren"))
-      (add-to-list 'parinfer-rust-treat-command-as '(spacemacs/evil-mc-paste-after . "paren"))
-      (add-to-list 'parinfer-rust-treat-command-as '(spacemacs/evil-mc-paste-before . "paren"))
-      (add-to-list 'parinfer-rust-treat-command-as '(yank . "paren")))
 
     (setq counsel-rg-base-command
           '("rg"
