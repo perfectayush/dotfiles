@@ -88,12 +88,6 @@ This function should only modify configuration layer settings."
 
 
      ;; emacs tooling
-     (tree-sitter :variables
-                  tree-sitter-syntax-highlight-enable t
-                  tree-sitter-ident t
-                  tree-sitter-fold-enable nil
-                  tree-sitter-fold-indicators-enable nil)
-     ;; parinfer
      helpful
      nav-flash
      ;; confluence
@@ -772,22 +766,6 @@ before packages are loaded."
     (add-to-list 'spacemacs-indent-sensitive-modes 'sql-mode)
     (set-fringe-style '(1 . 1))
 
-    (add-to-list 'treesit-language-source-alist
-                 '(sql . ("https://github.com/DerekStride/tree-sitter-sql" "gh-pages" "src")))
-
-    (setq treesit-load-name-override-list
-          '((sql "libtree-sitter-sql" "tree_sitter_sql")))
-
-     ;;;###autoload
-    (define-derived-mode sql-ts-mode sql-mode "SQL[ts]"
-      "Major mode for editing SQL with tree-sitter."
-      :syntax-table sql-mode-syntax-table
-
-      (setq-local font-lock-defaults nil)
-      (when (treesit-ready-p 'sql)
-        (treesit-parser-create 'sql)))
-
-    (treesit-major-mode-setup)
 
 
     ;; gpg settings
