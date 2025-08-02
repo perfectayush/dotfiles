@@ -82,15 +82,13 @@ alias en='emacsclient -t -a vim'
 alias e='emacsclient -n -a vim'
 alias vim=nvim
 alias v=nvim
-alias ssa='ssh'
 alias dsdb='udisksctl unmount --block-device /dev/sdb1;udisksctl unmount --block-device /dev/sdb2;udisks --detach /dev/sdb;'
-alias cnet='ping 8.8.8.8'
 alias zshconfig='emacsclient -t -a 'vim' ~/.zshrc'
 alias wn='dict -d wn'
 alias ff='fd'
 alias imdb='/usr/bin/lm'
 alias cmyip="curl ifconfig.me"
-alias ssh="kitty +kitten ssh"
+alias ls=eza
 
 #systemd alias
 alias restart='sudo systemctl restart'
@@ -171,6 +169,50 @@ export EMACS_SOCKET_NAME=~/.emacs.d/server/server
 
 
 function gam() { "/Users/ayush/bin/gam/gam" "$@" ; }
+
+function ssh() {
+    if [ -n "$KITTY_PID" ]; then
+        kitty +kitten ssh "$@"
+    else
+        command ssh "$@"
+    fi
+}
+
+function cnet(){
+     ping "${1:-1.1.1.1}"
+}
+
+
+# Transient prompt
+zle-line-init() {
+      emulate -L zsh
+
+      [[ $CONTEXT == start ]] || return 0
+
+      while true; do
+        zle .recursive-edit
+        local -i ret=$?
+        [[ $ret == 0 && $KEYS == $'\4' ]] || break
+        [[ -o ignore_eof ]] || exit 0
+      done
+
+      local saved_prompt=$PROMPT
+      local saved_rprompt=$RPROMPT
+      PROMPT='%F{4}❯%F{000} '
+      RPROMPT=''
+      zle .reset-prompt
+      PROMPT=$saved_prompt
+      RPROMPT=$saved_rprompt
+
+      if (( ret )); then
+        zle .send-break
+      else
+        zle .accept-line
+      fi
+      return ret
+}
+
+zle -N zle-line-init
 
 ## Finish zprof, by printing
 # zprof
