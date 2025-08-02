@@ -38,14 +38,14 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
 
-     compleseus
+     (compleseus :variables compleseus-use-vertico-posframe t)
      debug
      auto-completion
 
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      evil-better-jumper
      (vinegar :variables vinegar-reuse-dired-buffer t
-                         vinegar-dired-hide-details nil)
+              vinegar-dired-hide-details nil)
      multiple-cursors
 
      ;; languages/frameworks
@@ -61,7 +61,6 @@ This function should only modify configuration layer settings."
           org-brain-path "~/Dropbox/orgs/brain/"
           org-roam-directory "~/Dropbox/orgs/roam/")
 
-     plantuml
      emacs-lisp
      lua
      python
@@ -70,11 +69,8 @@ This function should only modify configuration layer settings."
            ruby-enable-enh-ruby-mode t)
      go
      (shell :variables shell-default-shell 'eshell)
-     clojure
-     julia
      javascript
      markdown
-     java
      yaml
      ansible
      docker
@@ -82,7 +78,6 @@ This function should only modify configuration layer settings."
      csv
      (sql :variables sql-auto-indent nil)
      systemd
-     php
      rust
      nginx
 
@@ -90,23 +85,20 @@ This function should only modify configuration layer settings."
      ;; emacs tooling
      helpful
      nav-flash
+
      ;; confluence
-     vagrant
      (git :variables
           git-magit-status-fullscreen t
           git-enable-magit-delta-plugin t
           magit-executable "/usr/local/bin/git")
 
+     kubernetes
      dash
      syntax-checking
      spell-checking
      better-defaults
      ibuffer
-     pandoc
      colors
-     speed-reading
-     command-log
-     restclient
      version-control
      treemacs
      theming
@@ -126,11 +118,15 @@ This function should only modify configuration layer settings."
                                                  "]#" "^=" "__" "_|_" "www" "{-" "{|" "|-" "|=" "|>" "|]"
                                                  "||" "||=" "||>" "|||>" "|}" "~-" "~=" "~>" "~@" "~~" "~~>"))
 
-     (osx :variables osx-command-as       'super
-                     osx-right-command-as 'hyper)
+     (osx :variables
+          osx-command-as       'super
+          osx-right-command-as 'hyper)
 
-     (openai :variables
-             openai-key #'openai-key-auth-source)
+     (llm-client :variables
+                 llm-client-enable-gptel t
+                 llm-client-enable-ellama t)
+
+
      ;; private layers
      archcode)
 
@@ -145,15 +141,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(evil-textobj-column
                                       evil-python-movement
                                       good-scroll
-                                      nord-theme
-                                      doom-themes
-                                      websocket
-                                      (flycheck :location (recipe
-                                                           :fetcher github
-                                                           :repo "perfectayush/flycheck"
-                                                           :branch "add-sqlfluff-linter"))
-                                      nano-theme
-                                      tron-legacy-theme)
+                                      websocket)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -328,9 +316,10 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(dracula
-                         tron-legacy
-                         modus-vivendi)
+   dotspacemacs-themes '(doom-one
+                         modus-vivendi-tinted
+                         dracula
+                         tron-legacy)
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
    ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
@@ -349,10 +338,12 @@ It should only modify the values of Spacemacs settings."
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Iosevka SS09"
-                               :size 18
-                               :weight light
-                               ;; :width expanded
-                               :powerline-scale 1.0)
+                               :size 20
+                               :weight regular
+                               )
+
+   ;; Default icons font, it can be `all-the-icons' or `nerd-icons'.
+   dotspacemacs-default-icons-font 'all-the-icons
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -373,10 +364,10 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-major-mode-leader-key ","
 
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
-   ;; (default "C-M-m" for terminal mode, "<M-return>" for GUI mode).
+   ;; (default "C-M-m" for terminal mode, "M-<return>" for GUI mode).
    ;; Thus M-RET should work as leader key in both GUI and terminal modes.
    ;; C-M-m also should work in terminal mode, but not in GUI mode.
-   dotspacemacs-major-mode-emacs-leader-key (if window-system "<M-return>" "C-M-m")
+   dotspacemacs-major-mode-emacs-leader-key (if window-system "M-<return>" "C-M-m")
 
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs `C-i', `TAB' and `C-m', `RET'.
@@ -384,7 +375,7 @@ It should only modify the values of Spacemacs settings."
    ;; and TAB or `C-m' and `RET'.
    ;; In the terminal, these pairs are generally indistinguishable, so this only
    ;; works in the GUI. (default nil)
-   dotspacemacs-distinguish-gui-tab nil
+   dotspacemacs-distinguish-gui-tab t
 
    ;; Name of the default layout (default "Default")
    dotspacemacs-default-layout-name "Default"
@@ -441,6 +432,22 @@ It should only modify the values of Spacemacs settings."
    ;; displayed in the current window. (default nil)
    dotspacemacs-switch-to-buffer-prefers-purpose nil
 
+   ;; Whether side windows (such as those created by treemacs or neotree)
+   ;; are kept or minimized by `spacemacs/toggle-maximize-window' (SPC w m).
+   ;; (default t)
+   dotspacemacs-maximize-window-keep-side-windows t
+
+   ;; If nil, no load-hints enabled. If t, enable the `load-hints' which will
+   ;; put the most likely path on the top of `load-path' to reduce walking
+   ;; through the whole `load-path'. It's an experimental feature to speedup
+   ;; Spacemacs on Windows. Refer the FAQ.org "load-hints" session for details.
+   dotspacemacs-enable-load-hints nil
+
+   ;; If t, enable the `package-quickstart' feature to avoid full package
+   ;; loading, otherwise no `package-quickstart' attemption (default nil).
+   ;; Refer the FAQ.org "package-quickstart" section for details.
+   dotspacemacs-enable-package-quickstart nil
+
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
@@ -488,7 +495,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil unicode symbols are displayed in the mode line.
    ;; If you use Emacs as a daemon and wants unicode characters only in GUI set
    ;; the value to quoted `display-graphic-p'. (default t)
-   dotspacemacs-mode-line-unicode-symbols nil
+   dotspacemacs-mode-line-unicode-symbols t
 
    ;; If non-nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
@@ -518,7 +525,7 @@ It should only modify the values of Spacemacs settings."
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
    dotspacemacs-line-numbers '(:relative t
-                               :size-limit-kb 8000)
+                                         :size-limit-kb 8000)
    ;; Code folding method. Possible values are `evil', `origami' and `vimish'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -562,6 +569,13 @@ It should only modify the values of Spacemacs settings."
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
    dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
 
+   ;; The backend used for undo/redo functionality. Possible values are
+   ;; `undo-tree', `undo-fu' and `undo-redo', see also `evil-undo-system'.
+   ;; Note that saved undo history does not get transferred when changing
+   ;; your undo system. The default is currently `undo-fu' as `undo-tree'
+   ;; is not maintained anymore and `undo-redo' is very basic."
+   dotspacemacs-undo-system 'undo-fu
+
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
    ;; %t - `projectile-project-name'
@@ -597,6 +611,9 @@ It should only modify the values of Spacemacs settings."
    ;; to aggressively delete empty line and long sequences of whitespace,
    ;; `trailing' to delete only the whitespace at end of lines, `changed' to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
+   ;; The variable `global-spacemacs-whitespace-cleanup-modes' controls
+   ;; which major modes have whitespace cleanup enabled or disabled
+   ;; by default.
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
 
@@ -656,42 +673,27 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     (load custom-file 'no-error)
     (setq-default quelpa-build-tar-executable "/opt/homebrew/bin/gtar")
 
-    (let
-        ((nord0  "#2E3440")
-         (nord1  "#3B4252")
-         (nord2  "#434C5E")
-         (nord3  "#4C566A")
-         (nord4  "#D8DEE9")
-         (nord5  "#E5E9F0")
-         (nord6  "#ECEFF4")
-         (nord7  "#8FBCBB")
-         (nord8  "#88C0D0")
-         (nord9  "#81A1C1")
-         (nord10 "#5E81AC")
-         (nord11 "#BF616A")
-         (nord12 "#D08770")
-         (nord13 "#EBCB8B")
-         (nord14 "#A3BE8C")
-         (nord15 "#B48EAD")
-         (nord11+1 "#8c3941")
-         (nord14+1 "#64824a")))
-
-
-
+    (setq package-archive-priorities '(("melpa"    . 5)
+                                       ("jcs-elpa" . 0)))
 
     (setq configuration-layer-elpa-archives
           '(("melpa"    . "melpa.org/packages/")
             ("org"      . "orgmode.org/elpa/")
             ("ublt"     . "elpa.ubolonton.org/packages/")
+            ("jcs-elpa" . "jcs-emacs.github.io/jcs-elpa/packages/")
             ("gnu"      . "elpa.gnu.org/packages/")
-            ("nongnu"   . "elpa.nongnu.org/nongnu/")))))
+            ("nongnu"   . "elpa.nongnu.org/nongnu/")))
+
+
+    ))
 
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
 This function is called only while dumping Spacemacs configuration. You can
 `require' or `load' the libraries of your choice that will be included in the
-dump.")
+dump."
+  )
 
 
 (defun dotspacemacs/user-config ()
@@ -701,6 +703,14 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (progn
+
+    ;; (treesit-major-mode-setup)
+
+    ;; Temp fix for transient
+    ;; (setq package-install-upgrade-built-in t)
+    ;; (unload-feature 'transient t)
+    ;; (require 'transient)
+    (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc" macos-keychain-generic macos-keychain-internet))
 
     ;; evil-settings
     (global-evil-matchit-mode)
@@ -757,14 +767,12 @@ before packages are loaded."
     (add-hook 'yaml-mode-hook #'superword-mode)
     (add-hook 'yaml-mode-hook #'smartparens-mode)
 
-    ;; avy settings
-    (setq avy-style 'words)
-
     ;; transparent title bar
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
     (add-to-list 'spacemacs-indent-sensitive-modes 'sql-mode)
     (set-fringe-style '(1 . 1))
+    (add-to-list 'auto-mode-alist '("\\.yaml\\.tpl\\'" . yaml-mode))
 
 
 
@@ -792,7 +800,35 @@ before packages are loaded."
             "--with-filename"
             "--no-heading"
             "--line-number"
-            "--color" "never" "%s"))))
+            "--color" "never" "%s")))
+
+  ;; local llm setup
+  (require 'llm-ollama)
+  (setopt ellama-language "English")
+  (setopt ellama-provider
+          (make-llm-ollama
+           ;; this model should be pulled to use it
+           ;; value should be the same as you print in terminal during pull
+           :chat-model "qwen2.5-coder:latest"
+           :embedding-model "nomic-embed-text"
+           :default-chat-non-standard-params '(("num_ctx" . 8192))))
+  (setopt ellama-naming-provider
+          (make-llm-ollama
+           :chat-model "llama3:8b-instruct-q8_0"
+           :embedding-model "nomic-embed-text"
+           :default-chat-non-standard-params '(("stop" . ("\n")))))
+  (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
+  ;; Translation llm provider
+  (setopt ellama-translation-provider (make-llm-ollama
+                                       :chat-model "phi3:14b-medium-128k-instruct-q6_K"
+                                       :embedding-model "nomic-embed-text"))
+
+  (setq vertico-posframe-parameters
+        '((internal-border-width . 0)
+          (left-fringe . 4)
+          (right-fringe . 4)
+          (undecorated . t)))
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
