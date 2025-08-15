@@ -6,6 +6,3 @@ if status is-interactive
     # enable starship transience
     enable_transience
 end
-
-# Added by LM Studio CLI (lms)
-set -gx PATH $PATH /Users/ayush/.lmstudio/bin

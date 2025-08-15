@@ -12,6 +12,9 @@ set -gx PAGER "less -S"
 # Setup emacs socket name
 set -gx EMACS_SOCKET_NAME "$HOME/.emacs.d/server/server"
 
+# Add homebrew path
+set -gx PATH $PATH /opt/homebrew/bin
+
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH /Users/ayush/.lmstudio/bin
 
