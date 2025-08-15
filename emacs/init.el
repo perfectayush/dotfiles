@@ -168,37 +168,6 @@ It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
-   ;; If non-nil then enable support for the portable dumper. You'll need to
-   ;; compile Emacs 27 from source following the instructions in file
-   ;; EXPERIMENTAL.org at to root of the git repository.
-   ;;
-   ;; WARNING: pdumper does not work with Native Compilation, so it's disabled
-   ;; regardless of the following setting when native compilation is in effect.
-   ;;
-   ;; (default nil)
-   dotspacemacs-enable-emacs-pdumper nil
-
-   ;; Name of executable file pointing to emacs 27+. This executable must be
-   ;; in your PATH.
-   ;; (default "emacs")
-   dotspacemacs-emacs-pdumper-executable-file "emacs"
-
-   ;; Name of the Spacemacs dump file. This is the file will be created by the
-   ;; portable dumper in the cache directory under dumps sub-directory.
-   ;; To load it when starting Emacs add the parameter `--dump-file'
-   ;; when invoking Emacs 27.1 executable on the command line, for instance:
-   ;;   ./emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs-27.1.pdmp
-   ;; (default (format "spacemacs-%s.pdmp" emacs-version))
-   dotspacemacs-emacs-dumper-dump-file (format "spacemacs-%s.pdmp" emacs-version)
-
-   ;; If non-nil ELPA repositories are contacted via HTTPS whenever it's
-   ;; possible. Set it to nil if you have no way to use HTTPS in your
-   ;; environment, otherwise it is strongly recommended to let it set to t.
-   ;; This variable has no effect if Emacs is launched with the parameter
-   ;; `--insecure' which forces the value of this variable to nil.
-   ;; (default t)
-   dotspacemacs-elpa-https t
-
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
    dotspacemacs-elpa-timeout 5
@@ -289,7 +258,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-startup-buffer-multi-digit-delay 0.4
 
    ;; If non-nil, show file icons for entries and headings on Spacemacs home buffer.
-   ;; This has no effect in terminal or if "all-the-icons" package or the font
+   ;; This has no effect in terminal or if "nerd-icons" package or the font
    ;; is not installed. (default nil)
    dotspacemacs-startup-buffer-show-icons nil
 
@@ -570,7 +539,7 @@ It should only modify the values of Spacemacs settings."
    dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
 
    ;; The backend used for undo/redo functionality. Possible values are
-   ;; `undo-tree', `undo-fu' and `undo-redo', see also `evil-undo-system'.
+   ;; `undo-fu', `undo-redo' and `undo-tree' see also `evil-undo-system'.
    ;; Note that saved undo history does not get transferred when changing
    ;; your undo system. The default is currently `undo-fu' as `undo-tree'
    ;; is not maintained anymore and `undo-redo' is very basic."
