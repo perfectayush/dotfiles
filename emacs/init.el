@@ -126,6 +126,7 @@ This function should only modify configuration layer settings."
                  llm-client-enable-gptel t
                  llm-client-enable-ellama t)
 
+     aider
 
      ;; private layers
      archcode)
@@ -536,7 +537,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("rg" "grep")
 
    ;; The backend used for undo/redo functionality. Possible values are
    ;; `undo-fu', `undo-redo' and `undo-tree' see also `evil-undo-system'.
@@ -653,7 +654,6 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
             ("gnu"      . "elpa.gnu.org/packages/")
             ("nongnu"   . "elpa.nongnu.org/nongnu/")))
 
-
     ))
 
 
@@ -706,18 +706,18 @@ before packages are loaded."
     (define-key evil-inner-text-objects-map "C" 'evil-textobj-column-WORD)
 
     ;; evil-surround
-    (setq yaml-mode-evil-surround-extras '((?q . ("\"{{ " . " }}\""))
-                                           (?a . ("{{ " . " }}"))
-                                           (?e . ("^(" . ")$"))))
+    ;; (setq yaml-mode-evil-surround-extras '((?q . ("\"{{ " . " }}\""))
+    ;;                                        (?a . ("{{ " . " }}"))
+    ;;                                        (?e . ("^(" . ")$"))))
 
-    (setq jinja2-mode-evil-surround-extras '((?a . ("{{ " . " }}"))))
+    ;; (setq jinja2-mode-evil-surround-extras '((?a . ("{{ " . " }}"))))
 
-    (defun update-surround-list (surround-items)
-      (dolist (item surround-items) (add-to-list 'evil-surround-pairs-alist item)))
+    ;; (defun update-surround-list (surround-items)
+    ;;   (dolist (item surround-items) (add-to-list 'evil-surround-pairs-alist item)))
 
-    (add-hook 'yaml-mode-hook (lambda () (update-surround-list yaml-mode-evil-surround-extras)))
-    (add-hook 'yaml-ts-mode-hook (lambda () (update-surround-list yaml-mode-evil-surround-extras)))
-    (add-hook 'jinja2-mode-hook (lambda () (update-surround-list jinja2-mode-evil-surround-extras)))
+    ;; (add-hook 'yaml-mode-hook (lambda () (update-surround-list yaml-mode-evil-surround-extras)))
+    ;; (add-hook 'yaml-ts-mode-hook (lambda () (update-surround-list yaml-mode-evil-surround-extras)))
+    ;; (add-hook 'jinja2-mode-hook (lambda () (update-surround-list jinja2-mode-evil-surround-extras)))
 
     ;; wgrep settings
     (setq wgrep-auto-save-buffer t)
@@ -731,10 +731,17 @@ before packages are loaded."
                                        (progn (modify-syntax-entry ?_ "_")
                                               (modify-syntax-entry ?- "_"))))
 
+    (defun yaml-set-indentation ()
+      "Custom settings for yaml-mode."
+      (require 'yaml-mode)
+      (setq yaml-indent-offset 2))
+    (add-hook 'yaml-ts-mode-hook #'yaml-set-indentation)
 
     ;; yaml-mode hooks
     (add-hook 'yaml-mode-hook #'superword-mode)
     (add-hook 'yaml-mode-hook #'smartparens-mode)
+    (add-hook 'yaml-ts-mode-hook #'superword-mode)
+    (add-hook 'yaml-ts-mode-hook #'smartparens-mode)
 
     ;; transparent title bar
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -742,6 +749,7 @@ before packages are loaded."
     (add-to-list 'spacemacs-indent-sensitive-modes 'sql-mode)
     (set-fringe-style '(1 . 1))
     (add-to-list 'auto-mode-alist '("\\.yaml\\.tpl\\'" . yaml-mode))
+    (add-to-list 'auto-mode-alist '("\\.yml\\.tpl\\'" . yaml-mode))
 
 
 
