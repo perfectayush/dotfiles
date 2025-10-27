@@ -7,7 +7,7 @@ set -gx HOMEBREW_AUTO_UPDATE_SECS 86400
 # Editors etc.
 set -gx EDITOR "/opt/homebrew/bin/emacsclient -c -a vim"
 set -gx VISUAL "emacsclient -c -a vim"
-set -gx PAGER "less -S"
+set -gx PAGER "less -S -R"
 
 # Setup emacs socket name
 set -gx EMACS_SOCKET_NAME "$HOME/.emacs.d/server/server"
