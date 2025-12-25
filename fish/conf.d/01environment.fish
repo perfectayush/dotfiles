@@ -17,6 +17,7 @@ set -gx PATH $PATH /opt/homebrew/bin
 
 # Added by LM Studio CLI (lms)
 set -gx PATH $PATH /Users/ayush/.lmstudio/bin
+set -gx PATH $PATH /opt/homebrew/opt/postgresql@18/bin
 
 # AWS
 set -gx AWS_DEFAULT_PROFILE admin
