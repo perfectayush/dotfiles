@@ -31,8 +31,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-configuration-layer-path '("~/.spacemacs.d/private/")
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(typescript
-     shell-scripts
+   '(
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
@@ -50,7 +49,6 @@ This function should only modify configuration layer settings."
      multiple-cursors
 
      ;; languages/frameworks
-     html
      (org :variables
           org-enable-github-support t
           org-enable-reveal-js-support t
@@ -68,7 +66,10 @@ This function should only modify configuration layer settings."
      (ruby :variables
            ruby-version-manager 'chruby
            ruby-enable-enh-ruby-mode t)
+     shell-scripts
      go
+     typescript
+     html
      (shell :variables shell-default-shell 'eshell)
      javascript
      markdown
