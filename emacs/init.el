@@ -151,7 +151,6 @@ This function should only modify configuration layer settings."
 
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '(org-contrib
-                                    bundler
                                     tern
                                     lsp
                                     company)
