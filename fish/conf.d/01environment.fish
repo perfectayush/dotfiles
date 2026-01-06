@@ -19,5 +19,8 @@ set -gx PATH $PATH /opt/homebrew/bin
 set -gx PATH $PATH /Users/ayush/.lmstudio/bin
 set -gx PATH $PATH /opt/homebrew/opt/postgresql@18/bin
 
+# Add /usr/sbin
+set -gx PATH $PATH /usr/sbin
+
 # AWS
 set -gx AWS_DEFAULT_PROFILE admin
