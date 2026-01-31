@@ -16,11 +16,12 @@ set -gx EMACS_SOCKET_NAME "$HOME/.emacs.d/server/server"
 set -gx PATH $PATH /opt/homebrew/bin
 
 # Added by LM Studio CLI (lms)
-set -gx PATH $PATH /Users/ayush/.lmstudio/bin
+set -gx PATH $PATH $HOME/.lmstudio/bin
 set -gx PATH $PATH /opt/homebrew/opt/postgresql@18/bin
 
 # Add /usr/sbin
 set -gx PATH $PATH /usr/sbin
+set -gx PATH $PATH $HOME/.bun/bin
 
 # AWS
 set -gx AWS_DEFAULT_PROFILE admin
