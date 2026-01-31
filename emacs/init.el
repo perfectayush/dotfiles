@@ -38,7 +38,10 @@ This function should only modify configuration layer settings."
      ;; `M-m f e R' (Emacs style) to install them.
      ;; ----------------------------------------------------------------
 
-     (compleseus :variables compleseus-use-vertico-posframe t)
+     (compleseus :variables
+                 compleseus-use-vertico-posframe t
+                 compleseus-use-nerd-icons t
+                 compleseus-consult-preview-keys '(:debounce 0.1 any))
      debug
      auto-completion
 
