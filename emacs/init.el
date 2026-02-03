@@ -47,8 +47,7 @@ This function should only modify configuration layer settings."
 
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      evil-better-jumper
-     (vinegar :variables vinegar-reuse-dired-buffer t
-              vinegar-dired-hide-details nil)
+     (ranger :variables ranger-override-dired 'dirvish)
      multiple-cursors
 
      ;; languages/frameworks
@@ -105,7 +104,7 @@ This function should only modify configuration layer settings."
      ibuffer
      colors
      version-control
-     treemacs
+     (treemacs :variables treemacs-use-icons-dired nil)
      theming
      (unicode-fonts :variables
                     unicode-fonts-enable-ligatures t
