@@ -94,6 +94,7 @@ This function should only modify configuration layer settings."
      (git :variables
           git-magit-status-fullscreen t
           git-enable-magit-delta-plugin t
+          magit-process-connection-type nil
           magit-executable "/usr/local/bin/git")
 
      kubernetes
@@ -664,6 +665,16 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
             ("jcs-elpa" . "jcs-emacs.github.io/jcs-elpa/packages/")
             ("gnu"      . "elpa.gnu.org/packages/")
             ("nongnu"   . "elpa.nongnu.org/nongnu/")))
+
+    (defun start-process@use-pipe (fn &rest args)
+      ;; checkdoc-params: (fn args)
+      "Advice to ensure that `start-process' uses a pipe rather than
+a pty for the compilation command. This increases performance on OSX
+by a factor of 10, as the default pty size is a pitiful 1024 bytes."
+      (let ((process-connection-type nil))
+        (apply fn args)))
+
+    (advice-add 'start-process :around #'start-process@use-pipe)
 
     ))
 
