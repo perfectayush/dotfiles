@@ -827,6 +827,121 @@ before packages are loaded."
           (left-fringe . 4)
           (right-fringe . 4)
           (undecorated . t)))
+
+  (declare-function agent-shell-cwd "agent-shell-project")
+
+  (defcustom agent-shell-file-cache-ttl nil
+    "Time in seconds before the file cache is considered stale.
+Set to nil to disable caching entirely."
+    :type '(choice (integer :tag "Seconds")
+                   (const :tag "Disable caching" nil))
+    :group 'agent-shell)
+
+  (defvar agent-shell--file-cache nil
+    "Hash table mapping project roots to (timestamp . files) cons cells.")
+
+  (defvar agent-shell--file-cache-processes nil
+    "Hash table tracking active async file listing processes per project.")
+
+  (defun agent-shell--file-cache-ensure ()
+    "Ensure file cache hash tables are initialized."
+    (unless (and (boundp 'agent-shell--file-cache)
+                 (hash-table-p agent-shell--file-cache))
+      (setq agent-shell--file-cache (make-hash-table :test 'equal)))
+    (unless (and (boundp 'agent-shell--file-cache-processes)
+                 (hash-table-p agent-shell--file-cache-processes))
+      (setq agent-shell--file-cache-processes (make-hash-table :test 'equal))))
+
+  (defun agent-shell--file-cache-ttl ()
+    "Return the cache TTL value, defaulting to 60 if not set."
+    (if (boundp 'agent-shell-file-cache-ttl)
+        agent-shell-file-cache-ttl
+      60))
+
+  (defun agent-shell--file-cache-get (project-root)
+    "Get cached files for PROJECT-ROOT if cache is valid.
+Returns nil if cache is stale or missing."
+    (let ((ttl (agent-shell--file-cache-ttl)))
+      (when-let* ((entry (gethash project-root agent-shell--file-cache))
+                  (timestamp (car entry))
+                  (files (cdr entry))
+                  ((or (null ttl)
+                       (< (- (float-time) timestamp) ttl))))
+        files)))
+
+  (defun agent-shell--file-cache-set (project-root files)
+    "Store FILES in cache for PROJECT-ROOT with current timestamp."
+    (puthash project-root (cons (float-time) files) agent-shell--file-cache))
+
+  (defun agent-shell--file-list-command (project-root)
+    "Return a command to list files in PROJECT-ROOT.
+Prefers fd/fdfind if available, falls back to find."
+    (let ((fd-cmd (or (executable-find "fd")
+                      (executable-find "fdfind"))))
+      (if fd-cmd
+          (list fd-cmd "--type" "f" "--hidden"
+                "--exclude" ".git" "--exclude" "node_modules"
+                "--exclude" ".hg" "--exclude" ".svn"
+                "--base-directory" project-root ".")
+        (list "find" project-root "-type" "f"
+              "-not" "-path" "*/.git/*"
+              "-not" "-path" "*/node_modules/*"
+              "-not" "-path" "*/.hg/*"
+              "-not" "-path" "*/.svn/*"))))
+
+  (defun agent-shell--file-cache-refresh-async (project-root)
+    "Asynchronously refresh the file cache for PROJECT-ROOT."
+    (unless (gethash project-root agent-shell--file-cache-processes)
+      (let* ((cmd (agent-shell--file-list-command project-root))
+             (use-fd (string-match-p "fd\\(find\\)?$" (car cmd)))
+             (buffer (generate-new-buffer " *agent-shell-files*"))
+             (proc (make-process
+                    :name "agent-shell-file-list"
+                    :buffer buffer
+                    :command cmd
+                    :connection-type 'pipe
+                    :sentinel
+                    (lambda (process _event)
+                      (when (memq (process-status process) '(exit signal))
+                        (remhash project-root agent-shell--file-cache-processes)
+                        (when (= (process-exit-status process) 0)
+                          (with-current-buffer (process-buffer process)
+                            (let ((files (split-string (buffer-string) "\n" t)))
+                              (agent-shell--file-cache-set
+                               project-root
+                               (if use-fd
+                                   files
+                                 (mapcar (lambda (f)
+                                           (file-relative-name f project-root))
+                                         files))))))
+                        (kill-buffer (process-buffer process)))))))
+        (puthash project-root proc agent-shell--file-cache-processes))))
+
+  (defun agent-shell--project-files-cached()
+    "Get project files with caching for performance.
+Returns cached files immediately if available, and triggers
+async refresh if cache is stale.  Falls back to sync method
+if no cache exists yet."
+    (agent-shell--file-cache-ensure)
+    (when-let* ((project-root (agent-shell-cwd)))
+      (let ((cached (agent-shell--file-cache-get project-root)))
+        (if cached
+            (progn
+              ;; Trigger background refresh if cache is getting stale (past 75% of TTL)
+              (let ((ttl (agent-shell--file-cache-ttl)))
+                (when-let* ((entry (gethash project-root agent-shell--file-cache))
+                            (timestamp (car entry))
+                            (ttl)
+                            ((> (- (float-time) timestamp)
+                                (* 0.75 ttl))))
+                  (agent-shell--file-cache-refresh-async project-root)))
+              cached)
+          ;; No cache - start async refresh and return sync result for first call
+          (agent-shell--file-cache-refresh-async project-root)
+          (when-let* ((files (agent-shell--project-files)))
+            (agent-shell--file-cache-set project-root files)
+            files)))))
+  (advice-add 'agent-shell--project-files :override #'agent-shell--project-files-cached)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
