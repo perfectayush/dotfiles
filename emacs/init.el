@@ -74,6 +74,7 @@ This function should only modify configuration layer settings."
      html
      (shell :variables shell-default-shell 'eshell)
      javascript
+     tide
      markdown
      yaml
      ansible
@@ -749,6 +750,8 @@ before packages are loaded."
                                        (progn (modify-syntax-entry ?_ "w")
                                               (modify-syntax-entry ?- "w"))))
 
+    (setq text-mode-ispell-word-completion nil)
+
     (add-hook 'subword-mode-hook   #'(lambda ()
                                        (progn (modify-syntax-entry ?_ "_")
                                               (modify-syntax-entry ?- "_"))))
@@ -765,15 +768,15 @@ before packages are loaded."
     (add-hook 'yaml-ts-mode-hook #'superword-mode)
     (add-hook 'yaml-ts-mode-hook #'smartparens-mode)
 
+
     ;; transparent title bar
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
     (add-to-list 'spacemacs-indent-sensitive-modes 'sql-mode)
     (set-fringe-style '(1 . 1))
-    (add-to-list 'auto-mode-alist '("\\.yaml\\.tpl\\'" . yaml-mode))
-    (add-to-list 'auto-mode-alist '("\\.yml\\.tpl\\'" . yaml-mode))
-
-
+    ;; (add-to-list 'auto-mode-alist '("\\.yaml\\.tpl\\'" . yaml-mode))
+    ;; (add-to-list 'auto-mode-alist '("\\.yml\\.tpl\\'" . yaml-mode))
+    (add-to-list 'auto-mode-alist '("\\.\\(yml\\|yaml\\|tpl\\)\\'" . helm-mode))
 
     ;; gpg settings
     (require 'epa-file)
@@ -782,8 +785,6 @@ before packages are loaded."
 
 
     ;; orderless completion settings
-    (setq completion-category-overrides '((eglot (styles orderless))
-                                          (file (styles basic partial-completion))))
 
     ;; paradox settings
     (setq paradox-github-token t)
@@ -821,6 +822,7 @@ before packages are loaded."
   (setopt ellama-translation-provider (make-llm-ollama
                                        :chat-model "phi3:14b-medium-128k-instruct-q6_K"
                                        :embedding-model "nomic-embed-text"))
+
 
   (setq vertico-posframe-parameters
         '((internal-border-width . 0)
@@ -942,6 +944,7 @@ if no cache exists yet."
             (agent-shell--file-cache-set project-root files)
             files)))))
   (advice-add 'agent-shell--project-files :override #'agent-shell--project-files-cached)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
