@@ -128,12 +128,6 @@ This function should only modify configuration layer settings."
           osx-command-as       'super
           osx-right-command-as 'hyper)
 
-     (llm-client :variables
-                 llm-client-enable-gptel t
-                 llm-client-enable-ellama t)
-
-     aider
-
      ;; private layers
      archcode)
 
@@ -801,28 +795,6 @@ before packages are loaded."
             "--no-heading"
             "--line-number"
             "--color" "never" "%s")))
-
-  ;; local llm setup
-  (require 'llm-ollama)
-  (setopt ellama-language "English")
-  (setopt ellama-provider
-          (make-llm-ollama
-           ;; this model should be pulled to use it
-           ;; value should be the same as you print in terminal during pull
-           :chat-model "qwen2.5-coder:latest"
-           :embedding-model "nomic-embed-text"
-           :default-chat-non-standard-params '(("num_ctx" . 8192))))
-  (setopt ellama-naming-provider
-          (make-llm-ollama
-           :chat-model "llama3:8b-instruct-q8_0"
-           :embedding-model "nomic-embed-text"
-           :default-chat-non-standard-params '(("stop" . ("\n")))))
-  (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
-  ;; Translation llm provider
-  (setopt ellama-translation-provider (make-llm-ollama
-                                       :chat-model "phi3:14b-medium-128k-instruct-q6_K"
-                                       :embedding-model "nomic-embed-text"))
-
 
   (setq vertico-posframe-parameters
         '((internal-border-width . 0)
