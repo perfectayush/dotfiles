@@ -698,7 +698,6 @@ before packages are loaded."
     (setq epa-pinentry-mode 'loopback)
     (epa-file-enable)
 
-
     ;; evil-settings
     (global-evil-matchit-mode)
     (evil-set-initial-state 'anaconda-mode-view-mode 'motion)
@@ -708,35 +707,8 @@ before packages are loaded."
     (define-key evil-inner-text-objects-map "c" 'evil-textobj-column-word)
     (define-key evil-inner-text-objects-map "C" 'evil-textobj-column-WORD)
 
-    ;; evil-surround
-    ;; (setq yaml-mode-evil-surround-extras '((?q . ("\"{{ " . " }}\""))
-    ;;                                        (?a . ("{{ " . " }}"))
-    ;;                                        (?e . ("^(" . ")$"))))
-
-    ;; (setq jinja2-mode-evil-surround-extras '((?a . ("{{ " . " }}"))))
-
-    ;; (defun update-surround-list (surround-items)
-    ;;   (dolist (item surround-items) (add-to-list 'evil-surround-pairs-alist item)))
-
-    ;; (add-hook 'yaml-mode-hook (lambda () (update-surround-list yaml-mode-evil-surround-extras)))
-    ;; (add-hook 'yaml-ts-mode-hook (lambda () (update-surround-list yaml-mode-evil-surround-extras)))
-    ;; (add-hook 'jinja2-mode-hook (lambda () (update-surround-list jinja2-mode-evil-surround-extras)))
-
-
-    ;; YAsnippet
-    (yas-global-mode)
-    (setq yas-triggers-in-field nil)
-
-    ;; YAsnippet in ts modes
-    (advice-add 'yas--modes-to-activate :around
-                (defun yas--get-snippet-tables@tree-sitter (orig-fn &optional mode)
-                  (funcall orig-fn
-                           (or (car (rassq (or mode major-mode) major-mode-remap-alist))
-                               mode))))
 
     ;; evil-state settings
-
-
     ;; modify super/sub word mode for evil
     (add-hook 'superword-mode-hook #'(lambda ()
                                        (progn (modify-syntax-entry ?_ "w")
@@ -751,6 +723,7 @@ before packages are loaded."
     (add-hook 'yaml-mode-hook #'smartparens-mode)
     (add-hook 'yaml-ts-mode-hook #'superword-mode)
     (add-hook 'yaml-ts-mode-hook #'smartparens-mode)
+
     ;; yaml-mode
     (defun yaml-set-indentation ()
       "Custom settings for yaml-mode."
@@ -783,21 +756,14 @@ before packages are loaded."
     (setq consult-ripgrep-args
           "rg --null --line-buffered --color=never --max-columns=1000 --path-separator / --field-context-separator :  --smart-case --no-heading --with-filename --line-number --search-zip")
 
-    (setq counsel-rg-base-command
-          '("rg"
-            "--max-columns" "240"
-            "--field-context-separator" ":"
-            "--with-filename"
-            "--no-heading"
-            "--line-number"
-            "--color" "never" "%s")))
 
-  (setq vertico-posframe-parameters
-        '((internal-border-width . 0)
-          (left-fringe . 4)
-          (right-fringe . 4)
-          (undecorated . t)))
+    (setq vertico-posframe-parameters
+          '((internal-border-width . 0)
+            (left-fringe . 4)
+            (right-fringe . 4)
+            (undecorated . t)))
 
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
