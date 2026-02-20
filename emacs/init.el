@@ -690,31 +690,17 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (progn
 
-    ;; (treesit-major-mode-setup)
-
-    ;; Temp fix for transient
-    ;; (setq package-install-upgrade-built-in t)
-    ;; (unload-feature 'transient t)
-    ;; (require 'transient)
+    ;; auth sources
     (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc" macos-keychain-generic macos-keychain-internet))
+
+    ;; gpg settings
+    (require 'epa-file)
+    (setq epa-pinentry-mode 'loopback)
+    (epa-file-enable)
+
 
     ;; evil-settings
     (global-evil-matchit-mode)
-
-    ;; autocomplete mode
-    (yas-global-mode)
-    ;; (global-company-mode)
-    (setq yas-triggers-in-field nil)
-
-
-    ;; YAsnippet in ts modes
-    (advice-add 'yas--modes-to-activate :around
-                (defun yas--get-snippet-tables@tree-sitter (orig-fn &optional mode)
-                  (funcall orig-fn
-                           (or (car (rassq (or mode major-mode) major-mode-remap-alist))
-                               mode))))
-
-    ;; evil-state settings
     (evil-set-initial-state 'anaconda-mode-view-mode 'motion)
     (evil-set-initial-state 'help-mode 'motion)
 
@@ -736,47 +722,57 @@ before packages are loaded."
     ;; (add-hook 'yaml-ts-mode-hook (lambda () (update-surround-list yaml-mode-evil-surround-extras)))
     ;; (add-hook 'jinja2-mode-hook (lambda () (update-surround-list jinja2-mode-evil-surround-extras)))
 
-    ;; wgrep settings
-    (setq wgrep-auto-save-buffer t)
+
+    ;; YAsnippet
+    (yas-global-mode)
+    (setq yas-triggers-in-field nil)
+
+    ;; YAsnippet in ts modes
+    (advice-add 'yas--modes-to-activate :around
+                (defun yas--get-snippet-tables@tree-sitter (orig-fn &optional mode)
+                  (funcall orig-fn
+                           (or (car (rassq (or mode major-mode) major-mode-remap-alist))
+                               mode))))
+
+    ;; evil-state settings
+
 
     ;; modify super/sub word mode for evil
     (add-hook 'superword-mode-hook #'(lambda ()
                                        (progn (modify-syntax-entry ?_ "w")
                                               (modify-syntax-entry ?- "w"))))
 
-    (setq text-mode-ispell-word-completion nil)
-
     (add-hook 'subword-mode-hook   #'(lambda ()
                                        (progn (modify-syntax-entry ?_ "_")
                                               (modify-syntax-entry ?- "_"))))
-
-    (defun yaml-set-indentation ()
-      "Custom settings for yaml-mode."
-      (require 'yaml-mode)
-      (setq yaml-indent-offset 2))
-    (add-hook 'yaml-ts-mode-hook #'yaml-set-indentation)
 
     ;; yaml-mode hooks
     (add-hook 'yaml-mode-hook #'superword-mode)
     (add-hook 'yaml-mode-hook #'smartparens-mode)
     (add-hook 'yaml-ts-mode-hook #'superword-mode)
     (add-hook 'yaml-ts-mode-hook #'smartparens-mode)
+    ;; yaml-mode
+    (defun yaml-set-indentation ()
+      "Custom settings for yaml-mode."
+      (require 'yaml-mode)
+      (setq yaml-indent-offset 2))
+    (add-hook 'yaml-ts-mode-hook #'yaml-set-indentation)
+    ;; (add-to-list 'auto-mode-alist '("\\.yaml\\.tpl\\'" . yaml-mode))
+    ;; (add-to-list 'auto-mode-alist '("\\.yml\\.tpl\\'" . yaml-mode))
+    (add-to-list 'auto-mode-alist '("\\.\\(yml\\|yaml\\|tpl\\)\\'" . helm-mode))
 
+
+
+    ;; wgrep settings
+    (setq wgrep-auto-save-buffer t)
+
+    (setq text-mode-ispell-word-completion nil)
 
     ;; transparent title bar
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . dark))
     (add-to-list 'spacemacs-indent-sensitive-modes 'sql-mode)
     (set-fringe-style '(1 . 1))
-    ;; (add-to-list 'auto-mode-alist '("\\.yaml\\.tpl\\'" . yaml-mode))
-    ;; (add-to-list 'auto-mode-alist '("\\.yml\\.tpl\\'" . yaml-mode))
-    (add-to-list 'auto-mode-alist '("\\.\\(yml\\|yaml\\|tpl\\)\\'" . helm-mode))
-
-    ;; gpg settings
-    (require 'epa-file)
-    (setq epa-pinentry-mode 'loopback)
-    (epa-file-enable)
-
 
     ;; orderless completion settings
 
@@ -801,8 +797,6 @@ before packages are loaded."
           (left-fringe . 4)
           (right-fringe . 4)
           (undecorated . t)))
-
-  (declare-function agent-shell-cwd "agent-shell-project")
 
   )
 
