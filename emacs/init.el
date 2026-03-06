@@ -656,7 +656,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
     (setq configuration-layer-elpa-archives
           '(("melpa"    . "melpa.org/packages/")
             ("org"      . "orgmode.org/elpa/")
-            ("ublt"     . "elpa.ubolonton.org/packages/")
+            ;; ("ublt"     . "elpa.ubolonton.org/packages/")
             ("jcs-elpa" . "jcs-emacs.github.io/jcs-elpa/packages/")
             ("gnu"      . "elpa.gnu.org/packages/")
             ("nongnu"   . "elpa.nongnu.org/nongnu/")))
