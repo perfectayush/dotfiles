@@ -22,6 +22,7 @@ set -gx PATH $PATH /opt/homebrew/opt/postgresql@18/bin
 # Add /usr/sbin
 set -gx PATH $PATH /usr/sbin
 set -gx PATH $PATH $HOME/.bun/bin
+set -gx PATH $PATH $HOME/.krew/bin
 
 # AWS
 set -gx AWS_DEFAULT_PROFILE admin
