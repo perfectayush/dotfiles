@@ -297,7 +297,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(doom :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(doom :separator wave :separator-scale 1)
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
    dotspacemacs-colorize-cursor-according-to-state t
@@ -689,7 +689,7 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (progn
-
+    (setq doom-modeline-modal-icon t)
     ;; auth sources
     (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc" macos-keychain-generic macos-keychain-internet))
 
