@@ -98,7 +98,6 @@ This function should only modify configuration layer settings."
           magit-process-connection-type nil
           magit-executable "/usr/local/bin/git")
 
-     kubernetes
      dash
      syntax-checking
      spell-checking
@@ -655,7 +654,7 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
     (setq configuration-layer-elpa-archives
           '(("melpa"    . "melpa.org/packages/")
-            ("org"      . "orgmode.org/elpa/")
+            ;; ("org"      . "orgmode.org/elpa/")
             ;; ("ublt"     . "elpa.ubolonton.org/packages/")
             ("jcs-elpa" . "jcs-emacs.github.io/jcs-elpa/packages/")
             ("gnu"      . "elpa.gnu.org/packages/")
