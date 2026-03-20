@@ -111,10 +111,17 @@ function _atuin_search
             command rm -rf "$tmpdir"
         end
     else
-        # In fish 3.4 and above we can use `"$(some command)"` to keep multiple lines separate;
-        # but to support fish 3.3 we need to use `(some command | string collect)`.
-        # https://fishshell.com/docs/current/relnotes.html#id24 (fish 3.4 "Notable improvements and fixes")
-        set ATUIN_H (ATUIN_SHELL=fish ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search --keymap-mode=$keymap_mode $argv -i 3>&1 1>&2 2>&3 | string collect)
+        set -l fifo (mktemp -u /tmp/atuin-fifo.XXXXXX)
+        command mkfifo $fifo
+
+        set -l cmd_buf (commandline -b)
+        kitty @ launch --type=window --location=hsplit --bias=50 \
+            --env ATUIN_SESSION=$ATUIN_SESSION --env ATUIN_SHELL=fish --env ATUIN_LOG=error \
+            --env _ATUIN_KM=$keymap_mode --env _ATUIN_BUF=$cmd_buf --env _ATUIN_FIFO=$fifo \
+            --env "_ATUIN_ARGS=$argv" \
+            sh -c 'r=$(ATUIN_QUERY="$_ATUIN_BUF" atuin search --keymap-mode="$_ATUIN_KM" $_ATUIN_ARGS -i 3>&1 1>&2 2>&3); printf "%s" "$r" > "$_ATUIN_FIFO"'
+        set ATUIN_H (string collect <$fifo)
+        rm -f $fifo
     end
 
     set ATUIN_H (string trim -- $ATUIN_H | string collect) # trim whitespace
