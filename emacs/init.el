@@ -670,6 +670,21 @@ by a factor of 10, as the default pty size is a pitiful 1024 bytes."
 
     (advice-add 'start-process :around #'start-process@use-pipe)
 
+    ;; Display optimization. Taken from
+    ;; https://emacsredux.com/blog/2026/04/07/stealing-from-the-best-emacs-configs/
+    (setq-default bidi-display-reordering 'left-to-right
+                  bidi-paragraph-direction 'left-to-right)
+    (setq bidi-inhibit-bpa t)
+
+    (setq redisplay-skip-fontification-on-input t)
+    (setq dotspacemacs-read-process-output-max  (* 4 1024 1024))
+
+    (setq-default cursor-in-non-selected-windows nil)
+    (setq highlight-nonselected-windows nil)
+
+    (setq kill-do-not-save-duplicates t)
+    (setq ffap-machine-p-known 'reject)
+    (setq window-combination-resize t)
     ))
 
 
@@ -763,6 +778,10 @@ before packages are loaded."
             (undecorated . t)))
 
     )
+
+  (add-hook 'after-save-hook
+            #'executable-make-buffer-file-executable-if-script-p)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
