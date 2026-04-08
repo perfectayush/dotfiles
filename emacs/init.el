@@ -83,7 +83,7 @@ This function should only modify configuration layer settings."
      csv
      (sql :variables sql-auto-indent nil)
      systemd
-     rust
+     (rust :variables rust-backend nil)
      nginx
 
 
