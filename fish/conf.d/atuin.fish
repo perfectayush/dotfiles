@@ -1,3 +1,4 @@
+set -gx ATUIN_TMUX_POPUP false
 if not set -q ATUIN_SESSION; or test "$ATUIN_SHLVL" != "$SHLVL"
     set -gx ATUIN_SESSION (atuin uuid)
     set -gx ATUIN_SHLVL $SHLVL
@@ -110,17 +111,10 @@ function _atuin_search
             command rm -rf "$tmpdir"
         end
     else
-        set -l fifo (mktemp -u /tmp/atuin-fifo.XXXXXX)
-        command mkfifo $fifo
-
-        set -l cmd_buf (commandline -b)
-        kitty @ launch --type=window --location=hsplit --bias=50 \
-            --env ATUIN_SESSION=$ATUIN_SESSION --env ATUIN_SHELL=fish --env ATUIN_LOG=error \
-            --env _ATUIN_KM=$keymap_mode --env _ATUIN_BUF=$cmd_buf --env _ATUIN_FIFO=$fifo \
-            --env "_ATUIN_ARGS=$argv" \
-            sh -c 'r=$(ATUIN_QUERY="$_ATUIN_BUF" atuin search --keymap-mode="$_ATUIN_KM" $_ATUIN_ARGS -i 3>&1 1>&2 2>&3); printf "%s" "$r" > "$_ATUIN_FIFO"'
-        set ATUIN_H (string collect <$fifo)
-        rm -f $fifo
+        # In fish 3.4 and above we can use `"$(some command)"` to keep multiple lines separate;
+        # but to support fish 3.3 we need to use `(some command | string collect)`.
+        # https://fishshell.com/docs/current/relnotes.html#id24 (fish 3.4 "Notable improvements and fixes")
+        set ATUIN_H (ATUIN_SHELL=fish ATUIN_LOG=error ATUIN_QUERY=(commandline -b) atuin search --keymap-mode=$keymap_mode $argv -i 3>&1 1>&2 2>&3 | string collect)
     end
 
     set ATUIN_H (string trim -- $ATUIN_H | string collect) # trim whitespace
@@ -167,14 +161,10 @@ if string match -q '4.*' $version
     end
 else
     bind \cr _atuin_search
-    bind -k up _atuin_bind_up
-    bind \eOA _atuin_bind_up
-    bind \e\[A _atuin_bind_up
+    bind -k up _atuin_bind_up; bind \eOA _atuin_bind_up; bind \e\[A _atuin_bind_up
     if bind -M insert >/dev/null 2>&1
         bind -M insert \cr _atuin_search
-        bind -M insert -k up _atuin_bind_up
-        bind -M insert \eOA _atuin_bind_up
-        bind -M insert \e\[A _atuin_bind_up
+        bind -M insert -k up _atuin_bind_up; bind -M insert \eOA _atuin_bind_up; bind -M insert \e\[A _atuin_bind_up
     end
 end
 # Question mark at start of line - natural language mode
@@ -191,7 +181,7 @@ function _atuin_ai_question_mark
         if string match --quiet '__atuin_ai_print__:*' "$output"
             echo (string replace "__atuin_ai_print__:" "" -- "$output" | string collect)
             commandline -f repaint
-        else if test "$output" = __atuin_ai_cancel__
+        else if test "$output" = "__atuin_ai_cancel__"
             commandline -f repaint
         else if string match --quiet '__atuin_ai_execute__:*' "$output"
             # Execute the command immediately
