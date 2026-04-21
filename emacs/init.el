@@ -48,7 +48,6 @@ This function should only modify configuration layer settings."
      (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      evil-better-jumper
      (ranger :variables ranger-override-dired 'dirvish)
-     multiple-cursors
 
      ;; languages/frameworks
      (org :variables
@@ -183,7 +182,7 @@ It should only modify the values of Spacemacs settings."
    ;; Setting this >= 1 MB should increase performance for lsp servers
    ;; in emacs 27.
    ;; (default (* 1024 1024))
-   dotspacemacs-read-process-output-max (* 1024 1024)
+   dotspacemacs-read-process-output-max (* 1024 1024 4)
 
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
@@ -285,10 +284,9 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-one
-                         modus-vivendi-tinted
-                         dracula
-                         tron-legacy)
+   dotspacemacs-themes '((batppuccin-frappe :package batppuccin)
+                         (batppuccin-latte :package batppuccin)
+                         )
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
    ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
@@ -677,7 +675,6 @@ by a factor of 10, as the default pty size is a pitiful 1024 bytes."
     (setq bidi-inhibit-bpa t)
 
     (setq redisplay-skip-fontification-on-input t)
-    (setq dotspacemacs-read-process-output-max  (* 4 1024 1024))
 
     (setq-default cursor-in-non-selected-windows nil)
     (setq highlight-nonselected-windows nil)
