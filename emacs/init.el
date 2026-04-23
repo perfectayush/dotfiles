@@ -284,7 +284,15 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '((batppuccin-frappe :package batppuccin)
+   dotspacemacs-themes '((ember-modus
+                          :location (recipe
+                                     :fetcher github
+                                     :branch "modus-variant"
+                                     :repo "perfectayush/emacs-ember-theme"
+                                     :files ("modus/*.el")))
+                         (ember-modus-soft :package ember-modus-theme)
+                         (ember-modus-light :package ember-modus-theme)
+                         (batppuccin-frappe :package batppuccin)
                          (batppuccin-latte :package batppuccin)
                          )
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -701,6 +709,8 @@ Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (progn
     (setq doom-modeline-modal-icon t)
+
+
     ;; auth sources
     (setq auth-sources '("~/.authinfo.gpg" "~/.authinfo" "~/.netrc" macos-keychain-generic macos-keychain-internet))
 
