@@ -283,7 +283,10 @@ It should only modify the values of Spacemacs settings."
 
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
-   ;; with 2 themes variants, one dark and one light)
+   ;; with 2 themes variants, one dark and one light). A theme from external
+   ;; package can be defined with `:package', or a theme can be defined with
+   ;; `:location' to download the theme package, refer the themes section in
+   ;; DOCUMENTATION.org for the full theme specifications.
    dotspacemacs-themes '((ember-modus
                           :location (recipe
                                      :fetcher github
@@ -312,9 +315,9 @@ It should only modify the values of Spacemacs settings."
    ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Iosevka SS09"
+   dotspacemacs-default-font '("IosevkaTermSS09 Nerd Font"
                                :size 18
-                               :weight light
+                               :weight ultra-light
                                )
 
    ;; Default icons font, it can be `all-the-icons' or `nerd-icons'.
