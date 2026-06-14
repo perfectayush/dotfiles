@@ -90,19 +90,6 @@ default-root-container-orientation = 'auto'
     alt-backtick = ['mode main', 'mode main']
     backtick     = ['workspace-back-and-forth', 'mode main']
 
-    e            = ['workspace e', 'mode main']
-    t            = ['workspace t', 'mode main']
-    z            = ['workspace z', 'mode main']
-    s            = ['workspace s', 'mode main']
-    shift-e      = ['move-node-to-workspace e', 'mode main']
-    shift-t      = ['move-node-to-workspace t', 'mode main']
-    shift-z      = ['move-node-to-workspace z', 'mode main']
-    shift-s      = ['move-node-to-workspace s', 'mode main']
-    alt-e        = ['move-node-to-workspace e', 'workspace e', 'mode main']
-    alt-t        = ['move-node-to-workspace t', 'workspace t', 'mode main']
-    alt-z        = ['move-node-to-workspace z', 'workspace z', 'mode main']
-    alt-s        = ['move-node-to-workspace s', 'workspace s', 'mode main']
-
 [mode.modal.binding]
     # i3 wraps focus by default
     h =         'focus --boundaries-action wrap-around-the-workspace left'
@@ -183,20 +170,6 @@ default-root-container-orientation = 'auto'
     backtick = 'workspace-back-and-forth'
 
 
-    e = 'workspace e'
-    t = 'workspace t'
-    z = 'workspace z'
-    s = 'workspace s'
-    shift-e = 'move-node-to-workspace e'
-    shift-t = 'move-node-to-workspace t'
-    shift-z = 'move-node-to-workspace z'
-    shift-s = 'move-node-to-workspace s'
-    alt-e = ['move-node-to-workspace e', 'workspace e']
-    alt-t =  ['move-node-to-workspace t', 'workspace t']
-    alt-z = ['move-node-to-workspace z', 'workspace z']
-    alt-s =  ['move-node-to-workspace s', 'workspace s']
-
-
 [mode.resize.binding]
     h = 'resize width -50'
     j = 'resize height +50'
@@ -206,21 +179,35 @@ default-root-container-orientation = 'auto'
     esc = 'mode main'
 
 [[on-window-detected]]
+    check-further-callbacks = true
+    run = ['move-node-to-workspace 1']
+
+[[on-window-detected]]
     if.app-id = 'org.gnu.Emacs'
     check-further-callbacks = true
-    run = ['move-node-to-workspace e']
+    run = ['move-node-to-workspace 0']
 
 [[on-window-detected]]
     if.app-id = 'net.kovidgoyal.kitty'
     check-further-callbacks = true
-    run = ['move-node-to-workspace t']
+    run = ['move-node-to-workspace 9']
 
 [[on-window-detected]]
     if.app-id = 'app.zen-browser.zen'
     check-further-callbacks = true
-    run = ['move-node-to-workspace z']
+    run = ['move-node-to-workspace 8']
 
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
     check-further-callbacks = true
-    run = ['move-node-to-workspace s']
+    run = ['move-node-to-workspace 7']
+
+[[on-window-detected]]
+    if.app-id = 'net.whatsapp.WhatsApp'
+    check-further-callbacks = true
+    run = ['move-node-to-workspace 6']
+
+[[on-window-detected]]
+    if.app-id = 'net.whatsapp.WhatsApp'
+    check-further-callbacks = true
+    run = ['move-node-to-workspace 6']
