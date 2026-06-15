@@ -185,7 +185,7 @@ default-root-container-orientation = 'auto'
 [[on-window-detected]]
     if.app-id = 'org.gnu.Emacs'
     check-further-callbacks = true
-    run = ['move-node-to-workspace 0']
+    run = ['move-node-to-workspace 10']
 
 [[on-window-detected]]
     if.app-id = 'net.kovidgoyal.kitty'
