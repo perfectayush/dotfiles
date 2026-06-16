@@ -179,6 +179,16 @@ default-root-container-orientation = 'auto'
     esc = 'mode main'
 
 [[on-window-detected]]
+    if.app-id = 'com.1password.1password'
+    check-further-callbacks = false
+    run = ['layout floating']
+
+[[on-window-detected]]
+    if.app-id = ' in.sinew.Enpass-Desktop'
+    check-further-callbacks = false
+    run = ['layout floating']
+
+[[on-window-detected]]
     check-further-callbacks = true
     run = ['move-node-to-workspace 1']
 
@@ -211,3 +221,4 @@ default-root-container-orientation = 'auto'
     if.app-id = 'net.whatsapp.WhatsApp'
     check-further-callbacks = true
     run = ['move-node-to-workspace 6']
+
