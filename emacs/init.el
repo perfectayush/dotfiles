@@ -139,6 +139,8 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(evil-textobj-column
                                       evil-python-movement
+                                      keycoach
+                                      blamee
                                       good-scroll
                                       websocket)
 
@@ -791,6 +793,53 @@ before packages are loaded."
 
   (add-hook 'after-save-hook
             #'executable-make-buffer-file-executable-if-script-p)
+
+  (setq delete-pair-push-mark t)                             ; EMACS-31: pushes a mark after delete-pair so C-x C-x selects what was inside
+  (setq ibuffer-human-readable-size t)                       ; EMACS-31: KB/MB instead of raw byte counts
+  (setq kill-region-dwim 'emacs-word)                        ; EMACS-31: C-w with no region kills a word
+  (setq native-comp-async-on-battery-power nil)              ; EMACS-31: stop native-comp jobs on battery
+  (setq view-lossage-auto-refresh t)                         ; EMACS-31: live-updating C-h l, great for teaching/debugging
+  (setq display-fill-column-indicator-warning nil)           ; EMACS-31
+  (setq dired-hide-details-hide-absolute-location t)         ; EMACS-31: hide the absolute dir path in dired-hide-details-mode
+  (setq world-clock-sort-order "%FT%T")                      ; EMACS-31: sort the world clock sanely
+  (setq zone-all-frames t)                                   ; EMACS-31
+  (setq zone-all-windows-in-frame t)                         ; EMACS-31
+  (setq uniquify-after-kill-buffer-flag t)                   ; EMACS-31: ren
+
+  (setq treesit-auto-install-grammar t)                      ; EMACS-31
+  (setq treesit-enabled-modes t)                             ; EMACS-31
+
+  ;; Disable event logging completely (Emacs >= 30)
+  (setq eglot-events-buffer-config '(:size 0 :format short))
+  (setq eglot-max-file-watches 5000)
+  (setq eglot-report-progress nil)
+  (setq eglot-autoshutdown t)
+  (setq eglot-sync-connect nil)
+  (setq eglot-documentation-renderer 'markdown-ts-view-mode) ;; EMACS-31
+  (setq eglot-code-action-indications nil)                   ;; EMACS-31
+
+  (add-to-list 'eglot-ignored-server-capabilities :documentHighlightProvider)
+  (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
+  (add-to-list 'eglot-ignored-server-capabilities :documentFormattingProvider)
+  (add-to-list 'eglot-ignored-server-capabilities :documentRangeFormattingProvider)
+  (add-to-list 'eglot-ignored-server-capabilities :documentOnTypeFormattingProvider)
+
+  (setq eldoc-help-at-pt t)                                  ;; EMACS-31
+  (setq completion-eager-update t)                           ;; EMACS-31
+  (setq completion-eager-display 'auto)                      ;; EMACS-31
+  (setq minibuffer-visible-completions 'up-down)
+
+
+  ;; projectile optimizations
+  (setq projectile-enable-caching nil)
+  (setq projectile-async-indexing nil)
+
+  (with-eval-after-load 'magit
+    (remove-hook 'magit-status-sections-hook 'projectile-locate-dominating-file))
+  (setq magit-refresh-status-buffer nil)
+
+  ;; Disable heavy font-locking/untracked file checks in massive repos
+  (remove-hook 'magit-status-mode-hook 'magit-add-section-hook)
 
   )
 
