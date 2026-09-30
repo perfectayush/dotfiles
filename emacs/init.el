@@ -749,6 +749,7 @@ before packages are loaded."
     (add-hook 'yaml-mode-hook #'smartparens-mode)
     (add-hook 'yaml-ts-mode-hook #'superword-mode)
     (add-hook 'yaml-ts-mode-hook #'smartparens-mode)
+    (add-hook 'yaml-ts-mode-hook #'go-template-helper-mode)
 
     ;; yaml-mode
     (defun yaml-set-indentation ()
@@ -758,7 +759,7 @@ before packages are loaded."
     (add-hook 'yaml-ts-mode-hook #'yaml-set-indentation)
     ;; (add-to-list 'auto-mode-alist '("\\.yaml\\.tpl\\'" . yaml-mode))
     ;; (add-to-list 'auto-mode-alist '("\\.yml\\.tpl\\'" . yaml-mode))
-    (add-to-list 'auto-mode-alist '("\\.\\(yml\\|yaml\\|tpl\\)\\'" . helm-mode))
+    (add-to-list 'auto-mode-alist '("\\.\\(yml\\|yaml\\|tpl\\)\\'" . yaml-ts-mode))
 
 
 
@@ -805,30 +806,18 @@ before packages are loaded."
   (setq zone-all-frames t)                                   ; EMACS-31
   (setq zone-all-windows-in-frame t)                         ; EMACS-31
   (setq uniquify-after-kill-buffer-flag t)                   ; EMACS-31: ren
-
   (setq treesit-auto-install-grammar t)                      ; EMACS-31
   (setq treesit-enabled-modes t)                             ; EMACS-31
-
   ;; Disable event logging completely (Emacs >= 30)
-  (setq eglot-events-buffer-config '(:size 0 :format short))
-  (setq eglot-max-file-watches 5000)
-  (setq eglot-report-progress nil)
-  (setq eglot-autoshutdown t)
-  (setq eglot-sync-connect nil)
-  (setq eglot-documentation-renderer 'markdown-ts-view-mode) ;; EMACS-31
-  (setq eglot-code-action-indications nil)                   ;; EMACS-31
-
-  (add-to-list 'eglot-ignored-server-capabilities :documentHighlightProvider)
-  (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
-  (add-to-list 'eglot-ignored-server-capabilities :documentFormattingProvider)
-  (add-to-list 'eglot-ignored-server-capabilities :documentRangeFormattingProvider)
-  (add-to-list 'eglot-ignored-server-capabilities :documentOnTypeFormattingProvider)
-
   (setq eldoc-help-at-pt t)                                  ;; EMACS-31
   (setq completion-eager-update t)                           ;; EMACS-31
   (setq completion-eager-display 'auto)                      ;; EMACS-31
   (setq minibuffer-visible-completions 'up-down)
 
+
+  (setq-default display-line-numbers-grow-only nil)
+  (setq-default display-line-numbers-width 3)
+  (setq-default display-line-numbers-width-start nil)
 
   ;; projectile optimizations
   (setq projectile-enable-caching nil)
@@ -841,6 +830,9 @@ before packages are loaded."
   ;; Disable heavy font-locking/untracked file checks in massive repos
   (remove-hook 'magit-status-mode-hook 'magit-add-section-hook)
 
+  (setq consult-async-input-debounce 0.05
+        consult-async-input-throttle 0.1
+        consult-async-refresh-delay 0.05)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
